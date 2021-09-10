@@ -154,7 +154,7 @@ class _Account1State extends State<Account1> {
                       )
                 ),
                  ),
-             //inputfield2
+             //inputfield2.
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Container(

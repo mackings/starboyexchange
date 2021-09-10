@@ -1,6 +1,8 @@
-import 'package:expandable/expandable.dart';
+
 import 'package:flutter/material.dart';
 import 'package:starboyexchange/account1.dart';
+
+import 'account3.dart';
 
 
 
@@ -195,7 +197,7 @@ class _Account2State extends State<Account2> {
                                 ),)
                             ),
                           ]
-                      )
+                      ),
                   ),
                 ),
                 //accountnum
@@ -358,36 +360,41 @@ class _Account2State extends State<Account2> {
                 //donebutton
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                      width: 156.1904754638672,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius : BorderRadius.only(
-                          topLeft: Radius.circular(5),
-                          topRight: Radius.circular(5),
-                          bottomLeft: Radius.circular(5),
-                          bottomRight: Radius.circular(5),
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> Account3()));
+                    },
+                    child: Container(
+                        width: 156.1904754638672,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius : BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                            bottomRight: Radius.circular(5),
+                          ),
+                          color : Color.fromRGBO(229, 229, 229, 1),
                         ),
-                        color : Color.fromRGBO(229, 229, 229, 1),
-                      ),
-                      child: Stack(
-                          children: <Widget>[
-                            Positioned(
-                                top: 14,
-                                left: 60,
-                                child: Center(
-                                  child: Text('DONE', textAlign: TextAlign.left, style: TextStyle(
-                                      color: Color.fromRGBO(13, 14, 14, 1),
-                                      fontFamily: 'Montserrat',
-                                      fontSize: 14,
-                                      letterSpacing: 0 ,
-                                      fontWeight: FontWeight.bold,
-                                      height: 1
-                                  ),),
-                                )
-                            ),
-                          ]
-                      )
+                        child: Stack(
+                            children: <Widget>[
+                              Positioned(
+                                  top: 14,
+                                  left: 60,
+                                  child: Center(
+                                    child: Text('DONE', textAlign: TextAlign.left, style: TextStyle(
+                                        color: Color.fromRGBO(13, 14, 14, 1),
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 14,
+                                        letterSpacing: 0 ,
+                                        fontWeight: FontWeight.bold,
+                                        height: 1
+                                    ),),
+                                  )
+                              ),
+                            ]
+                        )
+                    ),
                   ),
                 ),
 
