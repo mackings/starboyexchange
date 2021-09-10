@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 import 'package:starboyexchange/account2.dart';
+import 'package:starboyexchange/account4.dart';
 
 
 
@@ -467,7 +468,7 @@ class _Account1State extends State<Account1> {
 
                       InkWell(
                         onTap: (){
-                          print("Account");
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Account4()));
                         },
                         child: Text('Login Here', textAlign: TextAlign.center, style: TextStyle(
                             color: Color.fromRGBO(13, 14, 14, 1),

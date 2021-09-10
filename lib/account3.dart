@@ -54,7 +54,7 @@ class _Account3State extends State<Account3> {
                         print("Add New Payment Method");
                       },
                       child: Container(
-                          width: 170,
+                          width: 200,
                           height: 40,
                           decoration: BoxDecoration(
                             borderRadius : BorderRadius.only(
