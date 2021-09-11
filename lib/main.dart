@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:starboyexchange/account1.dart';
 
+import 'introsliders.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -17,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
     return MaterialApp(
-      home: Account1() ,
+      home: Account1(),
     );
   }
 }

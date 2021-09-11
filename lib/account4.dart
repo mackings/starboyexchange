@@ -5,6 +5,8 @@ import 'package:starboyexchange/Resetpassword.dart';
 import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
 
+import 'package:starboyexchange/mainui.dart';
+
 class Account4 extends StatefulWidget {
   const Account4({Key ?key}) : super(key: key);
 
@@ -223,6 +225,7 @@ class _Account4State extends State<Account4> {
                 //loginbtn
                 InkWell(
                   onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui()));
                   },
                   child: Container(
                       width: 156.1904754638672,
