@@ -20,8 +20,6 @@ class _MainuiState extends State<Mainui> {
           child: Center(
             child: Column(
               children: [
-
-
                 Container(
                     width: 375,
                     height: 378,
@@ -41,6 +39,7 @@ class _MainuiState extends State<Mainui> {
                     ),
                     child: Stack(
                         children: <Widget>[
+
                           Positioned(
                               top: 65,
                               left: 298,
@@ -70,7 +69,9 @@ class _MainuiState extends State<Mainui> {
                                   fontWeight: FontWeight.normal,
                                   height: 1
                               ),)
-                          ),Positioned(
+                          ),
+
+                          Positioned(
                               top: 201,
                               left: 126,
                               child: Text('N 165,000', textAlign: TextAlign.left, style: TextStyle(

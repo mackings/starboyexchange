@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^0.22.0
   intro_slider: ^3.0.2
+  flutter_switch: ^0.3.2
+  readmore: ^2.1.0
 
 
 
@@ -64,6 +66,24 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
       - assets/card.png
+      - assets/hide.svg
+      - assets/photo.svg
+      - assets/home.svg
+      - assets/atm.svg
+      - assets/search.svg
+      - assets/calculator.svg
+      - assets/arrowleft.png
+      - assets/arrowleft.svg
+      - assets/cloudup.svg
+      - assets/cloud.png
+      - assets/image.svg
+      - assets/attach.png
+      - assets/phone.png
+      - assets/whatsapp.png
+      - assets/instagram.png
+      - assets/facebook.png
+      - assets/twitter.png
+      - assets/chrome.png
       - assets/amazon.png
       - assets/itunes.png
       - assets/skrill.png

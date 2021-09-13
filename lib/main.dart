@@ -1,5 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:starboyexchange/account1.dart';
+import 'package:starboyexchange/helpandsupport.dart';
+import 'package:starboyexchange/history.dart';
+import 'package:starboyexchange/history2.dart';
+import 'package:starboyexchange/mainui.dart';
+import 'package:starboyexchange/notifications.dart';
+import 'package:starboyexchange/profile.dart';
+import 'package:starboyexchange/rate1.dart';
+import 'package:starboyexchange/settings.dart';
+import 'package:starboyexchange/testing.dart';
+import 'package:starboyexchange/trade1.dart';
+import 'package:starboyexchange/trade2.dart';
+import 'package:starboyexchange/withdraw.dart';
 
 import 'introsliders.dart';
 
@@ -19,7 +31,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
     return MaterialApp(
-      home: Account1(),
+      home: Withdraw1(),
     );
   }
 }

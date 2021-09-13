@@ -122,7 +122,8 @@ class _Account2State extends State<Account2> {
                                     ]
                                 ),
                               ),
-                            ),Positioned(
+                            ),
+                            Positioned(
                                 top: 0,
                                 left: 0,
                                 child: Text('Select Currency', textAlign: TextAlign.left, style: TextStyle(
@@ -249,7 +250,9 @@ class _Account2State extends State<Account2> {
                                     ]
                                 ),
                               ),
-                            ),Positioned(
+                            ),
+
+                            Positioned(
                                 top: 0,
                                 left: 0,
                                 child: Text('Enter Account Number', textAlign: TextAlign.left, style: TextStyle(
