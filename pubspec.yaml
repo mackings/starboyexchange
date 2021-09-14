@@ -67,6 +67,7 @@ flutter:
   assets:
       - assets/card.png
       - assets/hide.svg
+      - assets/fmenu.svg
       - assets/photo.svg
       - assets/home.svg
       - assets/atm.svg

@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
 
+import 'package:starboyexchange/trade2.dart';
+
 class Trade1 extends StatefulWidget {
   const Trade1({Key ?key}) : super(key: key);
 
@@ -21,7 +23,7 @@ class _Trade1State extends State<Trade1> {
             children: [
               Container(
                   width: 375,
-                  height: 812,
+                  height: 770,
                   decoration: BoxDecoration(
                     color : Color.fromRGBO(28, 24, 24, 1),
                   ),
@@ -300,11 +302,11 @@ class _Trade1State extends State<Trade1> {
                                               )
                                           )
                                       ),Positioned(
-                                          top: 587,
+                                          top: 580,
                                           left: 32,
                                           child: Container(
                                               width: 312,
-                                              height: 135,
+                                              height: 125,
 
                                               child: Stack(
                                                   children: <Widget>[
@@ -313,7 +315,7 @@ class _Trade1State extends State<Trade1> {
                                                         left: 0,
                                                         child: Container(
                                                             width: 312,
-                                                            height: 111,
+                                                            height: 60,
                                                             decoration: BoxDecoration(
                                                               borderRadius : BorderRadius.only(
                                                                 topLeft: Radius.circular(5),
@@ -332,7 +334,7 @@ class _Trade1State extends State<Trade1> {
                                                                   TextFormField(
                                                                     keyboardType: TextInputType.number,
                                                                     decoration: InputDecoration(
-                                                                        hintText: "Input your opinion",
+                                                                        hintText: "Enter Comments",
                                                                         hintStyle: TextStyle(color: Colors.white30),
                                                                         labelStyle: TextStyle(color: Colors.white),
                                                                       enabledBorder: UnderlineInputBorder(
@@ -349,7 +351,7 @@ class _Trade1State extends State<Trade1> {
                                                                     textAlign: TextAlign.center,
                                                                     style: TextStyle(
                                                                       color: Colors.white,
-                                                                      fontSize: 25.0,
+                                                                      fontSize: 15.0,
                                                                     ),
                                                                   ),
                                                                 ]
@@ -431,7 +433,7 @@ class _Trade1State extends State<Trade1> {
                                               )
                                           )
                                       ),Positioned(
-                                          top: 472,
+                                          top: 457,
                                           left: 28,
                                           child: Container(
                                               width: 316,
@@ -499,7 +501,7 @@ class _Trade1State extends State<Trade1> {
                               ),
                             )
                         ),Positioned(
-                            top: 723,
+                            top: 680,
                             left: 29,
                             child: Container(
                                 width: 316,
@@ -534,7 +536,7 @@ class _Trade1State extends State<Trade1> {
                                                         left: 0,
                                                         child: InkWell(
                                                           onTap: (){
-                                                            print("Submit Trade");
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Trade2()));
                                                           },
                                                           child: Container(
                                                               width: 237,

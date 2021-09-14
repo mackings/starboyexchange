@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
 
-import 'package:starboyexchange/account4.dart';
+import 'package:starboyexchange/login.dart';
 
 class Account3 extends StatefulWidget {
   const Account3({Key ?key}) : super(key: key);
@@ -90,7 +90,7 @@ class _Account3State extends State<Account3> {
 
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Account4()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
                       },
                       child: Container(
                           width: 156.1904754638672,

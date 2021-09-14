@@ -5,6 +5,7 @@ import 'package:starboyexchange/history.dart';
 import 'package:starboyexchange/history2.dart';
 import 'package:starboyexchange/mainui.dart';
 import 'package:starboyexchange/notifications.dart';
+import 'package:starboyexchange/openapp.dart';
 import 'package:starboyexchange/profile.dart';
 import 'package:starboyexchange/rate1.dart';
 import 'package:starboyexchange/settings.dart';
@@ -12,6 +13,7 @@ import 'package:starboyexchange/testing.dart';
 import 'package:starboyexchange/trade1.dart';
 import 'package:starboyexchange/trade2.dart';
 import 'package:starboyexchange/withdraw.dart';
+import 'package:starboyexchange/withdraw2.dart';
 
 import 'introsliders.dart';
 
@@ -31,7 +33,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
     return MaterialApp(
-      home: Withdraw1(),
+      home: Openapp(),
     );
   }
 }

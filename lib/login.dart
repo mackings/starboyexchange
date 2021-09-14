@@ -7,14 +7,14 @@ import 'dart:math' as math;
 
 import 'package:starboyexchange/mainui.dart';
 
-class Account4 extends StatefulWidget {
-  const Account4({Key ?key}) : super(key: key);
+class Login extends StatefulWidget {
+  const Login({Key ?key}) : super(key: key);
 
   @override
-  _Account4State createState() => _Account4State();
+  _LoginState createState() => _LoginState();
 }
 
-class _Account4State extends State<Account4> {
+class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -286,18 +286,22 @@ class _Account4State extends State<Account4> {
                         height: 1
                     ),),
 
+
                     InkWell(
                       onTap: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>Account1()));
                       },
-                      child: Text('Register Here', textAlign: TextAlign.left, style: TextStyle(
-                          color: Color.fromRGBO(13, 13, 13, 1),
-                          fontFamily: 'Montserrat',
-                          fontSize: 12,
-                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                          fontWeight: FontWeight.normal,
-                          height: 1
-                      ),),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text('Register Here', textAlign: TextAlign.left, style: TextStyle(
+                            color: Color.fromRGBO(13, 13, 13, 1),
+                            fontFamily: 'Montserrat',
+                            fontSize: 12,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                        ),),
+                      ),
                     )
                   ],
                 )

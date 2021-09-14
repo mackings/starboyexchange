@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 import 'package:starboyexchange/account2.dart';
-import 'package:starboyexchange/account4.dart';
+import 'package:starboyexchange/login.dart';
 
 
 
@@ -51,7 +51,7 @@ class _Account1State extends State<Account1> {
                                 child: Text('Xchange', textAlign: TextAlign.left, style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Montserrat',
-                                    fontSize: 30,
+                                    fontSize: 25,
                                     letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                                     fontWeight: FontWeight.bold,
                                     height: 1
@@ -59,13 +59,13 @@ class _Account1State extends State<Account1> {
                               ),
                           ),Positioned(
                               top: -2.2737367544323206e-13,
-                              left: 5.2727131843566895,
+                              left: 2.2727131843566895,
                               child: Transform.rotate(
                                 angle: 3.1347894642296156e-16 * (math.pi / 180),
                                 child: Text('StarBoy', textAlign: TextAlign.left, style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Montserrat',
-                                    fontSize: 30,
+                                    fontSize: 25,
                                     letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                                     fontWeight: FontWeight.bold,
                                     height: 1
@@ -468,7 +468,7 @@ class _Account1State extends State<Account1> {
 
                       InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Account4()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
                         },
                         child: Text('Login Here', textAlign: TextAlign.center, style: TextStyle(
                             color: Color.fromRGBO(13, 14, 14, 1),

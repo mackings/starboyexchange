@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
 import 'package:flutter_svg/svg.dart';
+import 'package:starboyexchange/rate1.dart';
 
 
 class Trade2 extends StatefulWidget {
@@ -204,34 +205,39 @@ class _Trade2State extends State<Trade2> {
                                                     Positioned(
                                                         top: 0,
                                                         left: 0,
-                                                        child: Container(
-                                                            width: 237,
-                                                            height: 40,
-                                                            decoration: BoxDecoration(
-                                                              borderRadius : BorderRadius.only(
-                                                                topLeft: Radius.circular(5),
-                                                                topRight: Radius.circular(5),
-                                                                bottomLeft: Radius.circular(5),
-                                                                bottomRight: Radius.circular(5),
+                                                        child: InkWell(
+                                                          onTap: (){
+                                                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Rate1()));
+                                                          },
+                                                          child: Container(
+                                                              width: 237,
+                                                              height: 40,
+                                                              decoration: BoxDecoration(
+                                                                borderRadius : BorderRadius.only(
+                                                                  topLeft: Radius.circular(5),
+                                                                  topRight: Radius.circular(5),
+                                                                  bottomLeft: Radius.circular(5),
+                                                                  bottomRight: Radius.circular(5),
+                                                                ),
+                                                                color : Color.fromRGBO(81, 163, 163, 1),
                                                               ),
-                                                              color : Color.fromRGBO(81, 163, 163, 1),
-                                                            ),
-                                                            child: Stack(
-                                                                children: <Widget>[
-                                                                  Positioned(
-                                                                      top: 11,
-                                                                      left: 62,
-                                                                      child: Text('SUBMIT TRADE', textAlign: TextAlign.left, style: TextStyle(
-                                                                          color: Color.fromRGBO(13, 14, 14, 1),
-                                                                          fontFamily: 'Montserrat',
-                                                                          fontSize: 14,
-                                                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                                          fontWeight: FontWeight.normal,
-                                                                          height: 1
-                                                                      ),)
-                                                                  ),
-                                                                ]
-                                                            )
+                                                              child: Stack(
+                                                                  children: <Widget>[
+                                                                    Positioned(
+                                                                        top: 11,
+                                                                        left: 62,
+                                                                        child: Text('SUBMIT TRADE', textAlign: TextAlign.left, style: TextStyle(
+                                                                            color: Color.fromRGBO(13, 14, 14, 1),
+                                                                            fontFamily: 'Montserrat',
+                                                                            fontSize: 14,
+                                                                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                                            fontWeight: FontWeight.normal,
+                                                                            height: 1
+                                                                        ),)
+                                                                    ),
+                                                                  ]
+                                                              )
+                                                          ),
                                                         )
                                                     ),
                                                   ]

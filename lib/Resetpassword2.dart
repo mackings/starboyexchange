@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
 
+import 'login.dart';
+
 class ResetPassword2 extends StatefulWidget {
   const ResetPassword2({Key ?key}) : super(key: key);
 
@@ -344,6 +346,7 @@ class _ResetPassword2State extends State<ResetPassword2> {
                 //loginbtn
                 InkWell(
                   onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
                   },
                   child: Container(
                       width: 156.1904754638672,
@@ -407,7 +410,7 @@ class _ResetPassword2State extends State<ResetPassword2> {
 
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Account1()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
                       },
                       child: Text('Login Here', textAlign: TextAlign.left, style: TextStyle(
                           color: Color.fromRGBO(13, 13, 13, 1),
