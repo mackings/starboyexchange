@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:starboyexchange/account1.dart';
+import 'package:starboyexchange/login.dart';
 
 import 'account3.dart';
 
@@ -29,7 +30,7 @@ class _Account2State extends State<Account2> {
 
               children: [
                 SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +48,7 @@ class _Account2State extends State<Account2> {
                     ),
                     InkWell(
                       onTap: (){
-                        print("Hello Skip");
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
                       },
                       child: Text('Skip ', textAlign: TextAlign.left, style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 1),
@@ -75,13 +76,13 @@ class _Account2State extends State<Account2> {
                 SizedBox(
                   height: 8,
                 ),
-                Image.asset("assets/card.png",width: 350,height: 200,),
+                Image.asset("assets/card.png",width: 250,height: 150,),
                 //selectcurrency
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Container(
                       width: 312,
-                      height: 74,
+                      height: 79,
 
                       child: Stack(
                           children: <Widget>[
@@ -90,7 +91,7 @@ class _Account2State extends State<Account2> {
                               left: 0,
                               child: Container(
                                 width: 312,
-                                height: 50,
+                                height: 55,
                                 decoration: BoxDecoration(
                                   borderRadius : BorderRadius.only(
                                     topLeft: Radius.circular(5),
@@ -129,7 +130,7 @@ class _Account2State extends State<Account2> {
                                 child: Text('Select Currency', textAlign: TextAlign.left, style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Montserrat',
-                                    fontSize: 18,
+                                    fontSize: 15,
                                     letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                                     fontWeight: FontWeight.bold,
                                     height: 1
@@ -153,7 +154,7 @@ class _Account2State extends State<Account2> {
                               left: 0,
                               child: Container(
                                 width: 312,
-                                height: 50,
+                                height: 45,
                                 decoration: BoxDecoration(
                                   borderRadius : BorderRadius.only(
                                     topLeft: Radius.circular(5),
@@ -191,7 +192,7 @@ class _Account2State extends State<Account2> {
                                 child: Text('Selet Bank', textAlign: TextAlign.left, style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Montserrat',
-                                    fontSize: 18,
+                                    fontSize: 15,
                                     letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                                     fontWeight: FontWeight.bold,
                                     height: 1
@@ -242,7 +243,8 @@ class _Account2State extends State<Account2> {
                                           enabledBorder: InputBorder.none,
                                           errorBorder: InputBorder.none,
                                           disabledBorder: InputBorder.none,
-                                          hintText: "Enter Account Number Here",hintStyle: TextStyle(color: inputcolor),
+                                          hintText: "Enter Account Number Here",hintStyle: TextStyle(color: inputcolor, fontFamily:"Montserrat",fontSize: 12
+                                        ),
                                           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                                         ),
                                       ),
@@ -258,7 +260,7 @@ class _Account2State extends State<Account2> {
                                 child: Text('Enter Account Number', textAlign: TextAlign.left, style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Montserrat',
-                                    fontSize: 18,
+                                    fontSize: 15,
                                     letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                                     fontWeight: FontWeight.bold,
                                     height: 1
@@ -310,7 +312,7 @@ class _Account2State extends State<Account2> {
                                           enabledBorder: InputBorder.none,
                                           errorBorder: InputBorder.none,
                                           disabledBorder: InputBorder.none,
-                                          hintText: "Mac Kingsley",hintStyle: TextStyle(color: inputcolor),
+                                          hintText: "Mac Kingsley",hintStyle: TextStyle(color: inputcolor,fontFamily:"Montserrat",fontSize: 12),
                                           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                                         ),
                                       ),
@@ -324,7 +326,7 @@ class _Account2State extends State<Account2> {
                                 child: Text('Enter Account Name', textAlign: TextAlign.left, style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Montserrat',
-                                    fontSize: 18,
+                                    fontSize: 15,
                                     letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                                     fontWeight: FontWeight.bold,
                                     height: 1

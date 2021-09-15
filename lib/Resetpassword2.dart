@@ -125,8 +125,8 @@ class _ResetPassword2State extends State<ResetPassword2> {
                                           enabledBorder: InputBorder.none,
                                           errorBorder: InputBorder.none,
                                           disabledBorder: InputBorder.none,
-                                          hintText: "Enter The Old Password Here",hintStyle: TextStyle(color: inputcolor),
-                                          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                                          hintText: "Enter The Old Password Here",hintStyle: TextStyle(color: inputcolor,fontFamily: "Montserrat",fontSize: 12),
+                                          contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 15.0),
                                         ),
                                       ),
                                     ]
@@ -189,8 +189,8 @@ class _ResetPassword2State extends State<ResetPassword2> {
                                           enabledBorder: InputBorder.none,
                                           errorBorder: InputBorder.none,
                                           disabledBorder: InputBorder.none,
-                                          hintText: "Enter New Password Here",hintStyle: TextStyle(color: inputcolor),
-                                          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                                          hintText: "Enter New Password Here",hintStyle: TextStyle(color: inputcolor,fontFamily: "Montserrat",fontSize: 12),
+                                          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 17.0),
                                         ),
                                       ),
                                     ]
@@ -253,8 +253,8 @@ class _ResetPassword2State extends State<ResetPassword2> {
                                           enabledBorder: InputBorder.none,
                                           errorBorder: InputBorder.none,
                                           disabledBorder: InputBorder.none,
-                                          hintText: "Confirm Password Here",hintStyle: TextStyle(color: inputcolor),
-                                          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                                          hintText: "Confirm Password Here",hintStyle: TextStyle(color: inputcolor,fontFamily: "Montserrat",fontSize: 12),
+                                          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 17.0),
                                         ),
                                       ),
                                     ]
@@ -317,8 +317,8 @@ class _ResetPassword2State extends State<ResetPassword2> {
                                           enabledBorder: InputBorder.none,
                                           errorBorder: InputBorder.none,
                                           disabledBorder: InputBorder.none,
-                                          hintText: "Enter Token Here",hintStyle: TextStyle(color: inputcolor),
-                                          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                                          hintText: "Enter Token Here",hintStyle: TextStyle(color: inputcolor,fontFamily: "Montserrat",fontSize: 12),
+                                          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 17.0),
                                         ),
                                       ),
                                     ]

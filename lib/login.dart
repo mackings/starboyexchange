@@ -27,7 +27,13 @@ class _LoginState extends State<Login> {
               children: [
                 Image.asset("assets/gift.png",height: 200,width: 520,),
                 //starboy
-                Text("StarBoy\n Xchange",style: TextStyle(
+                Text("StarBoy",style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontFamily: "Montserrat",
+                  fontWeight: FontWeight.bold,
+                ),),
+                Text("Xchange",style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontFamily: "Montserrat",
@@ -98,7 +104,7 @@ class _LoginState extends State<Login> {
                                           enabledBorder: InputBorder.none,
                                           errorBorder: InputBorder.none,
                                           disabledBorder: InputBorder.none,
-                                          hintText: "Enter Full Email Address Here",hintStyle: TextStyle(color: inputcolor),
+                                          hintText: "Enter Full Email Address Here",hintStyle: TextStyle(color: inputcolor,fontFamily:"Montserrat",fontSize: 12),
                                           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                                         ),
                                       ),
@@ -166,7 +172,7 @@ class _LoginState extends State<Login> {
                                           enabledBorder: InputBorder.none,
                                           errorBorder: InputBorder.none,
                                           disabledBorder: InputBorder.none,
-                                          hintText: "Enter Your Password Here",hintStyle: TextStyle(color: inputcolor),
+                                          hintText: "Enter Your Password Here",hintStyle: TextStyle(color: inputcolor,fontFamily:"Montserrat",fontSize: 12),
                                           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                                         ),
                                       ),

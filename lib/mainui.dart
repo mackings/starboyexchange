@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/account1.dart';
+import 'package:starboyexchange/helpandsupport.dart';
+import 'package:starboyexchange/login.dart';
+import 'package:starboyexchange/notifications.dart';
+import 'package:starboyexchange/profile.dart';
+import 'package:starboyexchange/settings.dart';
 import 'package:starboyexchange/trade1.dart';
 
 import 'history.dart';
@@ -13,11 +18,306 @@ class Mainui extends StatefulWidget {
 }
 
 class _MainuiState extends State<Mainui> {
+  GlobalKey<ScaffoldState> _globalKey= GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        key: _globalKey,
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              Container(
+                  width: 231,
+                  height: 812,
+                  decoration: BoxDecoration(
+                    color : Color.fromRGBO(81, 163, 163, 1),
+                  ),
+                  child: Stack(
+                      children: <Widget>[
+                        Positioned(
+                            top: 72,
+                            left: 78.3457260131836,
+                            child: Container(
+                                width: 80,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                  border : Border.all(
+                                    color: Color.fromRGBO(81, 163, 163, 1),
+                                    width: 1,
+                                  ),
+                                  image : DecorationImage(
+                                      image: AssetImage('assets/signat.png'),
+                                      fit: BoxFit.fitWidth
+                                  ),
+                                  borderRadius : BorderRadius.all(Radius.elliptical(80, 80)),
+                                )
+                            )
+                        ),Positioned(
+                            top: 237,
+                            left: 58.345726013183594,
+                            child: Row(
+                              children: [
+                                Icon(Icons.person,color: Colors.white,),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile()));
+                                  },
+                                  child: Text('Profile', textAlign: TextAlign.left, style: TextStyle(
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 14,
+                                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                      fontWeight: FontWeight.normal,
+                                      height: 1
+                                  ),),
+                                ),
+                              ],
+                            )
+                        ),Positioned(
+                            top: 272,
+                            left: 58.345726013183594,
+                            child: Row(
+                              children: [
+                                Icon(Icons.account_balance,color: Colors.white,),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text('Account Details', textAlign: TextAlign.left, style: TextStyle(
+                                    color: Color.fromRGBO(255, 255, 255, 1),
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 14,
+                                    letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                    fontWeight: FontWeight.normal,
+                                    height: 1
+                                ),),
+                              ],
+                            )
+                        ),Positioned(
+                            top: 307,
+                            left: 58.345726013183594,
+                            child: Row(
+                              children: [
+                                Icon(Icons.notifications_active,color: Colors.white,),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
+                                  },
+                                  child: Text('Notifications', textAlign: TextAlign.left, style: TextStyle(
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 14,
+                                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                      fontWeight: FontWeight.normal,
+                                      height: 1
+                                  ),),
+                                ),
+                              ],
+                            )
+                        ),Positioned(
+                            top: 342,
+                            left: 58.345726013183594,
+                            child: Row(
+                              children: [
+                                Icon(Icons.help,color: Colors.white,),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Helpandsupport()));
+                                  },
+                                  child: Text('Help and Support', textAlign: TextAlign.left, style: TextStyle(
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 14,
+                                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                      fontWeight: FontWeight.normal,
+                                      height: 1
+                                  ),),
+                                ),
+                              ],
+                            )
+                        ),Positioned(
+                            top: 377,
+                            left: 58.345726013183594,
+                            child: Row(
+                              children: [
+                                Icon(Icons.settings,color: Colors.white,),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Settings()));
+                                  },
+                                  child: Text('Settings', textAlign: TextAlign.left, style: TextStyle(
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 14,
+                                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                      fontWeight: FontWeight.normal,
+                                      height: 1
+                                  ),),
+                                ),
+                              ],
+                            )
+                        ),Positioned(
+                            top: 447,
+                            left: 40.345726013183594,
+                            child: Container(
+                                width: 156.1904754638672,
+                                height: 40,
+
+                                child: Stack(
+                                    children: <Widget>[
+                                      Positioned(
+                                          top: 0,
+                                          left: 0,
+                                          child: InkWell(
+                                            onTap: (){
+                                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+                                            },
+                                            child: Container(
+                                                width: 156.1904754638672,
+                                                height: 40,
+                                                decoration: BoxDecoration(
+                                                  borderRadius : BorderRadius.only(
+                                                    topLeft: Radius.circular(5),
+                                                    topRight: Radius.circular(5),
+                                                    bottomLeft: Radius.circular(5),
+                                                    bottomRight: Radius.circular(5),
+                                                  ),
+                                                  color : Color.fromRGBO(13, 14, 14, 1),
+                                                ),
+                                                child: Stack(
+                                                    children: <Widget>[
+                                                      Positioned(
+                                                          top: 11,
+                                                          left: 43,
+                                                          child: Text('LOG OUT', textAlign: TextAlign.left, style: TextStyle(
+                                                              color: Color.fromRGBO(255, 255, 255, 1),
+                                                              fontFamily: 'Montserrat',
+                                                              fontSize: 14,
+                                                              letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                              fontWeight: FontWeight.normal,
+                                                              height: 1
+                                                          ),)
+                                                      ),
+                                                    ]
+                                                )
+                                            ),
+                                          )
+                                      ),
+                                    ]
+                                )
+                            )
+                        ),Positioned(
+                            top: 168,
+                            left: 30.345726013183594,
+                            child: Text('Welcome , Signat', textAlign: TextAlign.left, style: TextStyle(
+                                color: Color.fromRGBO(255, 255, 255, 1),
+                                fontFamily: 'Montserrat',
+                                fontSize: 18,
+                                letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                fontWeight: FontWeight.normal,
+                                height: 1
+                            ),)
+                        ),Positioned(
+                            top: 192,
+                            left: 60.345726013183594,
+                            child: Text('signat@gmail.com', textAlign: TextAlign.center, style: TextStyle(
+                                color: Color.fromRGBO(255, 255, 255, 1),
+                                fontFamily: 'Montserrat',
+                                fontSize: 10,
+                                letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                fontWeight: FontWeight.normal,
+                                height: 1
+                            ),)
+                        ),
+
+                        Positioned(
+                            top: 379,
+                            left: 26.85873794555664,
+                            child: Container(
+                                width: 12.49746322631836,
+                                height: 15,
+
+                                child: Stack(
+                                    children: <Widget>[
+                                      Positioned(
+                                          top: 0,
+                                          left: 0,
+                                          child: SvgPicture.asset(
+                                              'assets/images/vector.svg',
+                                              semanticsLabel: 'vector'
+                                          ),
+                                      ),
+                                    ]
+                                )
+                            )
+                        ),Positioned(
+                            top: 443,
+                            left: 26,
+                            child: Container(
+                                width: 12.910804748535156,
+                                height: 15.0001220703125,
+
+                                child: Stack(
+                                    children: <Widget>[
+                                     Positioned(
+                                          top: 1.876190185546875,
+                                          left: 3.6745338439941406,
+                                          child: SvgPicture.asset(
+                                              'assets/images/vector.svg',
+                                              semanticsLabel: 'vector'
+                                          ),
+                                      ),Positioned(
+                                          top: 0,
+                                          left: 2.4375648498535156,
+                                          child: SvgPicture.asset(
+                                              'assets/images/vector.svg',
+                                              semanticsLabel: 'vector'
+                                          ),
+                                      ),
+                                    ]
+                                )
+                            )
+                        ),Positioned(
+                            top: 274,
+                            left: 26.85873794555664,
+                            child: Container(
+                                width: 11.654277801513672,
+                                height: 15,
+
+                                child: Stack(
+                                    children: <Widget>[
+                                      Positioned(
+                                          top: 0,
+                                          left: 0,
+                                          child: SvgPicture.asset(
+                                              'assets/images/vector.svg',
+                                              semanticsLabel: 'vector'
+                                          ),
+                                      ),
+                                    ]
+                                )
+                            )
+                        ),
+                      ]
+                  )
+              )
+            ],
+
+          ),
+        ),
         backgroundColor: green,
         body: SingleChildScrollView(
           child: Center(
@@ -182,10 +482,15 @@ class _MainuiState extends State<Mainui> {
                                                       Positioned(
                                                           top: 0,
                                                           left: 0,
-                                                          child: SvgPicture.asset(
-                                                            "assets/fmenu.svg",color: Colors.white,
-                                                            height: 20,
-                                                            width: 20,
+                                                          child: InkWell(
+                                                            onTap: (){
+                                                              _globalKey.currentState!.openDrawer();
+                                                            },
+                                                            child: SvgPicture.asset(
+                                                              "assets/fmenu.svg",color: Colors.white,
+                                                              height: 20,
+                                                              width: 20,
+                                                            ),
                                                           ),
                                                       ),
                                                     ]
@@ -990,8 +1295,6 @@ class _MainuiState extends State<Mainui> {
           ),
         ),
 
-
-        drawer: Drawer(),
       ),
     );
   }

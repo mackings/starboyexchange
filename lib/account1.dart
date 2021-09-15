@@ -82,10 +82,10 @@ class _Account1State extends State<Account1> {
                 child: Text('Hello Star User !!! \n Please We Just Need A Few Details From \n You So We Can Continue.', textAlign: TextAlign.center, style: TextStyle(
                     color: Color.fromRGBO(255, 255, 255, 1),
                 fontFamily: 'Montserrat',
-                fontSize: 16,
-                letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                fontSize: 12,
+                letterSpacing: 1,
                 fontWeight: FontWeight.normal,
-                height: 1,
+                height: 1.5,
           ),),
               ),
 
@@ -106,7 +106,7 @@ class _Account1State extends State<Account1> {
                                 left: 0,
                                 child: Container(
                                     width: 312,
-                                    height: 50,
+                                    height: 45,
                                     decoration: BoxDecoration(
                                       borderRadius : BorderRadius.only(
                                         topLeft: Radius.circular(5),
@@ -132,7 +132,7 @@ class _Account1State extends State<Account1> {
                                                 enabledBorder: InputBorder.none,
                                                 errorBorder: InputBorder.none,
                                                 disabledBorder: InputBorder.none,
-                                                hintText: "Enter Full Name",hintStyle: TextStyle(color: inputcolor),
+                                                hintText: "Enter Full Name",hintStyle: TextStyle(color: inputcolor,fontFamily:"Montserrat",fontSize: 12),
                                               contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                                           ),
                                           ),
@@ -145,7 +145,7 @@ class _Account1State extends State<Account1> {
                                 child: Text('Full name', textAlign: TextAlign.left, style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Montserrat',
-                                    fontSize: 18,
+                                    fontSize: 15,
                                     letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                                     fontWeight: FontWeight.bold,
                                     height: 1
@@ -169,7 +169,7 @@ class _Account1State extends State<Account1> {
                               left: 0,
                               child: Container(
                                 width: 312,
-                                height: 50,
+                                height: 45,
                                 decoration: BoxDecoration(
                                   borderRadius : BorderRadius.only(
                                     topLeft: Radius.circular(5),
@@ -195,7 +195,7 @@ class _Account1State extends State<Account1> {
                                           enabledBorder: InputBorder.none,
                                           errorBorder: InputBorder.none,
                                           disabledBorder: InputBorder.none,
-                                          hintText: "Enter Full Email Address Here",hintStyle: TextStyle(color: inputcolor),
+                                          hintText: "Enter Full Email Address Here",hintStyle: TextStyle(color: inputcolor,fontFamily:"Montserrat",fontSize: 12),
                                           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                                         ),
                                       ),
@@ -208,7 +208,7 @@ class _Account1State extends State<Account1> {
                                 child: Text('Email Address', textAlign: TextAlign.left, style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Montserrat',
-                                    fontSize: 18,
+                                    fontSize: 12,
                                     letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                                     fontWeight: FontWeight.bold,
                                     height: 1
@@ -232,7 +232,7 @@ class _Account1State extends State<Account1> {
                               left: 0,
                               child: Container(
                                 width: 312,
-                                height: 50,
+                                height: 45,
                                 decoration: BoxDecoration(
                                   borderRadius : BorderRadius.only(
                                     topLeft: Radius.circular(5),
@@ -258,7 +258,7 @@ class _Account1State extends State<Account1> {
                                           enabledBorder: InputBorder.none,
                                           errorBorder: InputBorder.none,
                                           disabledBorder: InputBorder.none,
-                                          hintText: "Enter Phone Number Here",hintStyle: TextStyle(color: inputcolor),
+                                          hintText: "Enter Phone Number Here",hintStyle: TextStyle(color: inputcolor,fontFamily:"Montserrat",fontSize: 12),
                                           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                                         ),
                                       ),
@@ -271,7 +271,7 @@ class _Account1State extends State<Account1> {
                                 child: Text('Phone Number', textAlign: TextAlign.left, style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Montserrat',
-                                    fontSize: 18,
+                                    fontSize: 15,
                                     letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                                     fontWeight: FontWeight.bold,
                                     height: 1
@@ -295,7 +295,7 @@ class _Account1State extends State<Account1> {
                               left: 0,
                               child: Container(
                                 width: 312,
-                                height: 50,
+                                height: 45,
                                 decoration: BoxDecoration(
                                   borderRadius : BorderRadius.only(
                                     topLeft: Radius.circular(5),
@@ -322,7 +322,8 @@ class _Account1State extends State<Account1> {
                                           enabledBorder: InputBorder.none,
                                           errorBorder: InputBorder.none,
                                           disabledBorder: InputBorder.none,
-                                          hintText: "Enter A Strong Password Here",hintStyle: TextStyle(color: inputcolor),
+                                          hintText: "Enter A Strong Password Here",hintStyle: TextStyle(
+                                            color: inputcolor,fontFamily:"Montserrat",fontSize: 12 ),
                                           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                                         ),
                                       ),
@@ -335,7 +336,7 @@ class _Account1State extends State<Account1> {
                                 child: Text('Password', textAlign: TextAlign.left, style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Montserrat',
-                                    fontSize: 18,
+                                    fontSize: 15,
                                     letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                                     fontWeight: FontWeight.bold,
                                     height: 1
@@ -359,7 +360,7 @@ class _Account1State extends State<Account1> {
                               left: 0,
                               child: Container(
                                 width: 312,
-                                height: 50,
+                                height: 45,
                                 decoration: BoxDecoration(
                                   borderRadius : BorderRadius.only(
                                     topLeft: Radius.circular(5),
@@ -386,7 +387,7 @@ class _Account1State extends State<Account1> {
                                           enabledBorder: InputBorder.none,
                                           errorBorder: InputBorder.none,
                                           disabledBorder: InputBorder.none,
-                                          hintText: "Confirm Password Here",hintStyle: TextStyle(color: inputcolor),
+                                          hintText: "Confirm Password Here",hintStyle: TextStyle(color: inputcolor,fontFamily:"Montserrat",fontSize: 12),
                                           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                                         ),
                                       ),
@@ -399,7 +400,7 @@ class _Account1State extends State<Account1> {
                                 child: Text('Confirm Password', textAlign: TextAlign.left, style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Montserrat',
-                                    fontSize: 18,
+                                    fontSize: 15,
                                     letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                                     fontWeight: FontWeight.bold,
                                     height: 1
@@ -432,7 +433,7 @@ class _Account1State extends State<Account1> {
                         child: Stack(
                             children: <Widget>[
                               Positioned(
-                                  top: 10,
+                                  top: 12,
                                   left: 46,
                                   child: Text('SIGN UP', textAlign: TextAlign.left, style: TextStyle(
                                       color: Color.fromRGBO(13, 14, 14, 1),
@@ -464,6 +465,9 @@ class _Account1State extends State<Account1> {
                           fontWeight: FontWeight.bold,
                           height: 1,
                         ),),
+                      ),
+                      SizedBox(
+                        width: 10,
                       ),
 
                       InkWell(
