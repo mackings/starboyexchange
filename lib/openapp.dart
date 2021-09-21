@@ -60,7 +60,7 @@ class _OpenappState extends State<Openapp> {
                                                 child: Stack(
                                                     children: <Widget>[
                                                       Positioned(
-                                                          top: 10,
+                                                          top: 15,
                                                           left: 53,
                                                           child: Text('LOGIN', textAlign: TextAlign.left, style: TextStyle(
                                                               color: Color.fromRGBO(13, 14, 14, 1),
@@ -97,7 +97,7 @@ class _OpenappState extends State<Openapp> {
                                                 child: Stack(
                                                     children: <Widget>[
                                                       Positioned(
-                                                          top: 10,
+                                                          top: 13,
                                                           left: 11,
                                                           child: Text('CREATE ACCOUNT', textAlign: TextAlign.left, style: TextStyle(
                                                               color: Color.fromRGBO(255, 255, 255, 1),
@@ -118,7 +118,7 @@ class _OpenappState extends State<Openapp> {
                             )
                         ),Positioned(
                             top: 23,
-                            left: -56,
+                            left: -68,
                             child: Container(
                                 width: 506,
                                 height: 400,

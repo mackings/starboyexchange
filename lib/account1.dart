@@ -9,7 +9,7 @@ import 'package:starboyexchange/login.dart';
 
 
 
-final green = Color.fromRGBO(81, 163, 163, 1);
+final green = const Color.fromRGBO(81, 163, 163, 1);
 final inputcolor = Color.fromRGBO(196, 196, 196, 1);
 
 

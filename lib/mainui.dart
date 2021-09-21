@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/account1.dart';
@@ -18,7 +20,7 @@ class Mainui extends StatefulWidget {
 }
 
 class _MainuiState extends State<Mainui> {
-  GlobalKey<ScaffoldState> _globalKey= GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _globalKey= GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,7 +33,7 @@ class _MainuiState extends State<Mainui> {
               Container(
                   width: 231,
                   height: 812,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color : Color.fromRGBO(81, 163, 163, 1),
                   ),
                   child: Stack(
@@ -145,7 +147,8 @@ class _MainuiState extends State<Mainui> {
                                 ),
                               ],
                             )
-                        ),Positioned(
+                        ),
+                        Positioned(
                             top: 377,
                             left: 58.345726013183594,
                             child: Row(
@@ -169,7 +172,36 @@ class _MainuiState extends State<Mainui> {
                                 ),
                               ],
                             )
-                        ),Positioned(
+                        ),
+
+                        Positioned(
+                            top: 410,
+                            left: 58.345726013183594,
+                            child: Row(
+                              children: [
+                                Icon(Icons.my_library_books,color: Colors.white,),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Settings()));
+                                  },
+                                  child: Text('News', textAlign: TextAlign.left, style: TextStyle(
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 14,
+                                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                      fontWeight: FontWeight.normal,
+                                      height: 1
+                                  ),),
+                                ),
+                              ],
+                            )
+                        ),
+
+
+                        Positioned(
                             top: 447,
                             left: 40.345726013183594,
                             child: Container(
@@ -243,74 +275,7 @@ class _MainuiState extends State<Mainui> {
                             ),)
                         ),
 
-                        Positioned(
-                            top: 379,
-                            left: 26.85873794555664,
-                            child: Container(
-                                width: 12.49746322631836,
-                                height: 15,
 
-                                child: Stack(
-                                    children: <Widget>[
-                                      Positioned(
-                                          top: 0,
-                                          left: 0,
-                                          child: SvgPicture.asset(
-                                              'assets/images/vector.svg',
-                                              semanticsLabel: 'vector'
-                                          ),
-                                      ),
-                                    ]
-                                )
-                            )
-                        ),Positioned(
-                            top: 443,
-                            left: 26,
-                            child: Container(
-                                width: 12.910804748535156,
-                                height: 15.0001220703125,
-
-                                child: Stack(
-                                    children: <Widget>[
-                                     Positioned(
-                                          top: 1.876190185546875,
-                                          left: 3.6745338439941406,
-                                          child: SvgPicture.asset(
-                                              'assets/images/vector.svg',
-                                              semanticsLabel: 'vector'
-                                          ),
-                                      ),Positioned(
-                                          top: 0,
-                                          left: 2.4375648498535156,
-                                          child: SvgPicture.asset(
-                                              'assets/images/vector.svg',
-                                              semanticsLabel: 'vector'
-                                          ),
-                                      ),
-                                    ]
-                                )
-                            )
-                        ),Positioned(
-                            top: 274,
-                            left: 26.85873794555664,
-                            child: Container(
-                                width: 11.654277801513672,
-                                height: 15,
-
-                                child: Stack(
-                                    children: <Widget>[
-                                      Positioned(
-                                          top: 0,
-                                          left: 0,
-                                          child: SvgPicture.asset(
-                                              'assets/images/vector.svg',
-                                              semanticsLabel: 'vector'
-                                          ),
-                                      ),
-                                    ]
-                                )
-                            )
-                        ),
                       ]
                   )
               )
@@ -486,6 +451,7 @@ class _MainuiState extends State<Mainui> {
                                                             onTap: (){
                                                               _globalKey.currentState!.openDrawer();
                                                             },
+
                                                             child: SvgPicture.asset(
                                                               "assets/fmenu.svg",color: Colors.white,
                                                               height: 20,
@@ -500,13 +466,6 @@ class _MainuiState extends State<Mainui> {
                                       ]
                                   )
                               )
-                          ),Positioned(
-                              top: 206.97021484375,
-                              left: 259,
-                              child: SvgPicture.asset(
-                                  'assets/images/vector.svg',
-                                  semanticsLabel: 'vector'
-                              ),
                           ),
                         ]
                     )
@@ -541,13 +500,6 @@ class _MainuiState extends State<Mainui> {
                                   fontWeight: FontWeight.normal,
                                   height: 1
                               ),)
-                          ),Positioned(
-                              top: 14,
-                              left: 138,
-                              child: SvgPicture.asset(
-                                  'assets/images/vector.svg',
-                                  semanticsLabel: 'vector'
-                              ),
                           ),Positioned(
                               top: 44,
                               left: 22,
@@ -597,7 +549,7 @@ class _MainuiState extends State<Mainui> {
                               top: 63,
                               left: 291,
                               child: SvgPicture.asset(
-                                  'asses/checkmark.svg',
+                                  'assets/checkmark.svg',
                                   semanticsLabel: 'vector'
                               ),
                           ),Positioned(
@@ -609,41 +561,7 @@ class _MainuiState extends State<Mainui> {
 
                                   child: Stack(
                                       children: <Widget>[
-                                        Positioned(
-                                            top: 2,
-                                            left: 0,
-                                            child: Container(
-                                                width: 11.666666984558105,
-                                                height: 10,
-
-                                                child: Stack(
-                                                    children: <Widget>[
-                                                      Positioned(
-                                                          top: 0,
-                                                          left: 1.6666666269302368,
-                                                          child: SvgPicture.asset(
-                                                              'assets/images/vector.svg',
-                                                              semanticsLabel: 'vector'
-                                                          ),
-                                                      ),Positioned(
-                                                          top: 3.3333332538604736,
-                                                          left: 2.2737367544323206e-13,
-                                                          child: SvgPicture.asset(
-                                                              'assets/images/vector.svg',
-                                                              semanticsLabel: 'vector'
-                                                          ),
-                                                      ),Positioned(
-                                                          top: 6.666666507720947,
-                                                          left: 2.2737367544323206e-13,
-                                                          child: SvgPicture.asset(
-                                                              'assets/images/vector.svg',
-                                                              semanticsLabel: 'vector'
-                                                          ),
-                                                      ),
-                                                    ]
-                                                )
-                                            )
-                                        ),Positioned(
+                                      Positioned(
                                             top: 0,
                                             left: 12,
                                             child: Text('400', textAlign: TextAlign.center, style: TextStyle(
@@ -668,40 +586,6 @@ class _MainuiState extends State<Mainui> {
                                   child: Stack(
                                       children: <Widget>[
                                         Positioned(
-                                            top: 2,
-                                            left: 0,
-                                            child: Container(
-                                                width: 11.666666984558105,
-                                                height: 10,
-
-                                                child: Stack(
-                                                    children: <Widget>[
-                                                      Positioned(
-                                                          top: 0,
-                                                          left: 1.6666666269302368,
-                                                          child: SvgPicture.asset(
-                                                              'assets/images/vector.svg',
-                                                              semanticsLabel: 'vector'
-                                                          ),
-                                                      ),Positioned(
-                                                          top: 3.3333332538604736,
-                                                          left: 2.2737367544323206e-13,
-                                                          child: SvgPicture.asset(
-                                                              'assets/images/vector.svg',
-                                                              semanticsLabel: 'vector'
-                                                          ),
-                                                      ),Positioned(
-                                                          top: 6.666666507720947,
-                                                          left: 2.2737367544323206e-13,
-                                                          child: SvgPicture.asset(
-                                                              'assets/images/vector.svg',
-                                                              semanticsLabel: 'vector'
-                                                          ),
-                                                      ),
-                                                    ]
-                                                )
-                                            )
-                                        ),Positioned(
                                             top: 0,
                                             left: 12,
                                             child: Text('500', textAlign: TextAlign.center, style: TextStyle(
@@ -734,28 +618,6 @@ class _MainuiState extends State<Mainui> {
 
                                                 child: Stack(
                                                     children: <Widget>[
-                                                      Positioned(
-                                                          top: 0,
-                                                          left: 1.6666666269302368,
-                                                          child: SvgPicture.asset(
-                                                              'assets/images/vector.svg',
-                                                              semanticsLabel: 'vector'
-                                                          ),
-                                                      ),Positioned(
-                                                          top: 3.3333332538604736,
-                                                          left: 2.2737367544323206e-13,
-                                                          child: SvgPicture.asset(
-                                                              'assets/images/vector.svg',
-                                                              semanticsLabel: 'vector'
-                                                          ),
-                                                      ),Positioned(
-                                                          top: 6.666666507720947,
-                                                          left: 2.2737367544323206e-13,
-                                                          child: SvgPicture.asset(
-                                                              'assets/images/vector.svg',
-                                                              semanticsLabel: 'vector'
-                                                          ),
-                                                      ),
                                                     ]
                                                 )
                                             )
@@ -821,13 +683,6 @@ class _MainuiState extends State<Mainui> {
                                   child: Stack(
                                       children: <Widget>[
                                         Positioned(
-                                            top: 0,
-                                            left: 58,
-                                            child: SvgPicture.asset(
-                                                'assets/images/vector.svg',
-                                                semanticsLabel: 'vector'
-                                            ),
-                                        ),Positioned(
                                             top: 0,
                                             left: 0,
                                             child: Text('See all', textAlign: TextAlign.center, style: TextStyle(
@@ -1014,281 +869,14 @@ class _MainuiState extends State<Mainui> {
                                   )
                               )
                           ),
+                         
 
                         ]
                     )
                 ),
                    //lastman
                 SizedBox(height: 20,),
-                Positioned(
-                    top: 650,
-                    left: 26,
-                    child: Container(
-                        width: 316,
-                        height: 67,
-                        decoration: BoxDecoration(
-                          borderRadius : BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20),
-                          ),
-                          boxShadow : [BoxShadow(
-                              color: Color.fromRGBO(0, 0, 0, 0.25),
-                              offset: Offset(0,4),
-                              blurRadius: 3
-                          )],
-                          color : Color.fromRGBO(255, 255, 255, 1),
-                        ),
-                        child: Stack(
-                            children: <Widget>[
-                              Positioned(
-                                  top: 14,
-                                  left: 22,
-                                  child: Container(
-                                      width: 40,
-                                      height: 44,
 
-                                      child: Stack(
-                                          children: <Widget>[
-                                            Positioned(
-                                              top: 0,
-                                              left: 5,
-                                              child: SvgPicture.asset(
-                                                  'assets/home.svg',
-                                                  semanticsLabel: 'vector'
-                                              ),
-                                            ),Positioned(
-                                                top: 28,
-                                                left: 0,
-                                                child: Text('Home', textAlign: TextAlign.left, style: TextStyle(
-                                                    color: Color.fromRGBO(81, 163, 163, 0.5),
-                                                    fontFamily: 'Montserrat',
-                                                    fontSize: 12,
-                                                    letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                    fontWeight: FontWeight.normal,
-                                                    height: 1
-                                                ),)
-                                            ),
-                                          ]
-                                      )
-                                  )
-                              ),Positioned(
-                                  top: 14,
-                                  left: 84,
-                                  child: Container(
-                                      width: 64,
-                                      height: 42,
-
-                                      child: Stack(
-                                          children: <Widget>[
-                                            Positioned(
-                                                top: 28,
-                                                left: 0,
-                                                child: Container(
-                                                    width: 64,
-                                                    height: 14,
-
-                                                    child: Stack(
-                                                        children: <Widget>[
-                                                          Positioned(
-                                                              top: 0,
-                                                              left: 0,
-                                                              child: Text(' Calculate', textAlign: TextAlign.left, style: TextStyle(
-                                                                  color: Color.fromRGBO(81, 163, 163, 1),
-                                                                  fontFamily: 'Montserrat',
-                                                                  fontSize: 12,
-                                                                  letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                                  fontWeight: FontWeight.normal,
-                                                                  height: 1
-                                                              ),)
-                                                          ),
-                                                        ]
-                                                    )
-                                                )
-                                            ),Positioned(
-                                              top: 0,
-                                              left: 21,
-                                              child: SvgPicture.asset(
-                                                'assets/calculator.svg',
-                                                semanticsLabel: 'vector',
-                                                color: Colors.black,
-                                                height: 20,
-                                                width: 20,
-                                              ),
-                                            ),
-                                          ]
-                                      )
-                                  )
-                              ),Positioned(
-                                  top: 14,
-                                  left: 173,
-                                  child: InkWell(
-                                    onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>History1()));
-                                    },
-                                    child: Container(
-                                        width: 46,
-                                        height: 47,
-
-                                        child: Stack(
-                                            children: <Widget>[
-                                              Positioned(
-                                                  top: 28,
-                                                  left: 0,
-                                                  child: Container(
-                                                      width: 46,
-                                                      height: 19,
-
-                                                      child: Stack(
-                                                          children: <Widget>[
-                                                            Positioned(
-                                                                top: 0,
-                                                                left: 0,
-                                                                child: Text('History', textAlign: TextAlign.left, style: TextStyle(
-                                                                    color: Color.fromRGBO(81, 163, 163, 0.5),
-                                                                    fontFamily: 'Montserrat',
-                                                                    fontSize: 12,
-                                                                    letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                                    fontWeight: FontWeight.normal,
-                                                                    height: 1
-                                                                ),)
-                                                            ),
-                                                          ]
-                                                      )
-                                                  )
-                                              ),Positioned(
-                                                  top: 0,
-                                                  left: 11,
-                                                  child: Container(
-                                                      width: 24,
-                                                      height: 23,
-
-                                                      child: Stack(
-                                                          children: <Widget>[
-                                                            Positioned(
-                                                                top: 0,
-                                                                left: 0,
-                                                                child: Container(
-                                                                    width: 24,
-                                                                    height: 23,
-
-                                                                    child: Stack(
-                                                                        children: <Widget>[
-                                                                          Positioned(
-                                                                            top: 0,
-                                                                            left: 0,
-                                                                            child: SvgPicture.asset(
-                                                                              'assets/search.svg',
-                                                                              semanticsLabel: 'vector',
-                                                                              color: Colors.black,
-                                                                              height: 20,width: 20,
-                                                                            ),
-                                                                          ),Positioned(
-                                                                            top: 12.7774658203125,
-                                                                            left: 13.3333740234375,
-                                                                            child: SvgPicture.asset(
-                                                                                'assets/images/vector.svg',
-                                                                                semanticsLabel: 'vector'
-                                                                            ),
-                                                                          ),Positioned(
-                                                                            top: 19.16666603088379,
-                                                                            left: 20.666748046875,
-                                                                            child: SvgPicture.asset(
-                                                                                'assets/images/vector.svg',
-                                                                                semanticsLabel: 'vector'
-                                                                            ),
-                                                                          ),Positioned(
-                                                                            top: 6.38873291015625,
-                                                                            left: 5.3333740234375,
-                                                                            child: SvgPicture.asset(
-                                                                                'assets/images/vector.svg',
-                                                                                semanticsLabel: 'vector'
-                                                                            ),
-                                                                          ),Positioned(
-                                                                            top: 11.5,
-                                                                            left: 5.3333740234375,
-                                                                            child: SvgPicture.asset(
-                                                                                'assets/images/vector.svg',
-                                                                                semanticsLabel: 'vector'
-                                                                            ),
-                                                                          ),
-                                                                        ]
-                                                                    )
-                                                                )
-                                                            ),
-                                                          ]
-                                                      )
-                                                  )
-                                              ),
-                                            ]
-                                        )
-                                    ),
-                                  )
-                              ),Positioned(
-                                  top: 14,
-                                  left: 242,
-                                  child: Container(
-                                      width: 67,
-                                      height: 40,
-
-                                      child: Stack(
-                                          children: <Widget>[
-                                            Positioned(
-                                                top: 28,
-                                                left: 0,
-                                                child: Container(
-                                                    width: 67,
-                                                    height: 12,
-
-                                                    child: Stack(
-                                                        children: <Widget>[
-                                                          Positioned(
-                                                              top: 0,
-                                                              left: 0,
-                                                              child: Text('withdraw', textAlign: TextAlign.left, style: TextStyle(
-                                                                  color: Color.fromRGBO(13, 14, 14, 1),
-                                                                  fontFamily: 'Montserrat',
-                                                                  fontSize: 12,
-                                                                  letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                                  fontWeight: FontWeight.normal,
-                                                                  height: 1
-                                                              ),)
-                                                          ),
-                                                        ]
-                                                    )
-                                                )
-                                            ),Positioned(
-                                                top: 0,
-                                                left: 20,
-                                                child: Container(
-                                                    width: 27.5,
-                                                    height: 25,
-
-                                                    child: Stack(
-                                                        children: <Widget>[
-                                                          Positioned(
-                                                            top: 0,
-                                                            left: 0,
-                                                            child: SvgPicture.asset(
-                                                              'assets/atm.svg',
-                                                              semanticsLabel: 'vector',
-                                                              color: Colors.black,
-                                                              height: 20,width: 20,
-                                                            ),
-                                                          ),
-                                                        ]
-                                                    )
-                                                )
-                                            ),
-                                          ]
-                                      )
-                                  )
-                              ),
-                            ]
-                        )
-                    )
-                ),
 
               ],
             ),
