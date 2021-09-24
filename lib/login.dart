@@ -6,6 +6,7 @@ import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
 
 import 'package:starboyexchange/mainui.dart';
+import 'package:starboyexchange/notifications.dart';
 
 class Login extends StatefulWidget {
   const Login({Key ?key}) : super(key: key);
@@ -15,6 +16,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  TextEditingController emailcon = TextEditingController();
+  TextEditingController passcon = TextEditingController();
+  final adminmail= ("M@gmail.com");
+  final adminpass = (123);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -95,6 +100,7 @@ class _LoginState extends State<Login> {
                                 child: Stack(
                                     children: <Widget>[
                                       TextFormField(
+                                        controller: emailcon,
                                         textAlign: TextAlign.start,
                                         cursorColor: Colors.black,
                                         keyboardType: TextInputType.emailAddress,
@@ -162,6 +168,7 @@ class _LoginState extends State<Login> {
                                 child: Stack(
                                     children: <Widget>[
                                       TextFormField(
+                                        controller: passcon,
                                         textAlign: TextAlign.start,
                                         cursorColor: Colors.black,
                                         keyboardType: TextInputType.visiblePassword,

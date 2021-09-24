@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/account1.dart';
 import 'package:starboyexchange/helpandsupport.dart';
 import 'package:starboyexchange/login.dart';
+import 'package:starboyexchange/news.dart';
 import 'package:starboyexchange/notifications.dart';
 import 'package:starboyexchange/profile.dart';
 import 'package:starboyexchange/settings.dart';
@@ -174,6 +175,10 @@ class _MainuiState extends State<Mainui> {
                             )
                         ),
 
+                        SizedBox(
+                          height: 10,
+                        ),
+
                         Positioned(
                             top: 410,
                             left: 58.345726013183594,
@@ -185,7 +190,7 @@ class _MainuiState extends State<Mainui> {
                                 ),
                                 InkWell(
                                   onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Settings()));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>News()));
                                   },
                                   child: Text('News', textAlign: TextAlign.left, style: TextStyle(
                                       color: Color.fromRGBO(255, 255, 255, 1),
@@ -199,7 +204,6 @@ class _MainuiState extends State<Mainui> {
                               ],
                             )
                         ),
-
 
                         Positioned(
                             top: 447,

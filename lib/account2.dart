@@ -82,7 +82,7 @@ class _Account2State extends State<Account2> {
                   padding: const EdgeInsets.all(5.0),
                   child: Container(
                       width: 312,
-                      height: 79,
+                      height: 80,
 
                       child: Stack(
                           children: <Widget>[
@@ -145,7 +145,7 @@ class _Account2State extends State<Account2> {
                   padding: const EdgeInsets.all(5.0),
                   child: Container(
                       width: 312,
-                      height: 74,
+                      height: 70,
 
                       child: Stack(
                           children: <Widget>[

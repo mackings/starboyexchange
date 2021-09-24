@@ -5,6 +5,8 @@ import 'dart:math' as math;
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/withdraw.dart';
 
+import 'mainui.dart';
+
 
 class Rate1 extends StatefulWidget {
   const Rate1({Key? key}) : super(key: key);
@@ -554,9 +556,14 @@ class _Rate1State extends State<Rate1> {
                                                     Positioned(
                                                       top: 0,
                                                       left: 5,
-                                                      child: SvgPicture.asset(
-                                                          'assets/home.svg',
-                                                          semanticsLabel: 'vector'
+                                                      child: InkWell(
+                                                        onTap: (){
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui()));
+                                                        },
+                                                        child: SvgPicture.asset(
+                                                            'assets/home.svg',
+                                                            semanticsLabel: 'vector'
+                                                        ),
                                                       ),
                                                     ),Positioned(
                                                         top: 28,
@@ -770,11 +777,16 @@ class _Rate1State extends State<Rate1> {
                                                                   Positioned(
                                                                     top: 0,
                                                                     left: 0,
-                                                                    child: SvgPicture.asset(
-                                                                      'assets/atm.svg',
-                                                                      semanticsLabel: 'vector',
-                                                                      color: Colors.black,
-                                                                      height: 20,width: 20,
+                                                                    child: InkWell(
+                                                                      onTap: (){
+                                                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Withdraw1()));
+                                                                      },
+                                                                      child: SvgPicture.asset(
+                                                                        'assets/atm.svg',
+                                                                        semanticsLabel: 'vector',
+                                                                        color: Colors.black,
+                                                                        height: 20,width: 20,
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ]

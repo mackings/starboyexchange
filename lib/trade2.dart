@@ -1,8 +1,12 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/rate1.dart';
+// ignore: import_of_legacy_library_into_null_safe
+
 
 
 class Trade2 extends StatefulWidget {
@@ -13,6 +17,8 @@ class Trade2 extends StatefulWidget {
 }
 
 class _Trade2State extends State<Trade2> {
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -160,12 +166,14 @@ class _Trade2State extends State<Trade2> {
                                       ),Positioned(
                                           top: 188.7532196044922,
                                           left: 281.306640625,
-                                          child: SvgPicture.asset(
-                                              'assets/cloudup.svg',
-                                              semanticsLabel: 'vector',
-                                            height: 40,
-                                            width: 50,
-                                            color: Colors.white,
+                                          child: InkWell(
+                                            child: SvgPicture.asset(
+                                                'assets/cloudup.svg',
+                                                semanticsLabel: 'vector',
+                                              height: 40,
+                                              width: 50,
+                                              color: Colors.white,
+                                            ),
                                           ),
                                       ),
                                     ]

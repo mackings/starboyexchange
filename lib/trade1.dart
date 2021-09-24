@@ -13,6 +13,11 @@ class Trade1 extends StatefulWidget {
 }
 
 class _Trade1State extends State<Trade1> {
+  TextEditingController amountcontroller = TextEditingController();
+  var myamt = 0;
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,7 +36,7 @@ class _Trade1State extends State<Trade1> {
                       children: <Widget>[
                         Positioned(
                             top: -13,
-                            left: 0,
+                            left: -5,
                             child: Container(
                                 width: 375,
                                 height: 825,
@@ -81,14 +86,19 @@ class _Trade1State extends State<Trade1> {
                                               height: 1
                                           ),)
                                       ),Positioned(
-                                          top: 80.6184310913086,
-                                          left: 40.684268951416016,
+                                          top: 70.6184310913086,
+                                          left: 20.684268951416016,
                                           child: Transform.rotate(
                                             angle:10 * (math.pi / 180),
-                                            child: SvgPicture.asset(
-                                                'assets/arrowleft.svg',
-                                                semanticsLabel: 'vector',
-                                              color: Colors.white,
+                                            child: InkWell(
+                                              onTap: (){
+                                                Navigator.pop(context);
+                                              },
+                                              child: SvgPicture.asset(
+                                                  'assets/arrowleft.svg',
+                                                  semanticsLabel: 'vector',
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
                                       ),Positioned(
@@ -400,21 +410,21 @@ class _Trade1State extends State<Trade1> {
                                                                 width: 1,
                                                               ),
                                                             ),
-                                                            child: Stack(
-                                                                children: <Widget>[
-                                                                  Positioned(
-                                                                      top: 19,
-                                                                      left: 12,
-                                                                      child: Text('Enter Amount Here', textAlign: TextAlign.center, style: TextStyle(
-                                                                          color: Color.fromRGBO(196, 196, 196, 1),
-                                                                          fontFamily: 'Montserrat',
-                                                                          fontSize: 10,
-                                                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                                          fontWeight: FontWeight.normal,
-                                                                          height: 1
-                                                                      ),)
-                                                                  ),
-                                                                ]
+                                                            child: TextFormField(
+                                                              controller: amountcontroller,
+                                                              textAlign: TextAlign.start,
+                                                              cursorColor: Colors.black,
+                                                              keyboardType: TextInputType.number,
+                                                              decoration: InputDecoration(
+                                                                border: InputBorder.none,
+                                                                focusedBorder: InputBorder.none,
+                                                                enabledBorder: InputBorder.none,
+                                                                errorBorder: InputBorder.none,
+                                                                disabledBorder: InputBorder.none,
+                                                                hintText: "Enter Amount Here",hintStyle: TextStyle(
+                                                                  color: inputcolor,fontFamily: "Montserrat",fontSize: 12),
+                                                                contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                                                              ),
                                                             )
                                                         )
                                                     ),Positioned(
@@ -452,18 +462,20 @@ class _Trade1State extends State<Trade1> {
                                                     Positioned(
                                                         top: 13,
                                                         left: 25,
-                                                        child: Text('You entered \$ 0', textAlign: TextAlign.left, style: TextStyle(
-                                                            color: Color.fromRGBO(196, 196, 196, 1),
-                                                            fontFamily: 'Montserrat',
-                                                            fontSize: 14,
-                                                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                            fontWeight: FontWeight.normal,
-                                                            height: 1
-                                                        ),)
+                                                        child: InkWell(
+                                                          child: Text('You entered \$${myamt} ', textAlign: TextAlign.left, style: TextStyle(
+                                                              color: Color.fromRGBO(196, 196, 196, 1),
+                                                              fontFamily: 'Montserrat',
+                                                              fontSize: 14,
+                                                              letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                              fontWeight: FontWeight.normal,
+                                                              height: 1
+                                                          ),),
+                                                        ),
                                                     ),Positioned(
                                                         top: 42,
                                                         left: 25,
-                                                        child: Text('\$ 0 * 0', textAlign: TextAlign.left, style: TextStyle(
+                                                        child: Text('\$ ${amountcontroller.text}', textAlign: TextAlign.left, style: TextStyle(
                                                             color: Color.fromRGBO(255, 255, 255, 1),
                                                             fontFamily: 'Montserrat',
                                                             fontSize: 14,

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "926203093858",
+    "project_id": "starboyexchange",
+    "storage_bucket": "starboyexchange.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926203093858:android:eb1679b677657aee9c823b",
+        "android_client_info": {
+          "package_name": "com.example.starboyexchange"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926203093858-lh2n1nvjpkbg05o2q7u9rtih6kkb09hb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.starboyexchange",
+            "certificate_hash": "2ad2b78556639f7db823ba6afc24262bf2049c05"
+          }
+        },
+        {
+          "client_id": "926203093858-f5l8gbu91p95q8req0ng4v45etfj4eh4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoJwPTPonC2QaR4sIVnPpsbmCKTZTz5oo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926203093858-f5l8gbu91p95q8req0ng4v45etfj4eh4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
