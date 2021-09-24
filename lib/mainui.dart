@@ -10,6 +10,7 @@ import 'package:starboyexchange/notifications.dart';
 import 'package:starboyexchange/profile.dart';
 import 'package:starboyexchange/settings.dart';
 import 'package:starboyexchange/trade1.dart';
+import 'package:starboyexchange/withdraw.dart';
 
 import 'history.dart';
 
@@ -869,11 +870,14 @@ class _MainuiState extends State<Mainui> {
                                                 height: 1
                                             ),)
                                         ),
+
+
                                       ]
                                   )
-                              )
+                              ),
+
+
                           ),
-                         
 
                         ]
                     )

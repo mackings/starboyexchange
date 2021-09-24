@@ -1,3 +1,4 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/account1.dart';
@@ -28,7 +29,7 @@ class _Trade1State extends State<Trade1> {
             children: [
               Container(
                   width: 375,
-                  height: 770,
+                  height: 750,
                   decoration: BoxDecoration(
                     color : Color.fromRGBO(28, 24, 24, 1),
                   ),
@@ -57,7 +58,7 @@ class _Trade1State extends State<Trade1> {
                                 child: Stack(
                                     children: <Widget>[
                                       Positioned(
-                                          top: 65,
+                                          top: 45,
                                           left: 298,
                                           child: Container(
                                               width: 40,
@@ -75,7 +76,7 @@ class _Trade1State extends State<Trade1> {
                                               )
                                           )
                                       ),Positioned(
-                                          top: 76,
+                                          top: 56,
                                           left: 116,
                                           child: Text('Trade Gift Card', textAlign: TextAlign.left, style: TextStyle(
                                               color: Color.fromRGBO(255, 255, 255, 1),
@@ -86,7 +87,7 @@ class _Trade1State extends State<Trade1> {
                                               height: 1
                                           ),)
                                       ),Positioned(
-                                          top: 70.6184310913086,
+                                          top: 50.6184310913086,
                                           left: 20.684268951416016,
                                           child: Transform.rotate(
                                             angle:10 * (math.pi / 180),
@@ -102,7 +103,7 @@ class _Trade1State extends State<Trade1> {
                                             ),
                                           ),
                                       ),Positioned(
-                                          top: 117,
+                                          top: 100,
                                           left: 32,
                                           child: Container(
                                               width: 312,
@@ -129,34 +130,16 @@ class _Trade1State extends State<Trade1> {
                                                                 width: 1,
                                                               ),
                                                             ),
-                                                            child: Stack(
-                                                                children: <Widget>[
-                                                                  Positioned(
-                                                                      top: 19,
-                                                                      left: 12,
-                                                                      child: Text('Amazon', textAlign: TextAlign.center, style: TextStyle(
-                                                                          color: Color.fromRGBO(196, 196, 196, 1),
-                                                                          fontFamily: 'Montserrat',
-                                                                          fontSize: 10,
-                                                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                                          fontWeight: FontWeight.normal,
-                                                                          height: 1
-                                                                      ),)
-                                                                  ),Positioned(
-                                                                      top: 20,
-                                                                      left: 296,
-                                                                      child: Transform.rotate(
-                                                                        angle: -90.00000000000003 * (math.pi / 180),
-                                                                        child: SvgPicture.asset(
-                                                                            'assets/images/vector.svg',
-                                                                            semanticsLabel: 'vector'
-                                                                        ),
-                                                                      )
-                                                                  ),
-                                                                ]
-                                                            )
+                                                            child: DropdownSearch<String>(
+                                                              popupBackgroundColor: green,
+                                                              popupBarrierColor: green,
+                                                              items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                                                              popupItemDisabled: (String s) => s.startsWith('I'),
+
+                                                            ),
                                                         )
-                                                    ),Positioned(
+                                                    ),
+                                                    Positioned(
                                                         top: 0,
                                                         left: 0,
                                                         child: Text('Select Category', textAlign: TextAlign.left, style: TextStyle(
@@ -172,7 +155,7 @@ class _Trade1State extends State<Trade1> {
                                               )
                                           )
                                       ),Positioned(
-                                          top: 203,
+                                          top: 180,
                                           left: 32,
                                           child: Container(
                                               width: 312,
@@ -199,32 +182,13 @@ class _Trade1State extends State<Trade1> {
                                                                 width: 1,
                                                               ),
                                                             ),
-                                                            child: Stack(
-                                                                children: <Widget>[
-                                                                  Positioned(
-                                                                      top: 19,
-                                                                      left: 12,
-                                                                      child: Text('Germany Amazon ( cash reciept )', textAlign: TextAlign.center, style: TextStyle(
-                                                                          color: Color.fromRGBO(196, 196, 196, 1),
-                                                                          fontFamily: 'Montserrat',
-                                                                          fontSize: 10,
-                                                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                                          fontWeight: FontWeight.normal,
-                                                                          height: 1
-                                                                      ),)
-                                                                  ),Positioned(
-                                                                      top: 20,
-                                                                      left: 296,
-                                                                      child: Transform.rotate(
-                                                                        angle: -90.00000000000003 * (math.pi / 180),
-                                                                        child: SvgPicture.asset(
-                                                                            'assets/images/vector.svg',
-                                                                            semanticsLabel: 'vector'
-                                                                        ),
-                                                                      )
-                                                                  ),
-                                                                ]
-                                                            )
+                                                            child:DropdownSearch<String>(
+                                                              popupBackgroundColor: green,
+                                                              popupBarrierColor: green,
+                                                              items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                                                              popupItemDisabled: (String s) => s.startsWith('I'),
+
+                                                            ),
                                                         )
                                                     ),Positioned(
                                                         top: 0,
@@ -242,7 +206,7 @@ class _Trade1State extends State<Trade1> {
                                               )
                                           )
                                       ),Positioned(
-                                          top: 375,
+                                          top: 345,
                                           left: 32,
                                           child: Container(
                                               width: 312,
@@ -271,27 +235,14 @@ class _Trade1State extends State<Trade1> {
                                                             ),
                                                             child: Stack(
                                                                 children: <Widget>[
-                                                                  Positioned(
-                                                                      top: 19,
-                                                                      left: 12,
-                                                                      child: Text('Naira', textAlign: TextAlign.center, style: TextStyle(
-                                                                          color: Color.fromRGBO(196, 196, 196, 1),
-                                                                          fontFamily: 'Montserrat',
-                                                                          fontSize: 10,
-                                                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                                          fontWeight: FontWeight.normal,
-                                                                          height: 1
-                                                                      ),)
-                                                                  ),Positioned(
-                                                                      top: 20,
-                                                                      left: 296,
-                                                                      child: Transform.rotate(
-                                                                        angle: -90.00000000000003 * (math.pi / 180),
-                                                                        child: SvgPicture.asset(
-                                                                            'assets/images/vector.svg',
-                                                                            semanticsLabel: 'vector'
-                                                                        ),
-                                                                      )
+
+
+                                                                  DropdownSearch<String>(
+                                                                    popupBackgroundColor: green,
+                                                                    popupBarrierColor: green,
+                                                                    items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                                                                    popupItemDisabled: (String s) => s.startsWith('I'),
+
                                                                   ),
                                                                 ]
                                                             )
@@ -312,7 +263,7 @@ class _Trade1State extends State<Trade1> {
                                               )
                                           )
                                       ),Positioned(
-                                          top: 580,
+                                          top: 540,
                                           left: 32,
                                           child: Container(
                                               width: 312,
@@ -383,7 +334,7 @@ class _Trade1State extends State<Trade1> {
                                               )
                                           )
                                       ),Positioned(
-                                          top: 289,
+                                          top: 260,
                                           left: 31,
                                           child: Container(
                                               width: 312,
@@ -443,7 +394,7 @@ class _Trade1State extends State<Trade1> {
                                               )
                                           )
                                       ),Positioned(
-                                          top: 457,
+                                          top: 430,
                                           left: 28,
                                           child: Container(
                                               width: 316,
@@ -503,18 +454,8 @@ class _Trade1State extends State<Trade1> {
                                 )
                             )
                         ),Positioned(
-                            top: 873.2861328125,
-                            left: 107,
-                            child: Transform.rotate(
-                              angle: 34.83850442938349 * (math.pi / 180),
-                              child: SvgPicture.asset(
-                                  'assets/images/vector.svg',
-                                  semanticsLabel: 'vector'
-                              ),
-                            )
-                        ),Positioned(
-                            top: 680,
-                            left: 29,
+                            top: 620,
+                            left: 23,
                             child: Container(
                                 width: 316,
                                 height: 67,

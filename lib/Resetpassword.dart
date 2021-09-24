@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/Resetpassword2.dart';
 import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({Key ?key}) : super(key: key);
@@ -13,6 +14,14 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
+  TextEditingController resetpass = TextEditingController();
+
+     Future Resetpass() async{
+       await FirebaseAuth.instance.sendPasswordResetEmail(email: resetpass.text);
+     }
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -118,6 +127,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                                 child: Stack(
                                     children: <Widget>[
                                       TextFormField(
+                                        controller: resetpass,
                                         textAlign: TextAlign.start,
                                         cursorColor: Colors.black,
                                         keyboardType: TextInputType.emailAddress,
@@ -165,7 +175,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                 //loginbtn
                 InkWell(
                   onTap: (){
-                   Navigator.push(context, MaterialPageRoute(builder: (context)=>ResetPassword2()));
+                    Resetpass();
+                   //Navigator.push(context, MaterialPageRoute(builder: (context)=>ResetPassword2()));
                   },
                   child: Container(
                       width: 156.1904754638672,

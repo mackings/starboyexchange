@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/account1.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:open_url/open_url.dart';
+
+
+var whatsapp = ("https://web.whatsapp.com/send?phone=2348057572197&text=");
+void _launchURL() async =>
+    await canLaunch(whatsapp) ? await launch(whatsapp) : throw 'Could not launch $whatsapp';
+
 
 class Helpandsupport extends StatefulWidget {
   const Helpandsupport({Key ?key}) : super(key: key);
@@ -123,7 +131,12 @@ class _HelpandsupportState extends State<Helpandsupport> {
                         ),Positioned(
                           top: 337,
                           left: 215,
-                          child: Image.asset("assets/whatsapp.png",height: 20,width: 30,),
+                          child: InkWell(
+                            onTap: (){
+                              _launchURL();
+
+                            },
+                              child: Image.asset("assets/whatsapp.png",height: 20,width: 30,)),
                         ),Positioned(
                             top: 511,
                             left: 77,

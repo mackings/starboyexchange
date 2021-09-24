@@ -1,8 +1,10 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:starboyexchange/history.dart';
 import 'package:starboyexchange/introsliders.dart';
 import 'dart:math' as math;
 import 'package:flutter_svg/svg.dart';
+import 'package:starboyexchange/rate2.dart';
 import 'package:starboyexchange/withdraw.dart';
 
 import 'mainui.dart';
@@ -62,7 +64,7 @@ class _Rate1State extends State<Rate1> {
                                 )
                             )
                         ),Positioned(
-                            top: 47,
+                            top: 37,
                             left: 109,
                             child: Text('Rate Calculator', textAlign: TextAlign.left, style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
@@ -73,7 +75,7 @@ class _Rate1State extends State<Rate1> {
                                 height: 1
                             ),)
                         ),Positioned(
-                            top: 52.28997802734375,
+                            top: 42.28997802734375,
                             left: 30,
                             child: Container(
                                 width: 22.6119384765625,
@@ -93,12 +95,17 @@ class _Rate1State extends State<Rate1> {
                                                     Positioned(
                                                         top: 0,
                                                         left: 0,
-                                                        child: SvgPicture.asset(
-                                                            'assets/photo.svg',
-                                                            semanticsLabel: 'vector',
-                                                          color: Colors.white,
-                                                          height: 20,
-                                                          width: 20,
+                                                        child: InkWell(
+                                                          onTap: (){
+                                                            Navigator.pop(context);
+                                                          },
+                                                          child: SvgPicture.asset(
+                                                              'assets/arrowleft.svg',
+                                                              semanticsLabel: 'vector',
+                                                            color: Colors.white,
+                                                            height: 20,
+                                                            width: 20,
+                                                          ),
                                                         ),
                                                     ),
                                                   ]
@@ -121,7 +128,7 @@ class _Rate1State extends State<Rate1> {
                                 )
                             )
                         ),Positioned(
-                            top: 137,
+                            top: 117,
                             left: 22,
                             child: Container(
                                 width: 312,
@@ -148,34 +155,13 @@ class _Rate1State extends State<Rate1> {
                                                   width: 1,
                                                 ),
                                               ),
-                                              child: Stack(
-                                                  children: <Widget>[
-                                                    Positioned(
-                                                      left: 20,
-                                                      child: DropdownButton<String>(
-                                                        items: <String>['Amazon', 'Walmart', 'WellsFargo', 'Steam'].map((String value) {
-                                                          return DropdownMenuItem<String>(
-                                                            value: value,
-                                                            child: Text(value,style: TextStyle(color: Colors.black),),
-                                                          );
-                                                        }).toList(),
-                                                        onChanged: (_) {},
-                                                      ),
-                                                    ),
+                                              child:  DropdownSearch<String>(
+                                                popupBackgroundColor: green,
+                                                popupBarrierColor: green,
+                                                items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                                                popupItemDisabled: (String s) => s.startsWith('I'),
 
-                                                    Positioned(
-                                                        top: 20,
-                                                        left: 296,
-                                                        child: Transform.rotate(
-                                                          angle: -90.00000000000003 * (math.pi / 180),
-                                                          child: SvgPicture.asset(
-                                                              'assets/images/vector.svg',
-                                                              semanticsLabel: 'vector'
-                                                          ),
-                                                        )
-                                                    ),
-                                                  ]
-                                              )
+                                              ),
                                           )
                                       ),Positioned(
                                           top: 0,
@@ -193,7 +179,7 @@ class _Rate1State extends State<Rate1> {
                                 )
                             )
                         ),Positioned(
-                            top: 220,
+                            top: 200,
                             left: 22,
                             child: Container(
                                 width: 312,
@@ -220,34 +206,13 @@ class _Rate1State extends State<Rate1> {
                                                   width: 1,
                                                 ),
                                               ),
-                                              child: Stack(
-                                                  children: <Widget>[
-                                                    //Dropdown
-                                                    Positioned(
-                                                      left: 20,
-                                                      child: DropdownButton<String>(
-                                                        items: <String>['Amazon', 'Walmart', 'WellsFargo', 'Steam'].map((String value) {
-                                                          return DropdownMenuItem<String>(
-                                                            value: value,
-                                                            child: Text(value,style: TextStyle(color: Colors.black),),
-                                                          );
-                                                        }).toList(),
-                                                        onChanged: (_) {},
-                                                      ),
-                                                    ),
-                                                    Positioned(
-                                                        top: 20,
-                                                        left: 296,
-                                                        child: Transform.rotate(
-                                                          angle: -90.00000000000003 * (math.pi / 180),
-                                                          child: SvgPicture.asset(
-                                                              'assets/images/vector.svg',
-                                                              semanticsLabel: 'vector'
-                                                          ),
-                                                        )
-                                                    ),
-                                                  ]
-                                              )
+                                              child:  DropdownSearch<String>(
+                                                popupBackgroundColor: green,
+                                                popupBarrierColor: green,
+                                                items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                                                popupItemDisabled: (String s) => s.startsWith('I'),
+
+                                              ),
                                           )
                                       ),Positioned(
                                           top: 0,
@@ -265,7 +230,7 @@ class _Rate1State extends State<Rate1> {
                                 )
                             )
                         ),Positioned(
-                            top: 390,
+                            top: 370,
                             left: 22,
                             child: Container(
                                 width: 312,
@@ -292,33 +257,13 @@ class _Rate1State extends State<Rate1> {
                                                   width: 1,
                                                 ),
                                               ),
-                                              child: Stack(
-                                                  children: <Widget>[
-                                                    Positioned(
-                                                      left: 20,
-                                                      child: DropdownButton<String>(
-                                                        items: <String>['Naira', 'Dollar', 'Pounds', 'Euros'].map((String value) {
-                                                          return DropdownMenuItem<String>(
-                                                            value: value,
-                                                            child: Text(value,style: TextStyle(color: Colors.black),),
-                                                          );
-                                                        }).toList(),
-                                                        onChanged: (_) {},
-                                                      ),
-                                                    ),
-                                                   Positioned(
-                                                        top: 20,
-                                                        left: 296,
-                                                        child: Transform.rotate(
-                                                          angle: -90.00000000000003 * (math.pi / 180),
-                                                          child: SvgPicture.asset(
-                                                              'assets/images/vector.svg',
-                                                              semanticsLabel: 'vector'
-                                                          ),
-                                                        )
-                                                    ),
-                                                  ]
-                                              )
+                                              child:  DropdownSearch<String>(
+                                                popupBackgroundColor: green,
+                                                popupBarrierColor: green,
+                                                items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                                                popupItemDisabled: (String s) => s.startsWith('I'),
+
+                                              ),
                                           )
                                       ),Positioned(
                                           top: 0,
@@ -336,7 +281,7 @@ class _Rate1State extends State<Rate1> {
                                 )
                             )
                         ),Positioned(
-                            top: 310,
+                            top: 285,
                             left: 22,
                             child: Container(
                                 width: 312,
@@ -398,7 +343,7 @@ class _Rate1State extends State<Rate1> {
                                 )
                             )
                         ),Positioned(
-                            top: 480,
+                            top: 460,
                             left: 20,
                             child: Container(
                                 width: 316,
@@ -482,11 +427,11 @@ class _Rate1State extends State<Rate1> {
                             )
                         ),
                         Positioned(
-                            top: 600,
-                            left: 69,
+                            top: 580,
+                            left: 60,
                             child: InkWell(
                               onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Rate1()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Rate2()));
                               },
                               child: Container(
                                   width: 237,
@@ -523,7 +468,7 @@ class _Rate1State extends State<Rate1> {
                             )
                         ),
                         Positioned(
-                            top: 650,
+                            top: 630,
                             left: 26,
                             child: Container(
                                 width: 316,
@@ -691,34 +636,6 @@ class _Rate1State extends State<Rate1> {
                                                                                       color: Colors.black,
                                                                                       height: 20,width: 20,
                                                                                     ),
-                                                                                  ),Positioned(
-                                                                                    top: 12.7774658203125,
-                                                                                    left: 13.3333740234375,
-                                                                                    child: SvgPicture.asset(
-                                                                                        'assets/images/vector.svg',
-                                                                                        semanticsLabel: 'vector'
-                                                                                    ),
-                                                                                  ),Positioned(
-                                                                                    top: 19.16666603088379,
-                                                                                    left: 20.666748046875,
-                                                                                    child: SvgPicture.asset(
-                                                                                        'assets/images/vector.svg',
-                                                                                        semanticsLabel: 'vector'
-                                                                                    ),
-                                                                                  ),Positioned(
-                                                                                    top: 6.38873291015625,
-                                                                                    left: 5.3333740234375,
-                                                                                    child: SvgPicture.asset(
-                                                                                        'assets/images/vector.svg',
-                                                                                        semanticsLabel: 'vector'
-                                                                                    ),
-                                                                                  ),Positioned(
-                                                                                    top: 11.5,
-                                                                                    left: 5.3333740234375,
-                                                                                    child: SvgPicture.asset(
-                                                                                        'assets/images/vector.svg',
-                                                                                        semanticsLabel: 'vector'
-                                                                                    ),
                                                                                   ),
                                                                                 ]
                                                                             )
@@ -822,14 +739,19 @@ class _Rate1State extends State<Rate1> {
                                       Positioned(
                                           top: 6,
                                           left: 110,
-                                          child: Text('top 10 Cards', textAlign: TextAlign.center, style: TextStyle(
-                                              color: Color.fromRGBO(255, 255, 255, 1),
-                                              fontFamily: 'Montserrat',
-                                              fontSize: 10,
-                                              letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                              fontWeight: FontWeight.normal,
-                                              height: 1
-                                          ),)
+                                          child: InkWell(
+                                            onTap: (){
+                                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Rate2()));
+                                            },
+                                            child: Text('top 10 Cards', textAlign: TextAlign.center, style: TextStyle(
+                                                color: Color.fromRGBO(255, 255, 255, 1),
+                                                fontFamily: 'Montserrat',
+                                                fontSize: 10,
+                                                letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                fontWeight: FontWeight.normal,
+                                                height: 1
+                                            ),),
+                                          )
                                       ),
 
                                     ]

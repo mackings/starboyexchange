@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:readmore/readmore.dart';
 import 'package:starboyexchange/account1.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class Notifications extends StatefulWidget {
   const Notifications({Key ?key}) : super(key: key);

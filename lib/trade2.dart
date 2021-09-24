@@ -1,10 +1,16 @@
 
 
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/rate1.dart';
+import 'package:path/path.dart' as path;
+import 'package:image_picker/image_picker.dart';
+
 // ignore: import_of_legacy_library_into_null_safe
 
 
@@ -17,6 +23,40 @@ class Trade2 extends StatefulWidget {
 }
 
 class _Trade2State extends State<Trade2> {
+
+  FirebaseStorage storage = FirebaseStorage.instance;
+  Future<void> _upload(String inputSource) async {
+
+    final picker = ImagePicker();
+    PickedFile? pickedImage;
+    try {
+      pickedImage = await picker.getImage(
+          source: inputSource == 'camera'
+              ? ImageSource.camera
+              : ImageSource.gallery,
+          maxWidth: 1920);
+
+      final String fileName = path.basename(pickedImage!.path);
+      File imageFile = File(pickedImage.path);
+
+      try {
+        // Uploading the selected image with some custom meta data
+        await storage.ref(fileName).putFile(
+            imageFile,
+            SettableMetadata(customMetadata: {
+              'uploaded_by': 'A bad guy',
+              'description': 'Some description...'
+            }));
+
+        // Refresh the UI
+        setState(() {});
+      } on FirebaseException catch (error) {
+        print(error);
+      }
+    } catch (err) {
+      print(err);
+    }
+  }
 
 
   @override
@@ -167,6 +207,9 @@ class _Trade2State extends State<Trade2> {
                                           top: 188.7532196044922,
                                           left: 281.306640625,
                                           child: InkWell(
+                                            onTap: (){
+                                              _upload("gallery");
+                                            },
                                             child: SvgPicture.asset(
                                                 'assets/cloudup.svg',
                                                 semanticsLabel: 'vector',

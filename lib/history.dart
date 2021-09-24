@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/history2.dart';
+
+
 class History1 extends StatefulWidget {
   const History1({Key? key}) : super(key: key);
 
@@ -87,7 +89,7 @@ class _History1State extends State<History1> {
                                                         left: 0,
                                                         child: InkWell(
                                                           onTap: (){
-                                                            print("History Nav");
+                                                            Navigator.pop(context);
                                                           },
                                                           child: SvgPicture.asset(
                                                               'assets/arrowleft.svg',
@@ -107,7 +109,7 @@ class _History1State extends State<History1> {
                             )
                         ),Positioned(
                             top: 124,
-                            left: 41,
+                            left: 31,
                             child: Container(
                                 width: 287,
                                 height: 36,
@@ -167,7 +169,7 @@ class _History1State extends State<History1> {
                         ),
                         Positioned(
                             top: 264,
-                            left: 41,
+                            left: 31,
                             child: Container(
                                 width: 287,
                                 height: 36,
@@ -224,7 +226,7 @@ class _History1State extends State<History1> {
                             )
                         ),Positioned(
                             top: 404,
-                            left: 41,
+                            left: 31,
                             child: Container(
                                 width: 287,
                                 height: 36,
@@ -281,7 +283,7 @@ class _History1State extends State<History1> {
                             )
                         ),Positioned(
                             top: 544,
-                            left: 41,
+                            left: 31,
                             child: Container(
                                 width: 287,
                                 height: 36,
@@ -338,7 +340,7 @@ class _History1State extends State<History1> {
                             )
                         ),Positioned(
                             top: 173,
-                            left: 41,
+                            left: 31,
                             child: Container(
                                 width: 287,
                                 height: 36,
@@ -395,7 +397,7 @@ class _History1State extends State<History1> {
                             )
                         ),Positioned(
                             top: 313,
-                            left: 41,
+                            left: 31,
                             child: Container(
                                 width: 287,
                                 height: 36,
@@ -452,7 +454,7 @@ class _History1State extends State<History1> {
                             )
                         ),Positioned(
                             top: 453,
-                            left: 41,
+                            left: 31,
                             child: Container(
                                 width: 287,
                                 height: 36,
@@ -509,7 +511,7 @@ class _History1State extends State<History1> {
                             )
                         ),Positioned(
                             top: 593,
-                            left: 41,
+                            left: 31,
                             child: Container(
                                 width: 287,
                                 height: 36,
@@ -566,7 +568,7 @@ class _History1State extends State<History1> {
                             )
                         ),Positioned(
                             top: 222,
-                            left: 41,
+                            left: 31,
                             child: Container(
                                 width: 287,
                                 height: 36,
@@ -623,7 +625,7 @@ class _History1State extends State<History1> {
                             )
                         ),Positioned(
                             top: 362,
-                            left: 41,
+                            left: 31,
                             child: Container(
                                 width: 287,
                                 height: 36,
@@ -680,7 +682,7 @@ class _History1State extends State<History1> {
                             )
                         ),Positioned(
                             top: 502,
-                            left: 41,
+                            left: 31,
                             child: Container(
                                 width: 287,
                                 height: 36,
@@ -738,7 +740,7 @@ class _History1State extends State<History1> {
                         ),
                         Positioned(
                             top: 642,
-                            left: 41,
+                            left: 31,
                             child: Container(
                                 width: 287,
                                 height: 70,

@@ -7,6 +7,8 @@ import 'dart:math' as math;
 
 import 'package:starboyexchange/mainui.dart';
 import 'package:starboyexchange/notifications.dart';
+import 'package:starboyexchange/testing.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatefulWidget {
   const Login({Key ?key}) : super(key: key);
@@ -18,8 +20,26 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController emailcon = TextEditingController();
   TextEditingController passcon = TextEditingController();
-  final adminmail= ("M@gmail.com");
-  final adminpass = (123);
+
+  Future Signin() async{
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailcon.text,
+          password: passcon.text,
+
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        return ('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        return ('Wrong password provided for that user.');
+      }
+    }
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui()));
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -99,19 +119,21 @@ class _LoginState extends State<Login> {
                                 ),
                                 child: Stack(
                                     children: <Widget>[
-                                      TextFormField(
-                                        controller: emailcon,
-                                        textAlign: TextAlign.start,
-                                        cursorColor: Colors.black,
-                                        keyboardType: TextInputType.emailAddress,
-                                        decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                          enabledBorder: InputBorder.none,
-                                          errorBorder: InputBorder.none,
-                                          disabledBorder: InputBorder.none,
-                                          hintText: "Enter Full Email Address Here",hintStyle: TextStyle(color: inputcolor,fontFamily:"Montserrat",fontSize: 12),
-                                          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                                      Form(
+                                        child: TextFormField(
+                                          controller: emailcon,
+                                          textAlign: TextAlign.start,
+                                          cursorColor: Colors.black,
+                                          keyboardType: TextInputType.emailAddress,
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            focusedBorder: InputBorder.none,
+                                            enabledBorder: InputBorder.none,
+                                            errorBorder: InputBorder.none,
+                                            disabledBorder: InputBorder.none,
+                                            hintText: "Enter Full Email Address Here",hintStyle: TextStyle(color: inputcolor,fontFamily:"Montserrat",fontSize: 12),
+                                            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                                          ),
                                         ),
                                       ),
                                     ]
@@ -238,7 +260,7 @@ class _LoginState extends State<Login> {
                 //loginbtn
                 InkWell(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui()));
+                   Signin();
                   },
                   child: Container(
                       width: 156.1904754638672,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'dart:math' as math;
 
+import 'package:starboyexchange/withdraw2.dart';
+
 class Withdraw1 extends StatefulWidget {
   const Withdraw1({Key ?key}) : super(key: key);
 
@@ -308,16 +310,21 @@ class _Withdraw1State extends State<Withdraw1> {
                                   Positioned(
                                       top: 11,
                                       left: 77,
-                                      child: Text(
-                                        'Withdraw', textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            color: Color.fromRGBO(13, 14, 14, 1),
-                                            fontFamily: 'Montserrat',
-                                            fontSize: 14,
-                                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                            fontWeight: FontWeight.normal,
-                                            height: 1
-                                        ),)
+                                      child: InkWell(
+                                        onTap: (){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Withdraw2()));
+                                        },
+                                        child: Text(
+                                          'Withdraw', textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                              color: Color.fromRGBO(13, 14, 14, 1),
+                                              fontFamily: 'Montserrat',
+                                              fontSize: 14,
+                                              letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                              fontWeight: FontWeight.normal,
+                                              height: 1
+                                          ),),
+                                      )
                                   ),
 
                                 ]

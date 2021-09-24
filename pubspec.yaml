@@ -38,6 +38,16 @@ dependencies:
   intro_slider: ^3.0.2
   flutter_switch: ^0.3.2
   readmore: ^2.1.0
+  dropdown_search: ^1.0.0
+  url_launcher: ^6.0.12
+  open_url: ^2.0.0
+  firebase_core: ^1.6.0
+  firebase_auth: ^3.1.1
+  cloud_firestore: ^2.5.3
+  image_picker: ^0.8.4+2
+  path: ^1.8.0
+  firebase_storage: ^10.0.3
+  flutter_screenutil: ^5.0.0+2
 
 
 

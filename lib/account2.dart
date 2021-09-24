@@ -1,9 +1,13 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:starboyexchange/account1.dart';
 import 'package:starboyexchange/login.dart';
 
 import 'account3.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 
 
@@ -17,6 +21,10 @@ class Account2 extends StatefulWidget {
 
 class _Account2State extends State<Account2> {
   bool value = false;
+
+  TextEditingController Accountnum = TextEditingController();
+  TextEditingController Accountname = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -105,22 +113,12 @@ class _Account2State extends State<Account2> {
                                     width: 1,
                                   ),
                                 ),
-                                child: Stack(
-                                    children: <Widget>[
-                                      //expanded
-                                      Center(
-                                        child: DropdownButton<String>(
-                                          items: <String>['Amazon', 'Walmart', 'WellsFargo', 'Steam'].map((String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(value,style: TextStyle(color: Colors.black),),
-                                            );
-                                          }).toList(),
-                                          onChanged: (_) {},
-                                        ),
-                                      )
+                                child: DropdownSearch<String>(
+                                  popupBackgroundColor: Colors.white,
+                                  popupBarrierColor: green,
+                                  items: ["Naira", "Dollar", "Euros", 'Btc',"Yen"],
+                                  popupItemDisabled: (String s) => s.startsWith('I'),
 
-                                    ]
                                 ),
                               ),
                             ),
@@ -168,22 +166,12 @@ class _Account2State extends State<Account2> {
                                     width: 1,
                                   ),
                                 ),
-                                child: Stack(
-                                    children: <Widget>[
-                                      //expanded
-                                      Center(
-                                        child: DropdownButton<String>(
-                                          items: <String>['Amazon', 'Walmart', 'WellsFargo', 'Steam'].map((String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(value,style: TextStyle(color: Colors.black),),
-                                            );
-                                          }).toList(),
-                                          onChanged: (_) {},
-                                        ),
-                                      )
+                                child: DropdownSearch<String>(
+                                  popupBackgroundColor: Colors.white,
+                                  popupBarrierColor: green,
+                                  items: ["Access Bank", "GT Bank", "Diamond ", 'Zenith Bank',"Polaris Bank"],
+                                  popupItemDisabled: (String s) => s.startsWith('I'),
 
-                                    ]
                                 ),
                               ),
                             ),Positioned(
@@ -234,6 +222,7 @@ class _Account2State extends State<Account2> {
                                     children: <Widget>[
                                      //accountcontroller
                                       TextFormField(
+                                        controller: Accountnum,
                                         textAlign: TextAlign.start,
                                         cursorColor: Colors.black,
                                         keyboardType: TextInputType.number,
@@ -303,6 +292,7 @@ class _Account2State extends State<Account2> {
                                     children: <Widget>[
                                       //accountcontroller
                                       TextFormField(
+                                        controller: Accountname,
                                         textAlign: TextAlign.start,
                                         cursorColor: Colors.black,
                                         keyboardType: TextInputType.text,
@@ -312,7 +302,7 @@ class _Account2State extends State<Account2> {
                                           enabledBorder: InputBorder.none,
                                           errorBorder: InputBorder.none,
                                           disabledBorder: InputBorder.none,
-                                          hintText: "Mac Kingsley",hintStyle: TextStyle(color: inputcolor,fontFamily:"Montserrat",fontSize: 12),
+                                          hintText: "Mac Kingsley Tiago",hintStyle: TextStyle(color: inputcolor,fontFamily:"Montserrat",fontSize: 12),
                                           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                                         ),
                                       ),
@@ -367,6 +357,10 @@ class _Account2State extends State<Account2> {
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
                     onTap: (){
+                      FirebaseFirestore.instance.collection(" Bank Accounts").add({
+                        "Account Name":Accountname.text,
+                        "Account Number":Accountnum.text
+                      });
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> Account3()));
                     },
                     child: Container(

@@ -1,11 +1,17 @@
 
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 import 'package:starboyexchange/account2.dart';
 import 'package:starboyexchange/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+
 
 
 
@@ -22,6 +28,26 @@ class Account1 extends StatefulWidget {
 
 class _Account1State extends State<Account1> {
   //all input controllers
+  TextEditingController ufullname = TextEditingController();
+  TextEditingController uemail = TextEditingController();
+  TextEditingController uphonenumber = TextEditingController();
+  TextEditingController upassword = TextEditingController();
+
+
+
+  Future Signup() async{
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: uemail.text, password: upassword.text);
+    await FirebaseFirestore.instance.collection("People").add({
+      "FullName":ufullname.text,
+      "Email":uemail.text,
+      "Phone Number":uphonenumber.text,
+      "Password":upassword.text
+
+    }).then((value) => (){
+      print(value.id);
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -123,6 +149,7 @@ class _Account1State extends State<Account1> {
                                     child: Stack(
                                         children: <Widget>[
                                           TextFormField(
+                                            controller: ufullname,
                                             textAlign: TextAlign.start,
                                             cursorColor: Colors.black,
                                             keyboardType: TextInputType.name,
@@ -186,6 +213,7 @@ class _Account1State extends State<Account1> {
                                 child: Stack(
                                     children: <Widget>[
                                       TextFormField(
+                                        controller: uemail,
                                         textAlign: TextAlign.start,
                                         cursorColor: Colors.black,
                                         keyboardType: TextInputType.emailAddress,
@@ -249,6 +277,7 @@ class _Account1State extends State<Account1> {
                                 child: Stack(
                                     children: <Widget>[
                                       TextFormField(
+                                        controller: uphonenumber,
                                         textAlign: TextAlign.start,
                                         cursorColor: Colors.black,
                                         keyboardType: TextInputType.phone,
@@ -312,6 +341,7 @@ class _Account1State extends State<Account1> {
                                 child: Stack(
                                     children: <Widget>[
                                       TextFormField(
+                                        controller: upassword,
                                         textAlign: TextAlign.start,
                                         cursorColor: Colors.black,
                                         keyboardType: TextInputType.visiblePassword,
@@ -416,6 +446,7 @@ class _Account1State extends State<Account1> {
                   child: InkWell(
                     splashColor: Colors.grey,
                     onTap: (){
+                      Signup();
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>Account2()));
                     },
                     child: Container(
