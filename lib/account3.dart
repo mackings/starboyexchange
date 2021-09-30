@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/account1.dart';
+import 'package:starboyexchange/account2.dart';
 import 'dart:math' as math;
 
 import 'package:starboyexchange/login.dart';
+import 'package:starboyexchange/profile.dart';
 
 class Account3 extends StatefulWidget {
   const Account3({Key ?key}) : super(key: key);
@@ -51,7 +53,7 @@ class _Account3State extends State<Account3> {
 
                     InkWell(
                       onTap: (){
-                        print("Add New Payment Method");
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Account2()));
                       },
                       child: Container(
                           width: 200,
@@ -90,7 +92,7 @@ class _Account3State extends State<Account3> {
 
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile()));
                       },
                       child: Container(
                           width: 156.1904754638672,

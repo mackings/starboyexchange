@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hive/hive.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:starboyexchange/account1.dart';
+import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'mainui.dart';
+
+class Person {
+  String name;
+  int email;
+
+  Person({required this.name, required this.email,});
+}
+
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -10,6 +26,66 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+
+
+
+
+
+
+  TextEditingController profilename =TextEditingController();
+  TextEditingController profileemail=TextEditingController();
+  TextEditingController profileusername=TextEditingController();
+  TextEditingController profilenumber=TextEditingController();
+
+
+
+   savedata() async{
+     SharedPreferences prefs = SharedPreferences.getInstance() as SharedPreferences;
+     setState(() {
+       profileusername = prefs.getString("profileusername") as TextEditingController;
+     });
+
+   }
+
+   Loaduser()async{
+     SharedPreferences mypref = SharedPreferences.getInstance() as SharedPreferences;
+     setState(() {
+       profilename = mypref.setString("profilename", profilename.text) as TextEditingController;
+     });
+
+   }
+
+
+   addinfo() async{
+     await Hive.openBox("ProfileDetails");
+     var box = Hive.box("ProfileNames");
+     await box.put("name", profilename.text);
+     var name = box.get(profilename.text);
+     print(name);
+
+   }
+
+
+
+
+
+
+
+  File? _selectedImage;
+  final picker = ImagePicker();
+
+  Future Profileimg() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      if (pickedFile != null) {
+        _selectedImage = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -40,7 +116,7 @@ class _ProfileState extends State<Profile> {
                         Positioned(
                             top: 36,
                             left: 151,
-                            child: Text('Profile', textAlign: TextAlign.left, style: TextStyle(
+                            child: Text(profileusername.text, textAlign: TextAlign.left, style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
                                 fontFamily: 'Montserrat',
                                 fontSize: 18,
@@ -79,9 +155,10 @@ class _ProfileState extends State<Profile> {
                                               child: Stack(
                                                   children: <Widget>[
                                                     TextFormField(
+                                                      controller: profilename,
                                                       textAlign: TextAlign.start,
                                                       cursorColor: Colors.black,
-                                                      keyboardType: TextInputType.emailAddress,
+                                                      keyboardType: TextInputType.text,
                                                       decoration: InputDecoration(
                                                         border: InputBorder.none,
                                                         focusedBorder: InputBorder.none,
@@ -141,6 +218,7 @@ class _ProfileState extends State<Profile> {
                                               child: Stack(
                                                   children: <Widget>[
                                                     TextFormField(
+                                                      controller: profileemail,
                                                       textAlign: TextAlign.start,
                                                       cursorColor: Colors.black,
                                                       keyboardType: TextInputType.emailAddress,
@@ -204,6 +282,7 @@ class _ProfileState extends State<Profile> {
                                                   children: <Widget>[
 
                                                     TextFormField(
+                                                      controller: profileusername,
                                                       textAlign: TextAlign.start,
                                                       cursorColor: Colors.black,
                                                       keyboardType: TextInputType.name,
@@ -266,6 +345,7 @@ class _ProfileState extends State<Profile> {
                                               child: Stack(
                                                   children: <Widget>[
                                                     TextFormField(
+                                                      controller: profilenumber,
                                                       textAlign: TextAlign.start,
                                                       cursorColor: Colors.black,
                                                       keyboardType: TextInputType.phone,
@@ -306,20 +386,46 @@ class _ProfileState extends State<Profile> {
                             top: 80,
                             left: 112,
                             child: Container(
-                                width: 150,
-                                height: 150,
-                                decoration: BoxDecoration(
-                                  border : Border.all(
-                                    color: Color.fromRGBO(81, 163, 163, 1),
-                                    width: 1,
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: _selectedImage == null
+                                  ? InkWell(
+                                onTap: () => Profileimg(),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 250,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[300],
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                  image : DecorationImage(
-                                      image: AssetImage('assets/signat.png'),
-                                      fit: BoxFit.fitWidth
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(70)
+                                    ),
+                                      child: Image.asset("assets/signat.png")),
+                                ),
+                              )
+                                  : InkWell(
+                                onTap: () => Profileimg(),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 250,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[300],
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                      image: FileImage(_selectedImage!),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  borderRadius : BorderRadius.all(Radius.elliptical(150, 150)),
-                                )
-                            )
+                                ),
+                              ),
+
+                            ),
                         ),Positioned(
                             top: 180,
                             left: 224,
@@ -354,7 +460,11 @@ class _ProfileState extends State<Profile> {
                                                         left: 0,
 
                                                         //image picker goes Here
-                                                        child: Image.asset("assets/attach.png",height: 15,width: 15,),
+                                                        child: InkWell(
+                                                          onTap: (){
+                                                            Profileimg();
+                                                          },
+                                                            child: Image.asset("assets/attach.png",height: 15,width: 15,)),
                                                     ),
                                                   ]
                                               )
@@ -401,34 +511,46 @@ class _ProfileState extends State<Profile> {
                                                     Positioned(
                                                         top: 0,
                                                         left: 0,
-                                                        child: Container(
-                                                            width: 237,
-                                                            height: 40,
-                                                            decoration: BoxDecoration(
-                                                              borderRadius : BorderRadius.only(
-                                                                topLeft: Radius.circular(5),
-                                                                topRight: Radius.circular(5),
-                                                                bottomLeft: Radius.circular(5),
-                                                                bottomRight: Radius.circular(5),
+                                                        child: InkWell(
+                                                          onTap: (){
+                                                            addinfo();
+                                                            savedata();
+                                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui(
+                                                             hisname:profilename.text,
+                                                             hisemail:profileemail.text,
+                                                             hisusername:profileusername.text,
+                                                             hisnumber:profilenumber.text,
+                                                           )));
+                                                          },
+                                                          child: Container(
+                                                              width: 237,
+                                                              height: 40,
+                                                              decoration: BoxDecoration(
+                                                                borderRadius : BorderRadius.only(
+                                                                  topLeft: Radius.circular(5),
+                                                                  topRight: Radius.circular(5),
+                                                                  bottomLeft: Radius.circular(5),
+                                                                  bottomRight: Radius.circular(5),
+                                                                ),
+                                                                color : Color.fromRGBO(81, 163, 163, 1),
                                                               ),
-                                                              color : Color.fromRGBO(81, 163, 163, 1),
-                                                            ),
-                                                            child: Stack(
-                                                                children: <Widget>[
-                                                                  Positioned(
-                                                                      top: 11,
-                                                                      left: 85,
-                                                                      child: Text('SUBMIT ', textAlign: TextAlign.left, style: TextStyle(
-                                                                          color: Color.fromRGBO(13, 14, 14, 1),
-                                                                          fontFamily: 'Montserrat',
-                                                                          fontSize: 14,
-                                                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                                          fontWeight: FontWeight.normal,
-                                                                          height: 1
-                                                                      ),)
-                                                                  ),
-                                                                ]
-                                                            )
+                                                              child: Stack(
+                                                                  children: <Widget>[
+                                                                    Positioned(
+                                                                        top: 11,
+                                                                        left: 85,
+                                                                        child: Text('SUBMIT ', textAlign: TextAlign.left, style: TextStyle(
+                                                                            color: Color.fromRGBO(13, 14, 14, 1),
+                                                                            fontFamily: 'Montserrat',
+                                                                            fontSize: 14,
+                                                                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                                            fontWeight: FontWeight.normal,
+                                                                            height: 1
+                                                                        ),)
+                                                                    ),
+                                                                  ]
+                                                              )
+                                                          ),
                                                         )
                                                     ),
                                                   ]

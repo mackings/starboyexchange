@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:starboyexchange/account1.dart';
+import 'package:starboyexchange/admin.dart';
+import 'package:starboyexchange/adminlogin.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key ? key}) : super(key: key);
@@ -50,7 +52,10 @@ class _SettingsState extends State<Settings> {
                                 fontWeight: FontWeight.normal,
                                 height: 1
                             ),)
-                        ),Positioned(
+                        ),
+
+
+                        Positioned(
                             top: 116,
                             left: 36,
                             child: Text('Enable Notifications', textAlign: TextAlign.left, style: TextStyle(
@@ -83,7 +88,26 @@ class _SettingsState extends State<Settings> {
                                 fontWeight: FontWeight.normal,
                                 height: 1
                             ),)
-                        ),Positioned(
+                        ),
+                        Positioned(
+                            top: 240,
+                            left: 36,
+                            child: InkWell(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Adminlogin()));
+                              },
+                              child: Text('Admin', textAlign: TextAlign.left, style: TextStyle(
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 14,
+                                  letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                  fontWeight: FontWeight.normal,
+                                  height: 1
+                              ),),
+                            )
+                        ),
+
+                        Positioned(
                             top: 113,
                             left: 280,
                             child: Container(

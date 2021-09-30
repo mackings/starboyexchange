@@ -1,35 +1,28 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:starboyexchange/Resetpassword2.dart';
-import 'package:starboyexchange/account1.dart';
-import 'dart:math' as math;
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:starboyexchange/login.dart';
 
-class ResetPassword extends StatefulWidget {
-  const ResetPassword({Key ?key}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:starboyexchange/admin.dart';
+import 'package:starboyexchange/introsliders.dart';
+import 'package:starboyexchange/account1.dart';
+import 'package:starboyexchange/openapp.dart';
+
+import 'account1.dart';
+
+class Adminlogin extends StatefulWidget {
+  const Adminlogin({Key ?key}) : super(key: key);
 
   @override
-  _ResetPasswordState createState() => _ResetPasswordState();
+  _AdminloginState createState() => _AdminloginState();
 }
 
-class _ResetPasswordState extends State<ResetPassword> {
-  TextEditingController resetpass = TextEditingController();
-
-     Future Resetpass() async{
-       await FirebaseAuth.instance.sendPasswordResetEmail(email: resetpass.text.trim());
-     }
-
-
-
+class _AdminloginState extends State<Adminlogin> {
+  final keys = 1234567890;
+  TextEditingController admin = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: green,
-        body: SingleChildScrollView(
+        backgroundColor: Colors.black,
+        body:SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
@@ -50,20 +43,9 @@ class _ResetPasswordState extends State<ResetPassword> {
                 SizedBox(
                   height: 10,
                 ),
-                Text('Reset Password', textAlign: TextAlign.left, style: TextStyle(
-                    color: Color.fromRGBO(255, 255, 255, 1),
-                    fontFamily: 'Montserrat',
-                    fontSize: 24,
-                    letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                    fontWeight: FontWeight.bold,
-                    height: 1
-                ),),
-                SizedBox(
-                  height: 20,
-                ),
                 Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: Text('Dear Star User Kindly Enter Your Email So', textAlign: TextAlign.left, style: TextStyle(
+                  child: Text('Enter Admin Key', textAlign: TextAlign.left, style: TextStyle(
                       color: Color.fromRGBO(255, 255, 255, 1),
                       fontFamily: 'Montserrat',
                       fontSize: 12,
@@ -72,28 +54,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       height: 1
                   ),),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('We Can Send A Token To Reset Your', textAlign: TextAlign.left, style: TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      fontFamily: 'Montserrat',
-                      fontSize: 12,
-                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                      fontWeight: FontWeight.normal,
-                      height: 1
-                  ),),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Text('Password With.', textAlign: TextAlign.left, style: TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      fontFamily: 'Montserrat',
-                      fontSize: 12,
-                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                      fontWeight: FontWeight.normal,
-                      height: 1
-                  ),),
-                ),
+
                 SizedBox(
                   height: 20,
                 ),
@@ -128,7 +89,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                                 child: Stack(
                                     children: <Widget>[
                                       TextFormField(
-                                        controller: resetpass,
+                                        controller: admin,
                                         textAlign: TextAlign.start,
                                         cursorColor: Colors.black,
                                         keyboardType: TextInputType.emailAddress,
@@ -138,7 +99,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                                           enabledBorder: InputBorder.none,
                                           errorBorder: InputBorder.none,
                                           disabledBorder: InputBorder.none,
-                                          hintText: "Enter Full Email Address Here",hintStyle: TextStyle(
+                                          hintText: "Enter Auth Keys Here",hintStyle: TextStyle(
                                             color: inputcolor,fontFamily: "Montserrat",fontSize: 12),
                                           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                                         ),
@@ -149,7 +110,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                             ),Positioned(
                                 top: 0,
                                 left: 0,
-                                child: Text('Email Address', textAlign: TextAlign.left, style: TextStyle(
+                                child: Text('Auth Keys', textAlign: TextAlign.left, style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Montserrat',
                                     fontSize: 18,
@@ -176,8 +137,12 @@ class _ResetPasswordState extends State<ResetPassword> {
                 //loginbtn
                 InkWell(
                   onTap: (){
-                    Resetpass();
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+                   if(admin.text==keys){
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>Admin()));
+                   }else{
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>Admin()));
+                   }
+
                   },
                   child: Container(
                       width: 156.1904754638672,
@@ -205,7 +170,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                                           Positioned(
                                               top: 15,
                                               left: 53,
-                                              child: Text('RESET', textAlign: TextAlign.left, style: TextStyle(
+                                              child: Text('Login', textAlign: TextAlign.left, style: TextStyle(
                                                   color: Color.fromRGBO(13, 14, 14, 1),
                                                   fontFamily: 'Montserrat',
                                                   fontSize: 14,
@@ -226,35 +191,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                 SizedBox(
                   height: 20,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Dont Have Account Yet ?', textAlign: TextAlign.left, style: TextStyle(
-                        color: Color.fromRGBO(255, 255, 255, 1),
-                        fontFamily: 'Montserrat',
-                        fontSize: 12,
-                        letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                        fontWeight: FontWeight.normal,
-                        height: 1
-                    ),),
-                   SizedBox(
-                     width: 10,
-                   ),
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Account1()));
-                      },
-                      child: Text('Login Here', textAlign: TextAlign.left, style: TextStyle(
-                          color: Color.fromRGBO(13, 13, 13, 1),
-                          fontFamily: 'Montserrat',
-                          fontSize: 12,
-                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                          fontWeight: FontWeight.normal,
-                          height: 1
-                      ),),
-                    )
-                  ],
-                )
 
 
 

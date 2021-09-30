@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.starboyexchange">
     <queries>
         <intent>
@@ -15,8 +16,10 @@
         </intent>
     </queries>
    <application
+       android:usesCleartextTraffic="true"
         android:label="starboyexchange"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+       tools:targetApi="m">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

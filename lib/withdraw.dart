@@ -1,8 +1,11 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'dart:math' as math;
 
 import 'package:starboyexchange/withdraw2.dart';
+
+import 'account1.dart';
 
 class Withdraw1 extends StatefulWidget {
   const Withdraw1({Key ?key}) : super(key: key);
@@ -154,38 +157,14 @@ class _Withdraw1State extends State<Withdraw1> {
                                           width: 1,
                                         ),
                                       ),
-                                      child: Stack(
-                                          children: <Widget>[
-                                            Positioned(
-                                                top: 19,
-                                                left: 12,
-                                                child: Text('Naira',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          196, 196, 196, 1),
-                                                      fontFamily: 'Montserrat',
-                                                      fontSize: 10,
-                                                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                      fontWeight: FontWeight
-                                                          .normal,
-                                                      height: 1
-                                                  ),)
-                                            ), Positioned(
-                                              top: 20,
-                                              left: 296,
-                                              child: Transform.rotate(
-                                                angle: -90.00000000000003 *
-                                                    (math.pi / 180),
-                                                child: SvgPicture.asset(
-                                                    'assets/images/vector.svg',
-                                                    semanticsLabel: 'vector'
-                                                ),
-                                              ),
-                                            ),
-                                          ]
-                                      )
-                                  )
+                                      child:  DropdownSearch<String>(
+                                        popupBackgroundColor: Colors.white,
+                                        popupBarrierColor: green,
+                                        items: ["Naira", "Euros (Disabled)", "Pounds", 'Yenn'],
+                                        popupItemDisabled: (String s) => s.startsWith('E'),
+
+                                      ),
+                                  ),
                               ),
 
                               Positioned(
@@ -248,25 +227,19 @@ class _Withdraw1State extends State<Withdraw1> {
                                           width: 1,
                                         ),
                                       ),
-                                      child: Stack(
-                                          children: <Widget>[
-                                            Positioned(
-                                                top: 19,
-                                                left: 12,
-                                                child: Text('Enter Amount Here',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          196, 196, 196, 1),
-                                                      fontFamily: 'Montserrat',
-                                                      fontSize: 10,
-                                                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                      fontWeight: FontWeight
-                                                          .normal,
-                                                      height: 1
-                                                  ),)
-                                            ),
-                                          ]
+                                      child: TextFormField(
+                                        textAlign: TextAlign.start,
+                                        cursorColor: Colors.black,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                          enabledBorder: InputBorder.none,
+                                          errorBorder: InputBorder.none,
+                                          disabledBorder: InputBorder.none,
+                                          hintText: "500",hintStyle: TextStyle(color: Colors.teal),
+                                          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                                        ),
                                       ),
                                   )
                               ), Positioned(

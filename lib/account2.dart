@@ -24,6 +24,7 @@ class _Account2State extends State<Account2> {
 
   TextEditingController Accountnum = TextEditingController();
   TextEditingController Accountname = TextEditingController();
+  TextEditingController Bankname = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -166,18 +167,27 @@ class _Account2State extends State<Account2> {
                                     width: 1,
                                   ),
                                 ),
-                                child: DropdownSearch<String>(
-                                  popupBackgroundColor: Colors.white,
-                                  popupBarrierColor: green,
-                                  items: ["Access Bank", "GT Bank", "Diamond ", 'Zenith Bank',"Polaris Bank"],
-                                  popupItemDisabled: (String s) => s.startsWith('I'),
-
+                                child: TextFormField(
+                                  controller: Bankname,
+                                  textAlign: TextAlign.start,
+                                  cursorColor: Colors.black,
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    enabledBorder: InputBorder.none,
+                                    errorBorder: InputBorder.none,
+                                    disabledBorder: InputBorder.none,
+                                    hintText: "Standard Chartered Bank",hintStyle: TextStyle(color: inputcolor,fontFamily:"Montserrat",fontSize: 12),
+                                    contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                                  ),
                                 ),
                               ),
-                            ),Positioned(
+                            ),
+                            Positioned(
                                 top: 0,
                                 left: 0,
-                                child: Text('Selet Bank', textAlign: TextAlign.left, style: TextStyle(
+                                child: Text('Enter Bank Name', textAlign: TextAlign.left, style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Montserrat',
                                     fontSize: 15,
@@ -359,7 +369,8 @@ class _Account2State extends State<Account2> {
                     onTap: (){
                       FirebaseFirestore.instance.collection(" Bank Accounts").add({
                         "Account Name":Accountname.text,
-                        "Account Number":Accountnum.text
+                        "Account Number":Accountnum.text,
+                        "Bank Name": Bankname.text,
                       });
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> Account3()));
                     },

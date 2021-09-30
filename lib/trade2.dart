@@ -4,14 +4,20 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:path/path.dart';
 import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/rate1.dart';
 import 'package:path/path.dart' as path;
 import 'package:image_picker/image_picker.dart';
+import "package:starboyexchange/admin.dart";
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// ignore: import_of_legacy_library_into_null_safe
+
 
 
 
@@ -24,43 +30,56 @@ class Trade2 extends StatefulWidget {
 
 class _Trade2State extends State<Trade2> {
 
-  FirebaseStorage storage = FirebaseStorage.instance;
-  Future<void> _upload(String inputSource) async {
 
-    final picker = ImagePicker();
-    PickedFile? pickedImage;
-    try {
-      pickedImage = await picker.getImage(
-          source: inputSource == 'camera'
-              ? ImageSource.camera
-              : ImageSource.gallery,
-          maxWidth: 1920);
+  File?  _selectedImage;
+  final picker = ImagePicker();
 
-      final String fileName = path.basename(pickedImage!.path);
-      File imageFile = File(pickedImage.path);
+  late String imageLink;
 
-      try {
-        // Uploading the selected image with some custom meta data
-        await storage.ref(fileName).putFile(
-            imageFile,
-            SettableMetadata(customMetadata: {
-              'uploaded_by': 'A bad guy',
-              'description': 'Some description...'
-            }));
 
-        // Refresh the UI
-        setState(() {});
-      } on FirebaseException catch (error) {
-        print(error);
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      if (pickedFile != null) {
+        _selectedImage = File(pickedFile.path);
+      } else {
+        print('No image selected.');
       }
-    } catch (err) {
-      print(err);
-    }
+    });
   }
+
+  //Mailer
+
+
+
+
+
+
+
+  Future SubmitTrade() async{
+    FirebaseStorage fs = FirebaseStorage.instance;
+    final reference = fs.ref();
+    final picturefolder = reference.child("Giftcards").child("Cards");
+    picturefolder.putFile(_selectedImage!).whenComplete(() => () async{
+     imageLink = await picturefolder.getDownloadURL();
+     print("Hellow");
+    });
+
+
+
+  }
+
+
+
+
+
+
 
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       home: Scaffold(
         backgroundColor: green,
@@ -101,20 +120,19 @@ class _Trade2State extends State<Trade2> {
                                           top: 65,
                                           left: 298,
                                           child: Container(
-                                              width: 40,
-                                              height: 40,
+                                            width: 40,
+                                            //ddddpp
+                                            height: 40,
+                                              child: Image.network(""),
+
                                               decoration: BoxDecoration(
                                                 border : Border.all(
                                                   color: Color.fromRGBO(81, 163, 163, 1),
                                                   width: 1,
                                                 ),
-                                                image : DecorationImage(
-                                                    image: AssetImage('assets/signat.png'),
-                                                    fit: BoxFit.fitWidth
-                                                ),
                                                 borderRadius : BorderRadius.all(Radius.elliptical(40, 40)),
-                                              )
-                                          )
+                                              ),
+                                          ),
                                       ),Positioned(
                                           top: 76,
                                           left: 103,
@@ -131,67 +149,61 @@ class _Trade2State extends State<Trade2> {
                                           left: 41.76918411254883,
                                           child: Transform.rotate(
                                             angle: 10 * (math.pi / 180),
-                                            child: SvgPicture.asset(
-                                                'assets/arrowleft.svg',
-                                                semanticsLabel: 'vector',
-                                              color: Colors.white,
+                                            child: InkWell(
+                                              onTap: (){
+                                                Navigator.pop(context);
+                                              },
+                                              child: SvgPicture.asset(
+                                                  'assets/arrowleft.svg',
+                                                  semanticsLabel: 'vector',
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           )
                                       ),Positioned(
                                           top: 138,
                                           left: 32,
                                           child: Container(
-                                              width: 146,
-                                              height: 138,
-                                              decoration: BoxDecoration(
-                                                borderRadius : BorderRadius.only(
-                                                  topLeft: Radius.circular(5),
-                                                  topRight: Radius.circular(5),
-                                                  bottomLeft: Radius.circular(5),
-                                                  bottomRight: Radius.circular(5),
+                                            height: 150,
+                                            width: 150,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            child: _selectedImage == null
+                                                ? InkWell(
+                                              onTap: () => getImage(),
+                                              child: Container(
+                                                width: MediaQuery.of(context).size.width,
+                                                height: 250,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey[300],
+                                                  borderRadius: BorderRadius.circular(10),
                                                 ),
-                                                color : Color.fromRGBO(13, 13, 13, 0.5099999904632568),
-                                                border : Border.all(
-                                                  color: Color.fromRGBO(0, 0, 0, 1),
-                                                  width: 1,
+                                                child: Icon(
+                                                  Icons.image,
+                                                  size: 70,
+                                                  color: Colors.white,
                                                 ),
                                               ),
-                                              child: Stack(
-                                                  children: <Widget>[
-                                                    Positioned(
-                                                        top: 57,
-                                                        left: 59,
-                                                        child: Container(
-                                                            width: 28.571428298950195,
-                                                            height: 25,
+                                            )
+                                                : InkWell(
+                                              onTap: () => getImage(),
+                                              child: Container(
+                                                width: MediaQuery.of(context).size.width,
+                                                height: 250,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey[300],
+                                                  borderRadius: BorderRadius.circular(10),
+                                                  image: DecorationImage(
+                                                    image: FileImage(_selectedImage!),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
 
-                                                            child: Stack(
-                                                                children: <Widget>[
-                                                                  Positioned(
-                                                                      top: 5.357142925262451,
-                                                                      left: 5.357142925262451,
-                                                                      child: SvgPicture.asset(
-                                                                          'assets/photo.svg',
-                                                                          semanticsLabel: 'vector',
-                                                                        color: Colors.white,
-                                                                        height: 20,
-                                                                        width: 20,
-                                                                      ),
-                                                                  ),Positioned(
-                                                                      top: 0,
-                                                                      left: 0,
-                                                                      child: SvgPicture.asset(
-                                                                          'assets/images/vector.svg',
-                                                                          semanticsLabel: 'vector'
-                                                                      ),
-                                                                  ),
-                                                                ]
-                                                            )
-                                                        )
-                                                    ),
-                                                  ]
-                                              )
-                                          )
+                                          ),
                                       ),Positioned(
                                           top: 227,
                                           left: 234,
@@ -208,7 +220,8 @@ class _Trade2State extends State<Trade2> {
                                           left: 281.306640625,
                                           child: InkWell(
                                             onTap: (){
-                                              _upload("gallery");
+                                              getImage();
+
                                             },
                                             child: SvgPicture.asset(
                                                 'assets/cloudup.svg',
@@ -258,6 +271,13 @@ class _Trade2State extends State<Trade2> {
                                                         left: 0,
                                                         child: InkWell(
                                                           onTap: (){
+                                                            SubmitTrade();
+                                                            Fluttertoast.showToast(
+                                                                msg: "Trade Submitted ",
+                                                                toastLength:Toast.LENGTH_LONG,
+                                                              backgroundColor:green,
+                                                              textColor: Colors.white,
+                                                            );
                                                             Navigator.push(context, MaterialPageRoute(builder: (context)=>Rate1()));
                                                           },
                                                           child: Container(

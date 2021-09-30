@@ -3,25 +3,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/account1.dart';
+import 'package:starboyexchange/account3.dart';
 import 'package:starboyexchange/helpandsupport.dart';
 import 'package:starboyexchange/login.dart';
 import 'package:starboyexchange/news.dart';
 import 'package:starboyexchange/notifications.dart';
 import 'package:starboyexchange/profile.dart';
 import 'package:starboyexchange/settings.dart';
+import 'package:starboyexchange/testing.dart';
 import 'package:starboyexchange/trade1.dart';
 import 'package:starboyexchange/withdraw.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 
+
+import 'account2.dart';
 import 'history.dart';
 
+
+
+
+
 class Mainui extends StatefulWidget {
-  const Mainui({Key ?key}) : super(key: key);
+  final hisname;
+  final hisemail;
+  final hisusername;
+  final hisnumber;
+
+  const Mainui({Key ?key,@required this.hisname, this.hisemail, this.hisusername,this.hisnumber  }) : super(key: key);
 
   @override
   _MainuiState createState() => _MainuiState();
 }
 
+
+
 class _MainuiState extends State<Mainui> {
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+
   final GlobalKey<ScaffoldState> _globalKey= GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -91,14 +118,20 @@ class _MainuiState extends State<Mainui> {
                                 SizedBox(
                                   width: 5,
                                 ),
-                                Text('Account Details', textAlign: TextAlign.left, style: TextStyle(
-                                    color: Color.fromRGBO(255, 255, 255, 1),
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 14,
-                                    letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                    fontWeight: FontWeight.normal,
-                                    height: 1
-                                ),),
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Account2()));
+
+                                  },
+                                  child: Text('Account Details', textAlign: TextAlign.left, style: TextStyle(
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 14,
+                                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                      fontWeight: FontWeight.normal,
+                                      height: 1
+                                  ),),
+                                ),
                               ],
                             )
                         ),Positioned(
@@ -259,7 +292,7 @@ class _MainuiState extends State<Mainui> {
                         ),Positioned(
                             top: 168,
                             left: 30.345726013183594,
-                            child: Text('Welcome , Signat', textAlign: TextAlign.left, style: TextStyle(
+                            child: Text('Welcome ${widget.hisusername}', textAlign: TextAlign.left, style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
                                 fontFamily: 'Montserrat',
                                 fontSize: 18,
@@ -269,8 +302,8 @@ class _MainuiState extends State<Mainui> {
                             ),)
                         ),Positioned(
                             top: 192,
-                            left: 60.345726013183594,
-                            child: Text('signat@gmail.com', textAlign: TextAlign.center, style: TextStyle(
+                            left: 30.345726013183594,
+                            child: Text(widget.hisemail, textAlign: TextAlign.center, style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
                                 fontFamily: 'Montserrat',
                                 fontSize: 10,
@@ -332,9 +365,9 @@ class _MainuiState extends State<Mainui> {
                                   ),
                               ),
                           ),Positioned(
-                              top: 57,
-                              left: 99,
-                              child: Text('Welcome , Signat', textAlign: TextAlign.left, style: TextStyle(
+                              top: 67,
+                              left: 70,
+                              child: Text("Welcome ${widget.hisusername}", textAlign: TextAlign.left, style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   fontFamily: 'Montserrat',
                                   fontSize: 18,
@@ -346,8 +379,8 @@ class _MainuiState extends State<Mainui> {
 
                           Positioned(
                               top: 201,
-                              left: 126,
-                              child: Text('N 165,000', textAlign: TextAlign.left, style: TextStyle(
+                              left: 139,
+                              child: Text('N0.00', textAlign: TextAlign.left, style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   fontFamily: 'Montserrat',
                                   fontSize: 24,
@@ -357,8 +390,8 @@ class _MainuiState extends State<Mainui> {
                               ),)
                           ),Positioned(
                               top: 120,
-                              left: 129,
-                              child: Text('signat@gmail.com', textAlign: TextAlign.center, style: TextStyle(
+                              left: 110,
+                              child: Text(widget.hisemail, textAlign: TextAlign.center, style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   fontFamily: 'Montserrat',
                                   fontSize: 10,
@@ -871,19 +904,268 @@ class _MainuiState extends State<Mainui> {
                                             ),)
                                         ),
 
-
                                       ]
-                                  )
+                                  ),
                               ),
 
-
                           ),
+
 
                         ]
                     )
                 ),
                    //lastman
-                SizedBox(height: 20,),
+
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                      width: 316,
+                      height: 67,
+                      decoration: BoxDecoration(
+                        borderRadius : BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                        ),
+                        boxShadow : [BoxShadow(
+                            color: Color.fromRGBO(0, 0, 0, 0.25),
+                            offset: Offset(0,4),
+                            blurRadius: 3
+                        )],
+                        color : Color.fromRGBO(255, 255, 255, 1),
+                      ),
+                      child: Stack(
+                          children: <Widget>[
+                            Positioned(
+                                top: 14,
+                                left: 22,
+                                child: Container(
+                                    width: 40,
+                                    height: 44,
+
+                                    child: Stack(
+                                        children: <Widget>[
+                                          Positioned(
+                                            top: 0,
+                                            left: 5,
+                                            child: InkWell(
+                                              onTap: (){
+                                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui()));
+                                              },
+                                              child: SvgPicture.asset(
+                                                  'assets/home.svg',
+                                                  semanticsLabel: 'vector'
+                                              ),
+                                            ),
+                                          ),Positioned(
+                                              top: 28,
+                                              left: 0,
+                                              child: Text('Home', textAlign: TextAlign.left, style: TextStyle(
+                                                  color: Color.fromRGBO(81, 163, 163, 0.5),
+                                                  fontFamily: 'Montserrat',
+                                                  fontSize: 12,
+                                                  letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                  fontWeight: FontWeight.normal,
+                                                  height: 1
+                                              ),)
+                                          ),
+                                        ]
+                                    )
+                                )
+                            ),Positioned(
+                                top: 14,
+                                left: 84,
+                                child: Container(
+                                    width: 64,
+                                    height: 42,
+
+                                    child: Stack(
+                                        children: <Widget>[
+                                          Positioned(
+                                              top: 28,
+                                              left: 0,
+                                              child: Container(
+                                                  width: 64,
+                                                  height: 14,
+
+                                                  child: Stack(
+                                                      children: <Widget>[
+                                                        Positioned(
+                                                            top: 0,
+                                                            left: 0,
+                                                            child: Text(' Calculate', textAlign: TextAlign.left, style: TextStyle(
+                                                                color: Color.fromRGBO(81, 163, 163, 1),
+                                                                fontFamily: 'Montserrat',
+                                                                fontSize: 12,
+                                                                letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                                fontWeight: FontWeight.normal,
+                                                                height: 1
+                                                            ),)
+                                                        ),
+                                                      ]
+                                                  )
+                                              )
+                                          ),Positioned(
+                                            top: 0,
+                                            left: 21,
+                                            child: SvgPicture.asset(
+                                              'assets/calculator.svg',
+                                              semanticsLabel: 'vector',
+                                              color: Colors.black,
+                                              height: 20,
+                                              width: 20,
+                                            ),
+                                          ),
+                                        ]
+                                    )
+                                )
+                            ),Positioned(
+                                top: 14,
+                                left: 173,
+                                child: InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>History1()));
+                                  },
+                                  child: Container(
+                                      width: 46,
+                                      height: 47,
+
+                                      child: Stack(
+                                          children: <Widget>[
+                                            Positioned(
+                                                top: 28,
+                                                left: 0,
+                                                child: Container(
+                                                    width: 46,
+                                                    height: 19,
+
+                                                    child: Stack(
+                                                        children: <Widget>[
+                                                          Positioned(
+                                                              top: 0,
+                                                              left: 0,
+                                                              child: Text('History', textAlign: TextAlign.left, style: TextStyle(
+                                                                  color: Color.fromRGBO(81, 163, 163, 0.5),
+                                                                  fontFamily: 'Montserrat',
+                                                                  fontSize: 12,
+                                                                  letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                                  fontWeight: FontWeight.normal,
+                                                                  height: 1
+                                                              ),)
+                                                          ),
+                                                        ]
+                                                    )
+                                                )
+                                            ),Positioned(
+                                                top: 0,
+                                                left: 11,
+                                                child: Container(
+                                                    width: 24,
+                                                    height: 23,
+
+                                                    child: Stack(
+                                                        children: <Widget>[
+                                                          Positioned(
+                                                              top: 0,
+                                                              left: 0,
+                                                              child: Container(
+                                                                  width: 24,
+                                                                  height: 23,
+
+                                                                  child: Stack(
+                                                                      children: <Widget>[
+                                                                        Positioned(
+                                                                          top: 0,
+                                                                          left: 0,
+                                                                          child: SvgPicture.asset(
+                                                                            'assets/search.svg',
+                                                                            semanticsLabel: 'vector',
+                                                                            color: Colors.black,
+                                                                            height: 20,width: 20,
+                                                                          ),
+                                                                        ),
+                                                                      ]
+                                                                  )
+                                                              )
+                                                          ),
+                                                        ]
+                                                    )
+                                                )
+                                            ),
+                                          ]
+                                      )
+                                  ),
+                                )
+                            ),Positioned(
+                                top: 14,
+                                left: 242,
+                                child: Container(
+                                    width: 67,
+                                    height: 40,
+
+                                    child: Stack(
+                                        children: <Widget>[
+                                          Positioned(
+                                              top: 28,
+                                              left: 0,
+                                              child: Container(
+                                                  width: 67,
+                                                  height: 12,
+
+                                                  child: Stack(
+                                                      children: <Widget>[
+                                                        Positioned(
+                                                            top: 0,
+                                                            left: 0,
+                                                            child: Text('withdraw', textAlign: TextAlign.left, style: TextStyle(
+                                                                color: Color.fromRGBO(13, 14, 14, 1),
+                                                                fontFamily: 'Montserrat',
+                                                                fontSize: 12,
+                                                                letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                                fontWeight: FontWeight.normal,
+                                                                height: 1
+                                                            ),)
+                                                        ),
+                                                      ]
+                                                  )
+                                              )
+                                          ),Positioned(
+                                              top: 0,
+                                              left: 20,
+                                              child: Container(
+                                                  width: 27.5,
+                                                  height: 25,
+
+                                                  child: Stack(
+                                                      children: <Widget>[
+                                                        Positioned(
+                                                          top: 0,
+                                                          left: 0,
+                                                          child: InkWell(
+                                                            onTap: (){
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Withdraw1()));
+                                                            },
+                                                            child: SvgPicture.asset(
+                                                              'assets/atm.svg',
+                                                              semanticsLabel: 'vector',
+                                                              color: Colors.black,
+                                                              height: 20,width: 20,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ]
+                                                  )
+                                              )
+                                          ),
+                                        ]
+                                    )
+                                )
+                            ),
+                          ]
+                      )
+                  ),
+                ),
 
 
               ],

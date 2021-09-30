@@ -1,12 +1,15 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:starboyexchange/account1.dart';
 import 'package:starboyexchange/history.dart';
 import 'dart:math' as math;
 
 import 'package:starboyexchange/mainui.dart';
 import 'package:starboyexchange/withdraw.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
+
 
 class Withdraw2 extends StatefulWidget {
   const Withdraw2({Key ? key}) : super(key: key);
@@ -16,6 +19,24 @@ class Withdraw2 extends StatefulWidget {
 }
 
 class _Withdraw2State extends State<Withdraw2> {
+  final mail = ("kingsleyudoma2018@gmail.com");
+  TextEditingController Anum = TextEditingController();
+  TextEditingController Aname = TextEditingController();
+  final _recipientController = TextEditingController(
+    text: 'macsonline500@gmail.com',
+  );
+
+  Future Mailadmin() async{
+   final email = Email(
+      body:Anum.text,
+      subject: Aname.text,
+      recipients:[_recipientController.text],
+      isHTML: false,
+    );
+   await FlutterEmailSender.send(email);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -76,34 +97,48 @@ class _Withdraw2State extends State<Withdraw2> {
                         ),Positioned(
                             top: 560,
                             left: 100,
-                            child: Container(
-                                width: 156.1904754638672,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  borderRadius : BorderRadius.only(
-                                    topLeft: Radius.circular(5),
-                                    topRight: Radius.circular(5),
-                                    bottomLeft: Radius.circular(5),
-                                    bottomRight: Radius.circular(5),
+                            child: InkWell(
+                              onTap: (){
+                                Fluttertoast.showToast(
+                                    msg: "Withdrawal Request Sent",
+                                  backgroundColor: Colors.green,
+                                );
+
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui()));
+                                Mailadmin();
+
+
+
+                              },
+                              child: Container(
+                                  width: 156.1904754638672,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius : BorderRadius.only(
+                                      topLeft: Radius.circular(5),
+                                      topRight: Radius.circular(5),
+                                      bottomLeft: Radius.circular(5),
+                                      bottomRight: Radius.circular(5),
+                                    ),
+                                    color : Color.fromRGBO(81, 163, 163, 1),
                                   ),
-                                  color : Color.fromRGBO(81, 163, 163, 1),
-                                ),
-                                child: Stack(
-                                    children: <Widget>[
-                                      Positioned(
-                                          top: 10,
-                                          left: 54,
-                                          child: Text('DONE', textAlign: TextAlign.left, style: TextStyle(
-                                              color: Color.fromRGBO(13, 14, 14, 1),
-                                              fontFamily: 'Montserrat',
-                                              fontSize: 14,
-                                              letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                              fontWeight: FontWeight.normal,
-                                              height: 1
-                                          ),)
-                                      ),
-                                    ]
-                                )
+                                  child: Stack(
+                                      children: <Widget>[
+                                        Positioned(
+                                            top: 10,
+                                            left: 54,
+                                            child: Text('DONE', textAlign: TextAlign.left, style: TextStyle(
+                                                color: Color.fromRGBO(13, 14, 14, 1),
+                                                fontFamily: 'Montserrat',
+                                                fontSize: 14,
+                                                letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                fontWeight: FontWeight.normal,
+                                                height: 1
+                                            ),)
+                                        ),
+                                      ]
+                                  )
+                              ),
                             )
                         ),Positioned(
                             top: 61,
@@ -224,22 +259,21 @@ class _Withdraw2State extends State<Withdraw2> {
                                                   width: 1,
                                                 ),
                                               ),
-                                              child: Stack(
-                                                  children: <Widget>[
-                                                    Positioned(
-                                                        top: 19,
-                                                        left: 12,
-                                                        child: Text('Enter account Number Here', textAlign: TextAlign.center, style: TextStyle(
-                                                            color: Color.fromRGBO(196, 196, 196, 1),
-                                                            fontFamily: 'Montserrat',
-                                                            fontSize: 10,
-                                                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                            fontWeight: FontWeight.normal,
-                                                            height: 1
-                                                        ),)
-                                                    ),
-                                                  ]
-                                              )
+                                              child: TextFormField(
+                                                controller: Anum,
+                                                textAlign: TextAlign.start,
+                                                cursorColor: Colors.black,
+                                                keyboardType: TextInputType.number,
+                                                decoration: InputDecoration(
+                                                  border: InputBorder.none,
+                                                  focusedBorder: InputBorder.none,
+                                                  enabledBorder: InputBorder.none,
+                                                  errorBorder: InputBorder.none,
+                                                  disabledBorder: InputBorder.none,
+                                                  hintText: "0781393834",hintStyle: TextStyle(color: Colors.teal),
+                                                  contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                                                ),
+                                              ),
                                           )
                                       ),Positioned(
                                           top: 0,
@@ -284,22 +318,21 @@ class _Withdraw2State extends State<Withdraw2> {
                                                   width: 1,
                                                 ),
                                               ),
-                                              child: Stack(
-                                                  children: <Widget>[
-                                                    Positioned(
-                                                        top: 19,
-                                                        left: 12,
-                                                        child: Text('John Dosumo', textAlign: TextAlign.center, style: TextStyle(
-                                                            color: Color.fromRGBO(196, 196, 196, 1),
-                                                            fontFamily: 'Montserrat',
-                                                            fontSize: 10,
-                                                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                            fontWeight: FontWeight.normal,
-                                                            height: 1
-                                                        ),)
-                                                    ),
-                                                  ]
-                                              )
+                                              child: TextFormField(
+                                                controller: Aname,
+                                                textAlign: TextAlign.start,
+                                                cursorColor: Colors.black,
+                                                keyboardType: TextInputType.text,
+                                                decoration: InputDecoration(
+                                                  border: InputBorder.none,
+                                                  focusedBorder: InputBorder.none,
+                                                  enabledBorder: InputBorder.none,
+                                                  errorBorder: InputBorder.none,
+                                                  disabledBorder: InputBorder.none,
+                                                  hintText: "Andrew Lawman Alabi",hintStyle: TextStyle(color: Colors.teal),
+                                                  contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                                                ),
+                                              ),
                                           )
                                       ),
 

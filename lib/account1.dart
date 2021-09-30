@@ -36,16 +36,20 @@ class _Account1State extends State<Account1> {
 
 
   Future Signup() async{
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: uemail.text, password: upassword.text);
-    await FirebaseFirestore.instance.collection("People").add({
-      "FullName":ufullname.text,
-      "Email":uemail.text,
-      "Phone Number":uphonenumber.text,
-      "Password":upassword.text
-
-    }).then((value) => (){
-      print(value.id);
-    });
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: uemail.text.trim(),
+          password: upassword.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
 

@@ -3,20 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
-
 import 'package:starboyexchange/trade2.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+
 
 class Trade1 extends StatefulWidget {
   const Trade1({Key ?key}) : super(key: key);
 
   @override
+
   _Trade1State createState() => _Trade1State();
 }
 
 class _Trade1State extends State<Trade1> {
-  TextEditingController amountcontroller = TextEditingController();
-  var myamt = 0;
 
+  savedatas() async{
+    SharedPreferences prefss = SharedPreferences.getInstance() as SharedPreferences;
+    setState(() async {
+      amountcontroller = (await prefss.setString("amountcontroller", amountcontroller.text)) as TextEditingController;
+    });
+
+  }
+
+  TextEditingController amountcontroller = TextEditingController();
+  late String zero = "0";
 
 
   @override
@@ -132,8 +143,8 @@ class _Trade1State extends State<Trade1> {
                                                             ),
                                                             child: DropdownSearch<String>(
                                                               popupBackgroundColor: green,
-                                                              popupBarrierColor: green,
-                                                              items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                                                              popupBarrierColor:Colors.white,
+                                                              items: ["Amazon", "Walmart", "Visa", 'Apple Store',"Steam","Ebay","Nordstorm","Target"],
                                                               popupItemDisabled: (String s) => s.startsWith('I'),
 
                                                             ),
@@ -184,8 +195,8 @@ class _Trade1State extends State<Trade1> {
                                                             ),
                                                             child:DropdownSearch<String>(
                                                               popupBackgroundColor: green,
-                                                              popupBarrierColor: green,
-                                                              items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                                                              popupBarrierColor: Colors.white,
+                                                              items: ["Amazon", "Walmart", "Visa", 'Apple Store',"Steam","Ebay","Nordstorm","Target"],
                                                               popupItemDisabled: (String s) => s.startsWith('I'),
 
                                                             ),
@@ -240,7 +251,7 @@ class _Trade1State extends State<Trade1> {
                                                                   DropdownSearch<String>(
                                                                     popupBackgroundColor: green,
                                                                     popupBarrierColor: green,
-                                                                    items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                                                                    items: ["Naira", "Dollar", "BTC", 'Eth'],
                                                                     popupItemDisabled: (String s) => s.startsWith('I'),
 
                                                                   ),
@@ -276,7 +287,7 @@ class _Trade1State extends State<Trade1> {
                                                         left: 0,
                                                         child: Container(
                                                             width: 312,
-                                                            height: 60,
+                                                            height: 50,
                                                             decoration: BoxDecoration(
                                                               borderRadius : BorderRadius.only(
                                                                 topLeft: Radius.circular(5),
@@ -299,13 +310,13 @@ class _Trade1State extends State<Trade1> {
                                                                         hintStyle: TextStyle(color: Colors.white30),
                                                                         labelStyle: TextStyle(color: Colors.white),
                                                                       enabledBorder: UnderlineInputBorder(
-                                                                        borderSide: BorderSide(color:  Colors.teal.shade900 ),
+                                                                        borderSide: BorderSide(color:  Colors.green.shade900),
                                                                       ),
                                                                       focusedBorder: UnderlineInputBorder(
-                                                                        borderSide: BorderSide(color:  Colors.teal.shade900 ),
+                                                                        borderSide: BorderSide(color:  Colors.green.shade900 ),
                                                                       ),
                                                                       border: UnderlineInputBorder(
-                                                                        borderSide: BorderSide(color:Colors.teal.shade900 ),
+                                                                        borderSide: BorderSide(color:Colors.green.shade900 ),
                                                                       ),
 
                                                                     ),
@@ -414,7 +425,12 @@ class _Trade1State extends State<Trade1> {
                                                         top: 13,
                                                         left: 25,
                                                         child: InkWell(
-                                                          child: Text('You entered \$${myamt} ', textAlign: TextAlign.left, style: TextStyle(
+                                                          onTap: (){
+                                                            setState(() {
+                                                              zero=amountcontroller.text;
+                                                            });
+                                                          },
+                                                          child: Text('You entered \$${zero} ', textAlign: TextAlign.left, style: TextStyle(
                                                               color: Color.fromRGBO(196, 196, 196, 1),
                                                               fontFamily: 'Montserrat',
                                                               fontSize: 14,
@@ -437,7 +453,7 @@ class _Trade1State extends State<Trade1> {
                                                     ),Positioned(
                                                         top: 71,
                                                         left: 25,
-                                                        child: Text('Total = 0', textAlign: TextAlign.left, style: TextStyle(
+                                                        child: Text('Total = ${amountcontroller.text}', textAlign: TextAlign.left, style: TextStyle(
                                                             color: Color.fromRGBO(255, 255, 255, 1),
                                                             fontFamily: 'Montserrat',
                                                             fontSize: 14,
@@ -489,6 +505,7 @@ class _Trade1State extends State<Trade1> {
                                                         left: 0,
                                                         child: InkWell(
                                                           onTap: (){
+                                                            savedatas();
                                                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Trade2()));
                                                           },
                                                           child: Container(
