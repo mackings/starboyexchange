@@ -18,16 +18,10 @@ class Trade1 extends StatefulWidget {
 
 class _Trade1State extends State<Trade1> {
 
-  savedatas() async{
-    SharedPreferences prefss = SharedPreferences.getInstance() as SharedPreferences;
-    setState(() async {
-      amountcontroller = (await prefss.setString("amountcontroller", amountcontroller.text)) as TextEditingController;
-    });
 
-  }
 
   TextEditingController amountcontroller = TextEditingController();
-  late String zero = "0";
+  int defaultv = 100;
 
 
   @override
@@ -80,7 +74,7 @@ class _Trade1State extends State<Trade1> {
                                                   width: 1,
                                                 ),
                                                 image : DecorationImage(
-                                                    image: AssetImage('assets/signat.png'),
+                                                    image: AssetImage('assets/lawson.png'),
                                                     fit: BoxFit.fitWidth
                                                 ),
                                                 borderRadius : BorderRadius.all(Radius.elliptical(40, 40)),
@@ -144,8 +138,8 @@ class _Trade1State extends State<Trade1> {
                                                             child: DropdownSearch<String>(
                                                               popupBackgroundColor: green,
                                                               popupBarrierColor:Colors.white,
-                                                              items: ["Amazon", "Walmart", "Visa", 'Apple Store',"Steam","Ebay","Nordstorm","Target"],
-                                                              popupItemDisabled: (String s) => s.startsWith('I'),
+                                                              items: ["Amazon", "Walmart", "Visa","Amex","Xbox","Bestbuy","Google's Play",'Itunes',"Starbucks", "BestBuy","Cadano", "Steam","Ebay","Nordstorm","Sephora","Target","Cardano","Solana","Victoria's Secret","Chipotle","Dogecoin" ],
+                                                              popupItemDisabled: (String s) => s.startsWith('x'),
 
                                                             ),
                                                         )
@@ -246,12 +240,10 @@ class _Trade1State extends State<Trade1> {
                                                             ),
                                                             child: Stack(
                                                                 children: <Widget>[
-
-
                                                                   DropdownSearch<String>(
                                                                     popupBackgroundColor: green,
                                                                     popupBarrierColor: green,
-                                                                    items: ["Naira", "Dollar", "BTC", 'Eth'],
+                                                                    items: ["NAIRA", "DOLLAR", "BTC", 'ETH' "EURO", "AMAZON", "EBAY"],
                                                                     popupItemDisabled: (String s) => s.startsWith('I'),
 
                                                                   ),
@@ -304,7 +296,7 @@ class _Trade1State extends State<Trade1> {
                                                             child: Stack(
                                                                 children: <Widget>[
                                                                   TextFormField(
-                                                                    keyboardType: TextInputType.number,
+                                                                    keyboardType: TextInputType.text,
                                                                     decoration: InputDecoration(
                                                                         hintText: "Enter Comments",
                                                                         hintStyle: TextStyle(color: Colors.white30),
@@ -425,18 +417,18 @@ class _Trade1State extends State<Trade1> {
                                                         top: 13,
                                                         left: 25,
                                                         child: InkWell(
-                                                          onTap: (){
-                                                            setState(() {
-                                                              zero=amountcontroller.text;
-                                                            });
-                                                          },
-                                                          child: Text('You entered \$${zero} ', textAlign: TextAlign.left, style: TextStyle(
+                                                         onTap: (){
+                                                           setState(() {
+
+                                                           });
+                                                         },
+                                                          child: Text('You entered \$${amountcontroller.text} ', textAlign: TextAlign.left, style: TextStyle(
                                                               color: Color.fromRGBO(196, 196, 196, 1),
                                                               fontFamily: 'Montserrat',
                                                               fontSize: 14,
                                                               letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                                                               fontWeight: FontWeight.normal,
-                                                              height: 1
+                                                              height: 1,
                                                           ),),
                                                         ),
                                                     ),Positioned(
@@ -505,7 +497,6 @@ class _Trade1State extends State<Trade1> {
                                                         left: 0,
                                                         child: InkWell(
                                                           onTap: (){
-                                                            savedatas();
                                                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Trade2()));
                                                           },
                                                           child: Container(

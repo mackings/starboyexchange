@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:starboyexchange/Data.dart';
 import 'package:starboyexchange/account1.dart';
 import"package:starboyexchange/trade2.dart";
+import 'package:provider/provider.dart';
 
 class Admin extends StatefulWidget {
   const Admin({Key ?key}) : super(key: key);
@@ -46,6 +48,8 @@ class _AdminState extends State<Admin> {
               Card(
                 child: InkWell(
                   onTap: () {
+
+                    context.read<Users>().updatecards();
                     //Navigator.push(context,
                         //MaterialPageRoute(builder: (context) => Dcars()));
                   },
@@ -59,7 +63,7 @@ class _AdminState extends State<Admin> {
                         size: 60,
                       ),
                       Text(
-                        "New Entries: 0 ",
+                        "Failed :0${context.watch<Users>().cards}",
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black,
@@ -84,7 +88,7 @@ class _AdminState extends State<Admin> {
                         size: 61,
                       ),
                       Text(
-                        "Failed :0",
+                        "Failed :0${context.watch<Users>().cards}",
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black,

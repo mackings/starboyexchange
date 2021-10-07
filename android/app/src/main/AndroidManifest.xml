@@ -17,8 +17,8 @@
     </queries>
    <application
        android:usesCleartextTraffic="true"
-        android:label="starboyexchange"
-        android:icon="@mipmap/ic_launcher"
+        android:label="StarExchange"
+        android:icon="@mipmap/lawson"
        tools:targetApi="m">
         <activity
             android:name=".MainActivity"
@@ -57,6 +57,9 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
 </manifest>

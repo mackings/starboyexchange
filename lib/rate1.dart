@@ -10,6 +10,17 @@ import 'package:starboyexchange/withdraw.dart';
 import 'mainui.dart';
 
 
+class Person2 {
+  String name ;
+  String email;
+  String username;
+  String number;
+
+  Person2 ({required this.name, required this.email, required this.username,required this.number});
+}
+
+
+
 class Rate1 extends StatefulWidget {
   const Rate1({Key? key}) : super(key: key);
 
@@ -18,6 +29,14 @@ class Rate1 extends StatefulWidget {
 }
 
 class _Rate1State extends State<Rate1> {
+  String defaultrate ="0";
+
+  TextEditingController profilename =TextEditingController();
+  TextEditingController profileemail=TextEditingController();
+  TextEditingController profileusername=TextEditingController();
+  TextEditingController profilenumber=TextEditingController();
+  TextEditingController Amount =TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -158,7 +177,7 @@ class _Rate1State extends State<Rate1> {
                                               child:  DropdownSearch<String>(
                                                 popupBackgroundColor: green,
                                                 popupBarrierColor: green,
-                                                items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                                                items:  ["Amazon", "Walmart", "Visa", 'Itunes',"Starbucks", "BestBuy","Cadano", "Steam","Ebay","Nordstorm","Sephora","Target","Cardano","Solana","Victoria's Secret","Chipotle","Dogecoin" ],
                                                 popupItemDisabled: (String s) => s.startsWith('I'),
 
                                               ),
@@ -209,8 +228,8 @@ class _Rate1State extends State<Rate1> {
                                               child:  DropdownSearch<String>(
                                                 popupBackgroundColor: green,
                                                 popupBarrierColor: green,
-                                                items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
-                                                popupItemDisabled: (String s) => s.startsWith('I'),
+                                                items:["Amazon", "Walmart", "Visa", 'Itunes',"Starbucks", "BestBuy","Cadano", "Steam","Ebay","Nordstorm","Sephora","Target","Cardano","Solana","Victoria's Secret","Chipotle","Dogecoin" ],
+                                                popupItemDisabled: (String s) => s.startsWith('u'),
 
                                               ),
                                           )
@@ -260,8 +279,8 @@ class _Rate1State extends State<Rate1> {
                                               child:  DropdownSearch<String>(
                                                 popupBackgroundColor: green,
                                                 popupBarrierColor: green,
-                                                items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
-                                                popupItemDisabled: (String s) => s.startsWith('I'),
+                                                items: ["NAIRA" ],
+                                                popupItemDisabled: (String s) => s.startsWith('u'),
 
                                               ),
                                           )
@@ -311,6 +330,7 @@ class _Rate1State extends State<Rate1> {
                                               child: Stack(
                                                   children: <Widget>[
                                                     TextFormField(
+                                                      controller: Amount,
                                                       textAlign: TextAlign.start,
                                                       cursorColor: Colors.black,
                                                       keyboardType: TextInputType.number,
@@ -380,7 +400,7 @@ class _Rate1State extends State<Rate1> {
                                                                   Positioned(
                                                                       top: 0,
                                                                       left: 0,
-                                                                      child: Text('You entered \$ 0', textAlign: TextAlign.left, style: TextStyle(
+                                                                      child: Text('You entered \$ ${Amount.text}', textAlign: TextAlign.left, style: TextStyle(
                                                                           color: Color.fromRGBO(196, 196, 196, 1),
                                                                           fontFamily: 'Montserrat',
                                                                           fontSize: 14,
@@ -391,7 +411,7 @@ class _Rate1State extends State<Rate1> {
                                                                   ),Positioned(
                                                                       top: 29,
                                                                       left: 0,
-                                                                      child: Text('\$ 0 * 0', textAlign: TextAlign.left, style: TextStyle(
+                                                                      child: Text('\$ ${defaultrate} * 0', textAlign: TextAlign.left, style: TextStyle(
                                                                           color: Color.fromRGBO(255, 255, 255, 1),
                                                                           fontFamily: 'Montserrat',
                                                                           fontSize: 14,
@@ -503,7 +523,11 @@ class _Rate1State extends State<Rate1> {
                                                       left: 5,
                                                       child: InkWell(
                                                         onTap: (){
-                                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui()));
+                                                          setState(() {
+                                                            defaultrate=Amount.text;
+
+                                                          });
+                                                         // Navigator.push(context, MaterialPageRoute(builder: (context)=> Mainui()));
                                                         },
                                                         child: SvgPicture.asset(
                                                             'assets/home.svg',

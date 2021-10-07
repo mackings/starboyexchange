@@ -62,7 +62,7 @@ class _History2State extends State<History2> {
                                                   width: 1,
                                                 ),
                                                 image : DecorationImage(
-                                                    image: AssetImage('assets/signat.png'),
+                                                    image: AssetImage('assets/lawson.png'),
                                                     fit: BoxFit.fitWidth
                                                 ),
                                                 borderRadius : BorderRadius.all(Radius.elliptical(40, 40)),

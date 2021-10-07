@@ -7,15 +7,11 @@ import 'package:starboyexchange/account1.dart';
 import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
-
 import 'mainui.dart';
+import 'package:provider/provider.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 
-class Person {
-  String name;
-  int email;
 
-  Person({required this.name, required this.email,});
-}
 
 
 class Profile extends StatefulWidget {
@@ -25,12 +21,9 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
+
+
 class _ProfileState extends State<Profile> {
-
-
-
-
-
 
   TextEditingController profilename =TextEditingController();
   TextEditingController profileemail=TextEditingController();
@@ -39,40 +32,10 @@ class _ProfileState extends State<Profile> {
 
 
 
-   savedata() async{
-     SharedPreferences prefs = SharedPreferences.getInstance() as SharedPreferences;
-     setState(() {
-       profileusername = prefs.getString("profileusername") as TextEditingController;
-     });
-
-   }
-
-   Loaduser()async{
-     SharedPreferences mypref = SharedPreferences.getInstance() as SharedPreferences;
-     setState(() {
-       profilename = mypref.setString("profilename", profilename.text) as TextEditingController;
-     });
-
-   }
-
-
-   addinfo() async{
-     await Hive.openBox("ProfileDetails");
-     var box = Hive.box("ProfileNames");
-     await box.put("name", profilename.text);
-     var name = box.get(profilename.text);
-     print(name);
-
-   }
-
-
-
-
-
-
-
   File? _selectedImage;
   final picker = ImagePicker();
+
+  //image picker
 
   Future Profileimg() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -84,6 +47,37 @@ class _ProfileState extends State<Profile> {
       }
     });
   }
+  //initialize notifications
+  @override
+  void initState() {
+   AwesomeNotifications().isNotificationAllowed().then((isAllowed){
+     if(isAllowed){
+       showDialog(
+           context: context, builder: (context)=>AlertDialog(
+         title: Text("StarExchange Notifications"),
+         content: Text("Starexchange would like to show you Notifications"),
+         actions: [
+           MaterialButton(
+               onPressed:()=> AwesomeNotifications()
+           .requestPermissionToSendNotifications()
+           .then((value) => Navigator.pop(context)),
+             child: Text("Enable"),
+           ),
+
+           MaterialButton(
+             onPressed: (){
+               Navigator.pop(context);
+             },
+             child: Text("Disable"),
+           ),
+         ],
+       ));
+     }
+   });
+    super.initState();
+  }
+
+
 
 
   @override
@@ -165,7 +159,7 @@ class _ProfileState extends State<Profile> {
                                                         enabledBorder: InputBorder.none,
                                                         errorBorder: InputBorder.none,
                                                         disabledBorder: InputBorder.none,
-                                                        hintText: "Enter Full Email Address Here",hintStyle: TextStyle(color: inputcolor,fontFamily: "Montserrat",fontSize: 12),
+                                                        hintText: "Enter Full Name Here",hintStyle: TextStyle(color: inputcolor,fontFamily: "Montserrat",fontSize: 12),
                                                         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                                                       ),
                                                     ),
@@ -513,13 +507,9 @@ class _ProfileState extends State<Profile> {
                                                         left: 0,
                                                         child: InkWell(
                                                           onTap: (){
-                                                            addinfo();
-                                                            savedata();
                                                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui(
-                                                             hisname:profilename.text,
-                                                             hisemail:profileemail.text,
-                                                             hisusername:profileusername.text,
-                                                             hisnumber:profilenumber.text,
+                                                            Hisname: profileusername.text,
+                                                             Hisemail: profileemail.text,
                                                            )));
                                                           },
                                                           child: Container(

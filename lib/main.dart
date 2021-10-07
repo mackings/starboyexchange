@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:starboyexchange/Data.dart';
 import 'package:starboyexchange/account1.dart';
 import 'package:starboyexchange/helpandsupport.dart';
 import 'package:starboyexchange/history.dart';
@@ -20,6 +21,11 @@ import 'introsliders.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hive/hive.dart';
 import 'dart:io';
+import 'package:provider/provider.dart';
+import"package:awesome_notifications/awesome_notifications.dart";
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 
 
 
@@ -34,9 +40,28 @@ void main() async {
   //final appDocPath = appDocDir.path;
  Hive.init(appDocDir.path);
   await Hive.openBox("ProfileNames");
+  FirebaseMessaging.onBackgroundMessage(_handler);
 
 
-  runApp(const MyApp());
+
+  runApp(
+    MultiProvider(
+        providers: [ 
+          ChangeNotifierProvider(create: (_)=> Users())
+        ],
+            child: MyApp(),
+    )
+  );
+  AwesomeNotifications().initialize("resource://drawable/lawson", [
+    NotificationChannel(
+      channelShowBadge: true,
+      channelKey: "Basics",
+      channelName: "Starboy",
+      channelDescription: "Notifications",
+      playSound: true,
+      enableVibration: true,
+    )
+  ]);
 }
 
 class MyApp extends StatefulWidget {
@@ -50,8 +75,19 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-      home: Openapp(),
+    return ChangeNotifierProvider(
+      create: (context){
+        return Data();
+      },
+      child: MaterialApp(
+        home: Openapp(),
+      ),
     );
   }
+}
+
+Future<void> _handler( RemoteMessage message) async{
+  print("Notifications ${message.data}");
+ AwesomeNotifications().createNotificationFromJsonData(message.data);
+
 }

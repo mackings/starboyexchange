@@ -78,7 +78,7 @@ class _NotificationsState extends State<Notifications> {
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: ReadMoreText(
-              'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',style: TextStyle(
+              'Hello Star user, You can Trade safely on our platform by simply Uploading your Giftcards and get funded after a sucessful Review.',style: TextStyle(
                     fontFamily: "Montserrat",
                     color: Colors.white,
                   ),
@@ -91,102 +91,10 @@ class _NotificationsState extends State<Notifications> {
 
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: ReadMoreText(
-                    'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',style: TextStyle(
-                    fontFamily: "Montserrat",
-                    color: Colors.white,
-                  ),
-                    trimLines: 2,
-                    colorClickableText: Colors.pink,
-                    trimMode: TrimMode.Line,
-                    trimCollapsedText: 'Read more',
-                    trimExpandedText: 'Show less',
-                    moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
 
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: ReadMoreText(
-                    'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',style: TextStyle(
-                    fontFamily: "Montserrat",
-                    color: Colors.white,
-                  ),
-                    trimLines: 2,
-                    colorClickableText: Colors.pink,
-                    trimMode: TrimMode.Line,
-                    trimCollapsedText: 'Read more',
-                    trimExpandedText: 'Show less',
-                    moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
 
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: ReadMoreText(
-                    'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',style: TextStyle(
-                    fontFamily: "Montserrat",
-                    color: Colors.white,
-                  ),
-                    trimLines: 2,
-                    colorClickableText: Colors.pink,
-                    trimMode: TrimMode.Line,
-                    trimCollapsedText: 'Read more',
-                    trimExpandedText: 'Show less',
-                    moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
 
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: ReadMoreText(
-                    'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',style: TextStyle(
-                    fontFamily: "Montserrat",
-                    color: Colors.white,
-                  ),
-                    trimLines: 2,
-                    colorClickableText: Colors.pink,
-                    trimMode: TrimMode.Line,
-                    trimCollapsedText: 'Read more',
-                    trimExpandedText: 'Show less',
-                    moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
 
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: ReadMoreText(
-                    'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',style: TextStyle(
-                    fontFamily: "Montserrat",
-                    color: Colors.white,
-                  ),
-                    trimLines: 2,
-                    colorClickableText: Colors.pink,
-                    trimMode: TrimMode.Line,
-                    trimCollapsedText: 'Read more',
-                    trimExpandedText: 'Show less',
-                    moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: ReadMoreText(
-                    'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',style: TextStyle(
-                    fontFamily: "Montserrat",
-                    color: Colors.white,
-                  ),
-                    trimLines: 2,
-                    colorClickableText: Colors.pink,
-                    trimMode: TrimMode.Line,
-                    trimCollapsedText: 'Read more',
-                    trimExpandedText: 'Show less',
-                    moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-
-                  ),
-                ),
 
               ],
             ),

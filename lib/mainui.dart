@@ -1,4 +1,5 @@
-// ignore_for_file: sized_box_for_whitespace
+
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,30 +10,27 @@ import 'package:starboyexchange/login.dart';
 import 'package:starboyexchange/news.dart';
 import 'package:starboyexchange/notifications.dart';
 import 'package:starboyexchange/profile.dart';
+import 'package:starboyexchange/rate1.dart';
 import 'package:starboyexchange/settings.dart';
 import 'package:starboyexchange/testing.dart';
 import 'package:starboyexchange/trade1.dart';
 import 'package:starboyexchange/withdraw.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
-
-
 import 'account2.dart';
 import 'history.dart';
-
+import 'package:provider/provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 
 
 class Mainui extends StatefulWidget {
-  final hisname;
-  final hisemail;
-  final hisusername;
-  final hisnumber;
+ final Hisname;
+ final Hisemail;
 
-  const Mainui({Key ?key,@required this.hisname, this.hisemail, this.hisusername,this.hisnumber  }) : super(key: key);
+  const Mainui({Key ? key, this.Hisname, this.Hisemail,      }) : super(key: key);
 
   @override
   _MainuiState createState() => _MainuiState();
@@ -42,7 +40,9 @@ class Mainui extends StatefulWidget {
 
 class _MainuiState extends State<Mainui> {
 
-@override
+
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -79,7 +79,7 @@ class _MainuiState extends State<Mainui> {
                                     width: 1,
                                   ),
                                   image : DecorationImage(
-                                      image: AssetImage('assets/signat.png'),
+                                      image: AssetImage('assets/lawson.png'),
                                       fit: BoxFit.fitWidth
                                   ),
                                   borderRadius : BorderRadius.all(Radius.elliptical(80, 80)),
@@ -292,7 +292,7 @@ class _MainuiState extends State<Mainui> {
                         ),Positioned(
                             top: 168,
                             left: 30.345726013183594,
-                            child: Text('Welcome ${widget.hisusername}', textAlign: TextAlign.left, style: TextStyle(
+                            child: Text('Welcome ${widget.Hisname}', textAlign: TextAlign.left, style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
                                 fontFamily: 'Montserrat',
                                 fontSize: 18,
@@ -303,7 +303,7 @@ class _MainuiState extends State<Mainui> {
                         ),Positioned(
                             top: 192,
                             left: 30.345726013183594,
-                            child: Text(widget.hisemail, textAlign: TextAlign.center, style: TextStyle(
+                            child: Text(" ${widget.Hisemail}", textAlign: TextAlign.center, style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
                                 fontFamily: 'Montserrat',
                                 fontSize: 10,
@@ -358,7 +358,7 @@ class _MainuiState extends State<Mainui> {
                                       width: 1,
                                     ),
                                     image : DecorationImage(
-                                        image: AssetImage('assets/signat.png'),
+                                        image: AssetImage('assets/lawson.png'),
                                         fit: BoxFit.fitWidth,
                                     ),
                                     borderRadius : BorderRadius.all(Radius.elliptical(40, 40)),
@@ -366,8 +366,8 @@ class _MainuiState extends State<Mainui> {
                               ),
                           ),Positioned(
                               top: 67,
-                              left: 70,
-                              child: Text("Welcome ${widget.hisusername}", textAlign: TextAlign.left, style: TextStyle(
+                              left: 90,
+                              child: Text("Welcome ${widget.Hisname}", textAlign: TextAlign.left, style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   fontFamily: 'Montserrat',
                                   fontSize: 18,
@@ -391,7 +391,7 @@ class _MainuiState extends State<Mainui> {
                           ),Positioned(
                               top: 120,
                               left: 110,
-                              child: Text(widget.hisemail, textAlign: TextAlign.center, style: TextStyle(
+                              child: Text("  ${widget.Hisemail}", textAlign: TextAlign.center, style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   fontFamily: 'Montserrat',
                                   fontSize: 10,
@@ -769,7 +769,7 @@ class _MainuiState extends State<Mainui> {
                                         ),Positioned(
                                             top: 19,
                                             left: 0,
-                                            child: Text('March 14th, 2021 4:29PM ', textAlign: TextAlign.center, style: TextStyle(
+                                            child: Text('${DateTime.now()} ', textAlign: TextAlign.center, style: TextStyle(
                                                 color: Color.fromRGBO(13, 14, 14, 1),
                                                 fontFamily: 'Montserrat',
                                                 fontSize: 12,
@@ -826,7 +826,7 @@ class _MainuiState extends State<Mainui> {
                                         ),Positioned(
                                             top: 19,
                                             left: 0,
-                                            child: Text('March 14th, 2021 4:29PM ', textAlign: TextAlign.center, style: TextStyle(
+                                            child: Text('${DateTime.now()}', textAlign: TextAlign.center, style: TextStyle(
                                                 color: Color.fromRGBO(13, 14, 14, 1),
                                                 fontFamily: 'Montserrat',
                                                 fontSize: 12,
@@ -883,7 +883,7 @@ class _MainuiState extends State<Mainui> {
                                         ),Positioned(
                                             top: 19,
                                             left: 0,
-                                            child: Text('March 14th, 2021 4:29PM ', textAlign: TextAlign.center, style: TextStyle(
+                                            child: Text('${DateTime.now()} ', textAlign: TextAlign.center, style: TextStyle(
                                                 color: Color.fromRGBO(13, 14, 14, 1),
                                                 fontFamily: 'Montserrat',
                                                 fontSize: 12,
@@ -951,7 +951,14 @@ class _MainuiState extends State<Mainui> {
                                             left: 5,
                                             child: InkWell(
                                               onTap: (){
-                                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui()));
+                                                Fluttertoast.showToast(
+                                                    msg: "You are Home Already",
+                                                  backgroundColor: Colors.black,
+                                                  textColor: Colors.white,
+                                                  gravity: ToastGravity.SNACKBAR,
+                                                );
+                                                //Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui()));
+
                                               },
                                               child: SvgPicture.asset(
                                                   'assets/home.svg',
@@ -1009,12 +1016,17 @@ class _MainuiState extends State<Mainui> {
                                           ),Positioned(
                                             top: 0,
                                             left: 21,
-                                            child: SvgPicture.asset(
-                                              'assets/calculator.svg',
-                                              semanticsLabel: 'vector',
-                                              color: Colors.black,
-                                              height: 20,
-                                              width: 20,
+                                            child: InkWell(
+                                              onTap: (){
+                                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Rate1()));
+                                              },
+                                              child: SvgPicture.asset(
+                                                'assets/calculator.svg',
+                                                semanticsLabel: 'vector',
+                                                color: Colors.black,
+                                                height: 20,
+                                                width: 20,
+                                              ),
                                             ),
                                           ),
                                         ]

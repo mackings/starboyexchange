@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,6 +17,8 @@ import "package:starboyexchange/admin.dart";
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_sms/flutter_sms.dart';
+
 
 
 
@@ -29,7 +32,6 @@ class Trade2 extends StatefulWidget {
 }
 
 class _Trade2State extends State<Trade2> {
-
 
   File?  _selectedImage;
   final picker = ImagePicker();
@@ -70,7 +72,29 @@ class _Trade2State extends State<Trade2> {
 
   }
 
+  void Notify() async{
+    await AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: 1,
+          channelKey: "Basics",
+          title: "Trade Notification",
+          body: "Trade Submitted, Verification in Progress",
+          bigPicture: "asset://assets/lawson.png",
+          displayOnForeground: true,
+          displayOnBackground: true,
+          notificationLayout: NotificationLayout.BigPicture,
+          autoCancel: true,
+        )
+    );
+  }
 
+
+  String message = "This is a test message!";
+  List<String> recipents = ["08137159066", "+2348110947817"];
+
+  Future _sendSMS(String message, List<String> recipents) async {
+    String _result = await sendSMS(message: message, recipients: recipents);
+  }
 
 
 
@@ -123,7 +147,7 @@ class _Trade2State extends State<Trade2> {
                                             width: 40,
                                             //ddddpp
                                             height: 40,
-                                              child: Image.network(""),
+                                              //child: Image.network("https://www.piccolomondotoys.com/components/com_virtuemart/shop_image/product/full/GiftCardImage5e80bdc3b243e.jpg"),
 
                                               decoration: BoxDecoration(
                                                 border : Border.all(
@@ -271,13 +295,9 @@ class _Trade2State extends State<Trade2> {
                                                         left: 0,
                                                         child: InkWell(
                                                           onTap: (){
+
+                                                            Notify();
                                                             SubmitTrade();
-                                                            Fluttertoast.showToast(
-                                                                msg: "Trade Submitted ",
-                                                                toastLength:Toast.LENGTH_LONG,
-                                                              backgroundColor:green,
-                                                              textColor: Colors.white,
-                                                            );
                                                             Navigator.push(context, MaterialPageRoute(builder: (context)=>Rate1()));
                                                           },
                                                           child: Container(

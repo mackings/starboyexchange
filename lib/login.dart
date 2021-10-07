@@ -145,13 +145,9 @@ class _LoginState extends State<Login> {
                                         Form(
                                           child: TextFormField(
                                             autocorrect: true,
-                                            validator: (value){
-                                              if(value==null || value.isEmpty){
-                                                return "Please Enter Your Email";
-                                              }
-                                              return null;
-                                            },
-
+                                            validator: EmailValidator(
+                                              errorText: " Please Enter a Registered Email"
+                                            ),
                                             controller: emailcon,
                                             textAlign: TextAlign.start,
                                             cursorColor: Colors.black,

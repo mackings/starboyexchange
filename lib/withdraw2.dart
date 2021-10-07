@@ -19,17 +19,18 @@ class Withdraw2 extends StatefulWidget {
 }
 
 class _Withdraw2State extends State<Withdraw2> {
-  final mail = ("kingsleyudoma2018@gmail.com");
+  final mail = ("Macsonline500@gmail.com");
   TextEditingController Anum = TextEditingController();
   TextEditingController Aname = TextEditingController();
+  TextEditingController bankname = TextEditingController();
   final _recipientController = TextEditingController(
     text: 'macsonline500@gmail.com',
   );
 
   Future Mailadmin() async{
    final email = Email(
-      body:Anum.text,
-      subject: Aname.text,
+     body: bankname.text,
+      subject: Anum.text,
       recipients:[_recipientController.text],
       isHTML: false,
     );
@@ -100,11 +101,13 @@ class _Withdraw2State extends State<Withdraw2> {
                             child: InkWell(
                               onTap: (){
                                 Fluttertoast.showToast(
-                                    msg: "Withdrawal Request Sent",
+                                    msg: "Kindly send a secure Mail to process your Payment",
                                   backgroundColor: Colors.green,
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.TOP,
                                 );
 
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui()));
+                                Navigator.pop(context);
                                 Mailadmin();
 
 
@@ -208,18 +211,26 @@ class _Withdraw2State extends State<Withdraw2> {
                                                   width: 1,
                                                 ),
                                               ),
-                                              child: DropdownSearch<String>(
-                                                popupBackgroundColor: green,
-                                                popupBarrierColor: green,
-                                                items: ["UBA", "Italia (Disabled)", "Access", 'Zenith'],
-                                                popupItemDisabled: (String s) => s.startsWith('I'),
-
+                                              child: TextFormField(
+                                                controller: bankname,
+                                                textAlign: TextAlign.start,
+                                                cursorColor: Colors.black,
+                                                keyboardType: TextInputType.text,
+                                                decoration: InputDecoration(
+                                                  border: InputBorder.none,
+                                                  focusedBorder: InputBorder.none,
+                                                  enabledBorder: InputBorder.none,
+                                                  errorBorder: InputBorder.none,
+                                                  disabledBorder: InputBorder.none,
+                                                  hintText: "Access Bank",hintStyle: TextStyle(color: Colors.teal),
+                                                  contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                                                ),
                                               ),
                                           )
                                       ),Positioned(
                                           top: 0,
                                           left: 0,
-                                          child: Text('Select Bank', textAlign: TextAlign.left, style: TextStyle(
+                                          child: Text('Bank Name', textAlign: TextAlign.left, style: TextStyle(
                                               color: Color.fromRGBO(255, 255, 255, 1),
                                               fontFamily: 'Montserrat',
                                               fontSize: 14,
@@ -289,8 +300,9 @@ class _Withdraw2State extends State<Withdraw2> {
                                       ),
                                     ]
                                 )
-                            )
-                        ),Positioned(
+                            ),
+                        ),
+                        Positioned(
                             top: 460,
                             left: 31,
                             child: Container(
