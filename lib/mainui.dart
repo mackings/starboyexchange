@@ -1018,7 +1018,8 @@ class _MainuiState extends State<Mainui> {
                                             left: 21,
                                             child: InkWell(
                                               onTap: (){
-                                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Rate1()));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Rate1(
+                                                )));
                                               },
                                               child: SvgPicture.asset(
                                                 'assets/calculator.svg',

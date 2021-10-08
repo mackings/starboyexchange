@@ -18,13 +18,17 @@ import 'package:provider/provider.dart';
    }
  }
 
-class status extends ChangeNotifier{
-  String state1 = "Approved";
-  String get state=> state1;
-   void change(){
-    
+class Userstate extends ChangeNotifier{
+   Userstate();
+   String displaytext = "";
+   String get getdisplaytext => displaytext;
+
+   void Setdisplay( String text){
+     displaytext = text;
+     notifyListeners();
 
    }
+
 
 }
 

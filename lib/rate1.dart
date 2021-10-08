@@ -10,14 +10,8 @@ import 'package:starboyexchange/withdraw.dart';
 import 'mainui.dart';
 
 
-class Person2 {
-  String name ;
-  String email;
-  String username;
-  String number;
-
-  Person2 ({required this.name, required this.email, required this.username,required this.number});
-}
+ late final  Rusername;
+   late final Remail;
 
 
 

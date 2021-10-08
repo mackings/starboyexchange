@@ -15,6 +15,8 @@ class Withdraw1 extends StatefulWidget {
 }
 
 class _Withdraw1State extends State<Withdraw1> {
+
+  final balance = 0.00;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -354,7 +356,7 @@ class _Withdraw1State extends State<Withdraw1> {
         Positioned(
           top: 403,
           left: 121,
-          child: Text('N 165,000', textAlign: TextAlign.left, style: TextStyle(
+          child: Text('N ${balance}', textAlign: TextAlign.left, style: TextStyle(
                 color: Color.fromRGBO(255, 255, 255, 1),
                 fontFamily: 'Montserrat',
                 fontSize: 24,

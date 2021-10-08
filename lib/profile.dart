@@ -7,6 +7,7 @@ import 'package:starboyexchange/account1.dart';
 import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
+import 'Data.dart';
 import 'mainui.dart';
 import 'package:provider/provider.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -24,6 +25,8 @@ class Profile extends StatefulWidget {
 
 
 class _ProfileState extends State<Profile> {
+
+
 
   TextEditingController profilename =TextEditingController();
   TextEditingController profileemail=TextEditingController();
@@ -82,6 +85,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    final appstate = Provider.of<Userstate>(context,listen: true);
     return MaterialApp(
       home: Scaffold(
         backgroundColor: green,
@@ -110,7 +114,7 @@ class _ProfileState extends State<Profile> {
                         Positioned(
                             top: 36,
                             left: 151,
-                            child: Text(profileusername.text, textAlign: TextAlign.left, style: TextStyle(
+                            child: Text("${profileusername.text}", textAlign: TextAlign.left, style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
                                 fontFamily: 'Montserrat',
                                 fontSize: 18,
@@ -149,6 +153,8 @@ class _ProfileState extends State<Profile> {
                                               child: Stack(
                                                   children: <Widget>[
                                                     TextFormField(
+                                                      onChanged: (changed)=> appstate.displaytext,
+                                                      onFieldSubmitted: (Submitted)=>appstate.displaytext,
                                                       controller: profilename,
                                                       textAlign: TextAlign.start,
                                                       cursorColor: Colors.black,
