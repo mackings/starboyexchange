@@ -21,7 +21,7 @@ class _Trade1State extends State<Trade1> {
 
 
   TextEditingController amountcontroller = TextEditingController();
-  int defaultv = 100;
+
 
 
   @override
@@ -422,7 +422,7 @@ class _Trade1State extends State<Trade1> {
 
                                                            });
                                                          },
-                                                          child: Text('You entered \$${amountcontroller.text} ', textAlign: TextAlign.left, style: TextStyle(
+                                                          child: Text('Calculate \$${amountcontroller.text} ', textAlign: TextAlign.left, style: TextStyle(
                                                               color: Color.fromRGBO(196, 196, 196, 1),
                                                               fontFamily: 'Montserrat',
                                                               fontSize: 14,

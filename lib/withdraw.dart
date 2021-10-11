@@ -16,6 +16,9 @@ class Withdraw1 extends StatefulWidget {
 
 class _Withdraw1State extends State<Withdraw1> {
 
+  TextEditingController currencyc = TextEditingController();
+  TextEditingController amountc = TextEditingController();
+
   final balance = 0.00;
   @override
   Widget build(BuildContext context) {
@@ -287,7 +290,9 @@ class _Withdraw1State extends State<Withdraw1> {
                                       left: 77,
                                       child: InkWell(
                                         onTap: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Withdraw2()));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Withdraw2(
+
+                                          )));
                                         },
                                         child: Text(
                                           'Withdraw', textAlign: TextAlign.left,

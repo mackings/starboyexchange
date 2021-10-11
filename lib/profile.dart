@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:starboyexchange/account1.dart';
@@ -11,8 +12,6 @@ import 'Data.dart';
 import 'mainui.dart';
 import 'package:provider/provider.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
-
-
 
 
 class Profile extends StatefulWidget {
@@ -32,6 +31,8 @@ class _ProfileState extends State<Profile> {
   TextEditingController profileemail=TextEditingController();
   TextEditingController profileusername=TextEditingController();
   TextEditingController profilenumber=TextEditingController();
+
+
 
 
 
@@ -85,7 +86,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    final appstate = Provider.of<Userstate>(context,listen: true);
+
     return MaterialApp(
       home: Scaffold(
         backgroundColor: green,
@@ -153,8 +154,6 @@ class _ProfileState extends State<Profile> {
                                               child: Stack(
                                                   children: <Widget>[
                                                     TextFormField(
-                                                      onChanged: (changed)=> appstate.displaytext,
-                                                      onFieldSubmitted: (Submitted)=>appstate.displaytext,
                                                       controller: profilename,
                                                       textAlign: TextAlign.start,
                                                       cursorColor: Colors.black,
@@ -513,10 +512,27 @@ class _ProfileState extends State<Profile> {
                                                         left: 0,
                                                         child: InkWell(
                                                           onTap: (){
-                                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui(
-                                                            Hisname: profileusername.text,
-                                                             Hisemail: profileemail.text,
-                                                           )));
+                                                            if(profileemail.text.isEmpty){
+                                                              Fluttertoast.showToast(
+                                                                  msg: "Please Complete fields",
+                                                                toastLength: Toast.LENGTH_LONG,
+                                                                gravity: ToastGravity.TOP
+                                                              );
+                                                              Navigator.pop(context);
+
+                                                            }else {
+                                                              Navigator.push(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (
+                                                                          context) =>
+                                                                          Mainui(
+                                                                            Hisname: profileusername
+                                                                                .text,
+                                                                            Hisemail: profileemail
+                                                                                .text,
+                                                                          )));
+                                                            }
                                                           },
                                                           child: Container(
                                                               width: 237,

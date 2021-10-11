@@ -1,4 +1,6 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -11,6 +13,10 @@ import 'package:starboyexchange/withdraw.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 
+ late final  currency;
+ late final Amount;
+
+
 class Withdraw2 extends StatefulWidget {
   const Withdraw2({Key ? key}) : super(key: key);
 
@@ -19,6 +25,22 @@ class Withdraw2 extends StatefulWidget {
 }
 
 class _Withdraw2State extends State<Withdraw2> {
+
+  final Fayabase = FirebaseAuth.instance.currentUser;
+  final withdrawdb = FirebaseDatabase.instance.reference();
+  Uploadwithdraw() async {
+    final storewithdraw = withdrawdb.child("Withdraw Requests").set(
+        {
+          "Account Name":Aname.text ,
+          "Account Num" : Anum.text,
+        }
+        );
+
+  }
+
+
+
+
   final mail = ("Macsonline500@gmail.com");
   TextEditingController Anum = TextEditingController();
   TextEditingController Aname = TextEditingController();
@@ -100,6 +122,7 @@ class _Withdraw2State extends State<Withdraw2> {
                             left: 100,
                             child: InkWell(
                               onTap: (){
+                                Uploadwithdraw();
                                 Fluttertoast.showToast(
                                     msg: "Kindly send a secure Mail to process your Payment",
                                   backgroundColor: Colors.green,
@@ -175,7 +198,7 @@ class _Withdraw2State extends State<Withdraw2> {
                                   boxShadow : [BoxShadow(
                                       color: Color.fromRGBO(0, 0, 0, 0.25),
                                       offset: Offset(0,4),
-                                      blurRadius: 4
+                                      blurRadius: 4,
                                   )],
                                   image : DecorationImage(
                                       image: AssetImage('assets/card.png'),

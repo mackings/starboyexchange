@@ -371,6 +371,7 @@ class _Account2State extends State<Account2> {
                         "Account Name":Accountname.text,
                         "Account Number":Accountnum.text,
                         "Bank Name": Bankname.text,
+                        "Date Added": DateTime.now(),
                       });
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> Account3()));
                     },

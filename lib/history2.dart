@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class History2 extends StatefulWidget {
   const History2({Key? key}) : super(key: key);
@@ -11,6 +14,26 @@ class History2 extends StatefulWidget {
 }
 
 class _History2State extends State<History2> {
+  bool transactsucess = true;
+
+  void Setstatus() async{
+
+    if(FirebaseAuth.instance.currentUser!.emailVerified){
+      setState(() {
+        Status=Status2;
+
+      });
+    }else{
+     return null;
+    }
+
+
+  }
+
+  String Status = "Pending";
+  String Status2 = "Approved";
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -139,14 +162,19 @@ class _History2State extends State<History2> {
                                                     Positioned(
                                                         top: 0,
                                                         left: 0,
-                                                        child: Text('More Info', textAlign: TextAlign.left, style: TextStyle(
-                                                            color: Color.fromRGBO(255, 255, 255, 1),
-                                                            fontFamily: 'Montserrat',
-                                                            fontSize: 14,
-                                                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                            fontWeight: FontWeight.normal,
-                                                            height: 1
-                                                        ),)
+                                                        child: InkWell(
+                                                          onTap: (){
+                                                            Setstatus();
+                                                          },
+                                                          child: Text('Tap for Info', textAlign: TextAlign.left, style: TextStyle(
+                                                              color: Color.fromRGBO(255, 255, 255, 1),
+                                                              fontFamily: 'Montserrat',
+                                                              fontSize: 14,
+                                                              letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                              fontWeight: FontWeight.normal,
+                                                              height: 1
+                                                          ),),
+                                                        )
                                                     ),
                                                   ]
                                               )
@@ -474,14 +502,19 @@ class _History2State extends State<History2> {
                                                                                 Positioned(
                                                                                     top: 0,
                                                                                     left: 0,
-                                                                                    child: Text('Valid', textAlign: TextAlign.left, style: TextStyle(
-                                                                                        color: Color.fromRGBO(255, 255, 255, 1),
-                                                                                        fontFamily: 'Montserrat',
-                                                                                        fontSize: 14,
-                                                                                        letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                                                        fontWeight: FontWeight.normal,
-                                                                                        height: 1
-                                                                                    ),)
+                                                                                    child: InkWell(
+                                                                                      onTap: (){
+
+                                                                                      },
+                                                                                      child: Text('Valid', textAlign: TextAlign.left, style: TextStyle(
+                                                                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                                                                          fontFamily: 'Montserrat',
+                                                                                          fontSize: 14,
+                                                                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                                                          fontWeight: FontWeight.normal,
+                                                                                          height: 1
+                                                                                      ),),
+                                                                                    )
                                                                                 ),
                                                                               ]
                                                                           )
@@ -523,18 +556,7 @@ class _History2State extends State<History2> {
                                                                                 Positioned(
                                                                                     top: 0,
                                                                                     left: 0,
-                                                                                    child: Text('Success', textAlign: TextAlign.left, style: TextStyle(
-                                                                                        color: Color.fromRGBO(255, 255, 255, 1),
-                                                                                        fontFamily: 'Montserrat',
-                                                                                        fontSize: 14,
-                                                                                        letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                                                        fontWeight: FontWeight.normal,
-                                                                                        height: 1
-                                                                                    ),)
-                                                                                ),Positioned(
-                                                                                    top: 0,
-                                                                                    left: 0,
-                                                                                    child: Text('Success', textAlign: TextAlign.left, style: TextStyle(
+                                                                                    child: Text('${Status.toString()}', textAlign: TextAlign.left, style: TextStyle(
                                                                                         color: Color.fromRGBO(255, 255, 255, 1),
                                                                                         fontFamily: 'Montserrat',
                                                                                         fontSize: 14,

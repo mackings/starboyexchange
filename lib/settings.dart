@@ -67,12 +67,14 @@ class _SettingsState extends State<Settings> {
                                 letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                                 fontWeight: FontWeight.normal,
                                 height: 1
-                            ),)
+                            ),),
                         ),Positioned(
                             top: 157,
                             left: 36,
                             child: InkWell(
-                              //onTap: Navigator.push(context, MaterialPageRoute(builder: (context)=> ResetPassword2())),
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> ResetPassword2()));
+                              },
                               child: Text('Change Password', textAlign: TextAlign.left, style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   fontFamily: 'Montserrat',

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,18 +18,16 @@ import 'package:provider/provider.dart';
 
    }
  }
-
-class Userstate extends ChangeNotifier{
-   Userstate();
-   String displaytext = "";
-   String get getdisplaytext => displaytext;
-
-   void Setdisplay( String text){
-     displaytext = text;
+ class Usernames with ChangeNotifier{
+   String _myusername = "";
+   String get myusername => _myusername;
+   set myusername( String _myusername){
+     _myusername = myusername;
      notifyListeners();
-
    }
 
+ }
 
-}
+
+
 

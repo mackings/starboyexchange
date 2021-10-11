@@ -1,8 +1,10 @@
 
 
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:starboyexchange/Data.dart';
 import 'package:starboyexchange/account1.dart';
 import 'package:starboyexchange/account3.dart';
 import 'package:starboyexchange/helpandsupport.dart';
@@ -32,6 +34,7 @@ class Mainui extends StatefulWidget {
 
   const Mainui({Key ? key, this.Hisname, this.Hisemail,      }) : super(key: key);
 
+
   @override
   _MainuiState createState() => _MainuiState();
 }
@@ -39,6 +42,7 @@ class Mainui extends StatefulWidget {
 
 
 class _MainuiState extends State<Mainui> {
+
 
 
 
@@ -292,7 +296,7 @@ class _MainuiState extends State<Mainui> {
                         ),Positioned(
                             top: 168,
                             left: 30.345726013183594,
-                            child: Text('Welcome ${widget.Hisname}', textAlign: TextAlign.left, style: TextStyle(
+                            child: Text('Welcome Demo', textAlign: TextAlign.left, style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
                                 fontFamily: 'Montserrat',
                                 fontSize: 18,

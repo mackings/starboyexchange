@@ -3,10 +3,12 @@
 import 'dart:io';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart';
+import 'package:starboyexchange/Data.dart';
 import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
 import 'package:flutter_svg/svg.dart';
@@ -18,6 +20,9 @@ import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_sms/flutter_sms.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_database/firebase_database.dart';
+
 
 
 
@@ -70,15 +75,24 @@ class _Trade2State extends State<Trade2> {
 
 
 
+
   }
 
   void Notify() async{
+    final Defuser = FirebaseAuth.instance.currentUser;
+     final Defusers = Defuser!.email;
+     print(Defusers);
+
+    final Database = FirebaseDatabase.instance.reference();
+    final store =  await Database.child("Trade Requests").set({ "Name":Defusers,});
+
+
     await AwesomeNotifications().createNotification(
         content: NotificationContent(
           id: 1,
           channelKey: "Basics",
-          title: "Trade Notification",
-          body: "Trade Submitted, Verification in Progress",
+          title: "Trade Notifications",
+          body: "Trade Verification in progress",
           bigPicture: "asset://assets/lawson.png",
           displayOnForeground: true,
           displayOnBackground: true,

@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:open_url/open_url.dart';
 
 
-var whatsapp = ("https://wa.me/2348057572197?text=Hello%20De'prime%2C%20I'm%20Hello Star %20in%20Exchange%20Lets Transact");
+var whatsapp = ("https://wa.me/2348057572197?text=Hello%20Star Exchange%2C%20I'm%20 %20in%20%20Lets Transact");
 void _launchURL() async =>
     await canLaunch(whatsapp) ? await launch(whatsapp) : throw 'Could not launch $whatsapp';
 

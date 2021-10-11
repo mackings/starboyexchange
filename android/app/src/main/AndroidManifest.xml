@@ -17,7 +17,7 @@
     </queries>
    <application
        android:usesCleartextTraffic="true"
-        android:label="StarExchange"
+        android:label="Star exchange"
         android:icon="@mipmap/lawson"
        tools:targetApi="m">
         <activity
