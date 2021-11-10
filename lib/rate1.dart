@@ -31,6 +31,18 @@ class _Rate1State extends State<Rate1> {
   TextEditingController profilenumber=TextEditingController();
   TextEditingController Amount =TextEditingController();
 
+
+  var frate = 180;
+  var xresult = 0;
+
+  autocal(){
+    xresult = frate*int.parse(Amount.text);
+    print(xresult);
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -70,7 +82,7 @@ class _Rate1State extends State<Rate1> {
                                     width: 1,
                                   ),
                                   image : DecorationImage(
-                                      image: AssetImage('assets/signat.png'),
+                                      image: AssetImage('assets/lawson.png'),
                                       fit: BoxFit.fitWidth
                                   ),
                                   borderRadius : BorderRadius.all(Radius.elliptical(40, 40)),
@@ -394,7 +406,7 @@ class _Rate1State extends State<Rate1> {
                                                                   Positioned(
                                                                       top: 0,
                                                                       left: 0,
-                                                                      child: Text('You entered \$ ${Amount.text}', textAlign: TextAlign.left, style: TextStyle(
+                                                                      child: Text('You entered ${Amount.text}', textAlign: TextAlign.left, style: TextStyle(
                                                                           color: Color.fromRGBO(196, 196, 196, 1),
                                                                           fontFamily: 'Montserrat',
                                                                           fontSize: 14,
@@ -405,7 +417,7 @@ class _Rate1State extends State<Rate1> {
                                                                   ),Positioned(
                                                                       top: 29,
                                                                       left: 0,
-                                                                      child: Text('\$ ${defaultrate} * 0', textAlign: TextAlign.left, style: TextStyle(
+                                                                      child: Text( "${xresult}", textAlign: TextAlign.left, style: TextStyle(
                                                                           color: Color.fromRGBO(255, 255, 255, 1),
                                                                           fontFamily: 'Montserrat',
                                                                           fontSize: 14,
@@ -416,7 +428,7 @@ class _Rate1State extends State<Rate1> {
                                                                   ),Positioned(
                                                                       top: 58,
                                                                       left: 0,
-                                                                      child: Text('Total = 0', textAlign: TextAlign.left, style: TextStyle(
+                                                                      child: Text('Total: ${xresult}', textAlign: TextAlign.left, style: TextStyle(
                                                                           color: Color.fromRGBO(255, 255, 255, 1),
                                                                           fontFamily: 'Montserrat',
                                                                           fontSize: 14,
@@ -445,7 +457,11 @@ class _Rate1State extends State<Rate1> {
                             left: 60,
                             child: InkWell(
                               onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Rate2()));
+                                setState(() {
+                                  var myresult = xresult;
+                                });
+                                autocal();
+                                //Navigator.push(context, MaterialPageRoute(builder: (context)=>Rate2()));
                               },
                               child: Container(
                                   width: 237,
@@ -517,10 +533,6 @@ class _Rate1State extends State<Rate1> {
                                                       left: 5,
                                                       child: InkWell(
                                                         onTap: (){
-                                                          setState(() {
-                                                            defaultrate=Amount.text;
-
-                                                          });
                                                          // Navigator.push(context, MaterialPageRoute(builder: (context)=> Mainui()));
                                                         },
                                                         child: SvgPicture.asset(

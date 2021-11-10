@@ -145,10 +145,10 @@ class _OpenappState extends State<Openapp> {
                             )
                         ),Positioned(
                             top: 390,
-                            left: 109,
+                            left: 115,
                             child: Transform.rotate(
                               angle: 2.2216249567550326e-16 * (math.pi / 180),
-                              child: Text('StarBoy', textAlign: TextAlign.left, style: TextStyle(
+                              child: Text('  Star', textAlign: TextAlign.left, style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   fontFamily: 'Montserrat',
                                   fontSize: 36,

@@ -22,6 +22,18 @@ class _Trade1State extends State<Trade1> {
 
   TextEditingController amountcontroller = TextEditingController();
 
+  var frate = 180;
+  var xresult = 0;
+
+  autocal(){
+    xresult = frate*int.parse(amountcontroller.text);
+    print(xresult);
+  }
+
+
+
+
+
 
 
   @override
@@ -243,8 +255,8 @@ class _Trade1State extends State<Trade1> {
                                                                   DropdownSearch<String>(
                                                                     popupBackgroundColor: green,
                                                                     popupBarrierColor: green,
-                                                                    items: ["NAIRA", "DOLLAR", "BTC", 'ETH' "EURO", "AMAZON", "EBAY"],
-                                                                    popupItemDisabled: (String s) => s.startsWith('I'),
+                                                                    items: ["NAIRA", "DOLLAR", "BTC",  "AMAZON", ],
+                                                                    popupItemDisabled: (String s) => s.startsWith('A'),
 
                                                                   ),
                                                                 ]
@@ -418,11 +430,13 @@ class _Trade1State extends State<Trade1> {
                                                         left: 25,
                                                         child: InkWell(
                                                          onTap: (){
-                                                           setState(() {
+                                                           autocal();
+                                                           setState((){
+                                                             var myresult = xresult;
 
                                                            });
                                                          },
-                                                          child: Text('Calculate \$${amountcontroller.text} ', textAlign: TextAlign.left, style: TextStyle(
+                                                          child: Text('Calculate ', textAlign: TextAlign.left, style: TextStyle(
                                                               color: Color.fromRGBO(196, 196, 196, 1),
                                                               fontFamily: 'Montserrat',
                                                               fontSize: 14,
@@ -445,7 +459,7 @@ class _Trade1State extends State<Trade1> {
                                                     ),Positioned(
                                                         top: 71,
                                                         left: 25,
-                                                        child: Text('Total = ${amountcontroller.text}', textAlign: TextAlign.left, style: TextStyle(
+                                                        child: Text('Total: ${xresult}', textAlign: TextAlign.left, style: TextStyle(
                                                             color: Color.fromRGBO(255, 255, 255, 1),
                                                             fontFamily: 'Montserrat',
                                                             fontSize: 14,

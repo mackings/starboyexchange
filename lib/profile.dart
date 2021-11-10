@@ -53,33 +53,7 @@ class _ProfileState extends State<Profile> {
   }
   //initialize notifications
   @override
-  void initState() {
-   AwesomeNotifications().isNotificationAllowed().then((isAllowed){
-     if(isAllowed){
-       showDialog(
-           context: context, builder: (context)=>AlertDialog(
-         title: Text("StarExchange Notifications"),
-         content: Text("Starexchange would like to show you Notifications"),
-         actions: [
-           MaterialButton(
-               onPressed:()=> AwesomeNotifications()
-           .requestPermissionToSendNotifications()
-           .then((value) => Navigator.pop(context)),
-             child: Text("Enable"),
-           ),
 
-           MaterialButton(
-             onPressed: (){
-               Navigator.pop(context);
-             },
-             child: Text("Disable"),
-           ),
-         ],
-       ));
-     }
-   });
-    super.initState();
-  }
 
 
 
@@ -405,7 +379,7 @@ class _ProfileState extends State<Profile> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(70)
                                     ),
-                                      child: Image.asset("assets/signat.png")),
+                                      child: Image.asset("assets/lawson.png")),
                                 ),
                               )
                                   : InkWell(

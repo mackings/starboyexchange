@@ -92,7 +92,7 @@ class _Trade2State extends State<Trade2> {
           id: 1,
           channelKey: "Basics",
           title: "Trade Notifications",
-          body: "Trade Verification in progress",
+          body: "Hello Star User Trade in progress",
           bigPicture: "asset://assets/lawson.png",
           displayOnForeground: true,
           displayOnBackground: true,

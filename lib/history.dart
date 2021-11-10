@@ -143,7 +143,7 @@ class _History1State extends State<History1> {
                                       ),Positioned(
                                           top: 19,
                                           left: 0,
-                                          child: Text('March 14th, 2021 4:29PM ', textAlign: TextAlign.center, style: TextStyle(
+                                          child: Text('${DateTime.now()}', textAlign: TextAlign.center, style: TextStyle(
                                               color: Color.fromRGBO(255, 255, 255, 1),
                                               fontFamily: 'Montserrat',
                                               fontSize: 12,
@@ -201,7 +201,7 @@ class _History1State extends State<History1> {
                                       ),Positioned(
                                           top: 19,
                                           left: 0,
-                                          child: Text('March 14th, 2021 4:29PM ', textAlign: TextAlign.center, style: TextStyle(
+                                          child: Text('${DateTime.now()}', textAlign: TextAlign.center, style: TextStyle(
                                               color: Color.fromRGBO(255, 255, 255, 1),
                                               fontFamily: 'Montserrat',
                                               fontSize: 12,
@@ -258,7 +258,7 @@ class _History1State extends State<History1> {
                                       ),Positioned(
                                           top: 19,
                                           left: 0,
-                                          child: Text('March 14th, 2021 4:29PM ', textAlign: TextAlign.center, style: TextStyle(
+                                          child: Text('${DateTime.now()} ', textAlign: TextAlign.center, style: TextStyle(
                                               color: Color.fromRGBO(255, 255, 255, 1),
                                               fontFamily: 'Montserrat',
                                               fontSize: 12,
@@ -315,7 +315,7 @@ class _History1State extends State<History1> {
                                       ),Positioned(
                                           top: 19,
                                           left: 0,
-                                          child: Text('March 14th, 2021 4:29PM ', textAlign: TextAlign.center, style: TextStyle(
+                                          child: Text('${DateTime.now()} ', textAlign: TextAlign.center, style: TextStyle(
                                               color: Color.fromRGBO(255, 255, 255, 1),
                                               fontFamily: 'Montserrat',
                                               fontSize: 12,
@@ -372,7 +372,7 @@ class _History1State extends State<History1> {
                                       ),Positioned(
                                           top: 19,
                                           left: 0,
-                                          child: Text('March 14th, 2021 4:29PM ', textAlign: TextAlign.center, style: TextStyle(
+                                          child: Text('${DateTime.now()}', textAlign: TextAlign.center, style: TextStyle(
                                               color: Color.fromRGBO(255, 255, 255, 1),
                                               fontFamily: 'Montserrat',
                                               fontSize: 12,
@@ -429,7 +429,7 @@ class _History1State extends State<History1> {
                                       ),Positioned(
                                           top: 19,
                                           left: 0,
-                                          child: Text('March 14th, 2021 4:29PM ', textAlign: TextAlign.center, style: TextStyle(
+                                          child: Text('${DateTime.now()}', textAlign: TextAlign.center, style: TextStyle(
                                               color: Color.fromRGBO(255, 255, 255, 1),
                                               fontFamily: 'Montserrat',
                                               fontSize: 12,
@@ -486,7 +486,7 @@ class _History1State extends State<History1> {
                                       ),Positioned(
                                           top: 19,
                                           left: 0,
-                                          child: Text('March 14th, 2021 4:29PM ', textAlign: TextAlign.center, style: TextStyle(
+                                          child: Text('${DateTime.now()} ', textAlign: TextAlign.center, style: TextStyle(
                                               color: Color.fromRGBO(255, 255, 255, 1),
                                               fontFamily: 'Montserrat',
                                               fontSize: 12,
@@ -543,7 +543,7 @@ class _History1State extends State<History1> {
                                       ),Positioned(
                                           top: 19,
                                           left: 0,
-                                          child: Text('March 14th, 2021 4:29PM ', textAlign: TextAlign.center, style: TextStyle(
+                                          child: Text('${DateTime.now()}', textAlign: TextAlign.center, style: TextStyle(
                                               color: Color.fromRGBO(255, 255, 255, 1),
                                               fontFamily: 'Montserrat',
                                               fontSize: 12,
@@ -600,7 +600,7 @@ class _History1State extends State<History1> {
                                       ),Positioned(
                                           top: 19,
                                           left: 0,
-                                          child: Text('March 14th, 2021 4:29PM ', textAlign: TextAlign.center, style: TextStyle(
+                                          child: Text('${DateTime.now()}', textAlign: TextAlign.center, style: TextStyle(
                                               color: Color.fromRGBO(255, 255, 255, 1),
                                               fontFamily: 'Montserrat',
                                               fontSize: 12,
@@ -657,7 +657,7 @@ class _History1State extends State<History1> {
                                       ),Positioned(
                                           top: 19,
                                           left: 0,
-                                          child: Text('March 14th, 2021 4:29PM ', textAlign: TextAlign.center, style: TextStyle(
+                                          child: Text('${DateTime.now()} ', textAlign: TextAlign.center, style: TextStyle(
                                               color: Color.fromRGBO(255, 255, 255, 1),
                                               fontFamily: 'Montserrat',
                                               fontSize: 12,
@@ -714,7 +714,7 @@ class _History1State extends State<History1> {
                                       ),Positioned(
                                           top: 19,
                                           left: 0,
-                                          child: Text('March 14th, 2021 4:29PM ', textAlign: TextAlign.center, style: TextStyle(
+                                          child: Text('${DateTime.now()}', textAlign: TextAlign.center, style: TextStyle(
                                               color: Color.fromRGBO(255, 255, 255, 1),
                                               fontFamily: 'Montserrat',
                                               fontSize: 12,

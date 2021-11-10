@@ -1,6 +1,7 @@
 
 
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -45,12 +46,38 @@ class _MainuiState extends State<Mainui> {
 
 
 
-
-  @override
   void initState() {
-    // TODO: implement initState
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed){
+      if(isAllowed){
+        showDialog(
+            context: context, builder: (context)=>AlertDialog(
+          title: Text("StarExchange Notifications"),
+          content: Text("Starexchange would like to show you Notifications"),
+          actions: [
+            MaterialButton(
+              onPressed:()=> AwesomeNotifications()
+                  .requestPermissionToSendNotifications()
+                  .then((value) => Navigator.pop(context)),
+              child: Text("Enable"),
+            ),
+
+            MaterialButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+              child: Text("Disable"),
+            ),
+          ],
+        ));
+      }
+    });
     super.initState();
   }
+
+
+
+
+  @override
 
 
   final GlobalKey<ScaffoldState> _globalKey= GlobalKey<ScaffoldState>();
@@ -296,7 +323,7 @@ class _MainuiState extends State<Mainui> {
                         ),Positioned(
                             top: 168,
                             left: 30.345726013183594,
-                            child: Text('Welcome Demo', textAlign: TextAlign.left, style: TextStyle(
+                            child: Text('Welcome ${widget.Hisname}', textAlign: TextAlign.left, style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
                                 fontFamily: 'Montserrat',
                                 fontSize: 18,

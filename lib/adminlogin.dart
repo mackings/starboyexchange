@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:starboyexchange/admin.dart';
 import 'package:starboyexchange/introsliders.dart';
 import 'package:starboyexchange/account1.dart';
+import 'package:starboyexchange/mainui.dart';
 import 'package:starboyexchange/openapp.dart';
 
 import 'account1.dart';
@@ -140,7 +142,7 @@ class _AdminloginState extends State<Adminlogin> {
                    if(admin.text==keys){
                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Admin()));
                    }else{
-                     Navigator.push(context, MaterialPageRoute(builder: (context)=>Admin()));
+                     Fluttertoast.showToast(msg: "Access Denied");
                    }
 
                   },

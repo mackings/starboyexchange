@@ -92,7 +92,7 @@ class _Account1State extends State<Account1> {
                               left: 2.2727131843566895,
                               child: Transform.rotate(
                                 angle: 3.1347894642296156e-16 * (math.pi / 180),
-                                child: Text('StarBoy', textAlign: TextAlign.left, style: TextStyle(
+                                child: Text( '    Star', textAlign: TextAlign.left, style: TextStyle(
                                     color: Color.fromRGBO(255, 255, 255, 1),
                                     fontFamily: 'Montserrat',
                                     fontSize: 25,

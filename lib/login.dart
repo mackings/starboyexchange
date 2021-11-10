@@ -11,6 +11,7 @@ import 'package:starboyexchange/profile.dart';
 import 'package:starboyexchange/testing.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Login extends StatefulWidget {
   const Login({Key ?key}) : super(key: key);
@@ -75,7 +76,7 @@ class _LoginState extends State<Login> {
                 children: [
                   Image.asset("assets/gift.png",height: 200,width: 520,),
                   //starboy
-                  Text("StarBoy",style: TextStyle(
+                  Text("  Star",style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontFamily: "Montserrat",
@@ -145,9 +146,12 @@ class _LoginState extends State<Login> {
                                         Form(
                                           child: TextFormField(
                                             autocorrect: true,
-                                            validator: EmailValidator(
-                                              errorText: " Please Enter a Registered Email"
-                                            ),
+                                            validator: (value){
+                                              if(value!.isEmpty){
+                                                return " Please Enter Details ";
+                                              }
+
+                                            },
                                             controller: emailcon,
                                             textAlign: TextAlign.start,
                                             cursorColor: Colors.black,
@@ -298,7 +302,16 @@ class _LoginState extends State<Login> {
                   //loginbtn
                   InkWell(
                     onTap: () {
-                     Login();
+                      if(_formKey.currentState!.validate()){
+                        Login();
+                      }else{
+                        Fluttertoast.showToast(
+                            msg: "Please Enter a correct Value",
+                          backgroundColor: Colors.white,
+                          textColor: Colors.teal,
+                        );
+                      }
+                     //Login();
                     },
                     child: Container(
                         width: 156.1904754638672,

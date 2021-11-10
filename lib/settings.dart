@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:starboyexchange/About.dart';
 import 'package:starboyexchange/Resetpassword.dart';
 import 'package:starboyexchange/Resetpassword2.dart';
 import 'package:starboyexchange/account1.dart';
@@ -87,14 +88,19 @@ class _SettingsState extends State<Settings> {
                         ),Positioned(
                             top: 198,
                             left: 36,
-                            child: Text('About', textAlign: TextAlign.left, style: TextStyle(
-                                color: Color.fromRGBO(255, 255, 255, 1),
-                                fontFamily: 'Montserrat',
-                                fontSize: 14,
-                                letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                fontWeight: FontWeight.normal,
-                                height: 1
-                            ),)
+                            child: InkWell(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> About()));
+                              },
+                              child: Text('About', textAlign: TextAlign.left, style: TextStyle(
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 14,
+                                  letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                  fontWeight: FontWeight.normal,
+                                  height: 1
+                              ),),
+                            )
                         ),
                         Positioned(
                             top: 240,
