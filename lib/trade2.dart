@@ -198,7 +198,8 @@ class _Trade2State extends State<Trade2> {
                                               ),
                                             ),
                                           )
-                                      ),Positioned(
+                                      ),
+                                      Positioned(
                                           top: 138,
                                           left: 32,
                                           child: Container(
