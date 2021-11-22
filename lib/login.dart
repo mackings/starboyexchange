@@ -54,7 +54,8 @@ class _LoginState extends State<Login> {
   Future Login() async{
     FirebaseAuth.instance.signInWithEmailAndPassword(email: emailcon.text, password: passcon.text);
     if(FirebaseAuth.instance.currentUser!.emailVerified){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile()));
+      //Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile()));
+      
     }else{
       await Navigator.push(context, MaterialPageRoute(builder: (context)=>Account1()));
     }

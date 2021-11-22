@@ -455,7 +455,31 @@ class _MainuiState extends State<Mainui> {
                                             left: 0,
                                             child: InkWell(
                                               onTap: (){
-                                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Trade1()));
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (BuildContext context){
+                                                      return AlertDialog(
+                                                        title: Text("Transaction History"),
+                                                        content: Text("This is the transaction history of your account"),
+                                                        actions: <Widget>[
+                                                          FlatButton(
+                                                            child: Text("Trade Giftcards"),
+                                                            onPressed: (){
+                                                              Navigator.of(context).pop();
+                                                            },
+                                                          ),
+
+                                                          FlatButton(
+                                                            child: Text("Crypto"),
+                                                            onPressed: (){
+                                                              Navigator.of(context).pop();
+                                                            },
+                                                          )
+                                                        ],
+                                                      );
+                                                    }
+                                                );
+                                                //Navigator.push(context, MaterialPageRoute(builder: (context)=>Trade1()));
                                               },
                                               child: Container(
                                                   width: 310,
