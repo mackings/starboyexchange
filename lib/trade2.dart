@@ -242,7 +242,7 @@ class _Trade2State extends State<Trade2> {
                                               ),
                                             ),
 
-                                          ),
+                                          ),    
                                       ),Positioned(
                                           top: 227,
                                           left: 234,
@@ -250,7 +250,7 @@ class _Trade2State extends State<Trade2> {
                                               color: Color.fromRGBO(255, 255, 255, 1),
                                               fontFamily: 'Montserrat',
                                               fontSize: 10,
-                                              letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                              letterSpacing: 0 /*pe__rcentages not used in flutter. defaulting to zero*/,
                                               fontWeight: FontWeight.normal,
                                               height: 1
                                           ),)

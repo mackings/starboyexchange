@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/Data.dart';
 import 'package:starboyexchange/account1.dart';
 import 'package:starboyexchange/account3.dart';
+import 'package:starboyexchange/buycrypto.dart';
 import 'package:starboyexchange/helpandsupport.dart';
 import 'package:starboyexchange/login.dart';
 import 'package:starboyexchange/news.dart';
@@ -540,12 +541,12 @@ class _MainuiState extends State<Mainui> {
                                                   },
                                                 ),
                                                 FlatButton(
-                                                  child: Text("Crypto",style: TextStyle(
+                                                  child: Text(" Trade Crypto",style: TextStyle(
                                                         color: Colors.black,
                                                         fontFamily: "montserrat",
                                                         ),),
                                                   onPressed: () {
-                                                    Navigator.of(context).pop();
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> const Butcrypto()));
                                                   },
                                                 )
                                               ],
