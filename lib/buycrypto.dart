@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -8,6 +9,8 @@ import 'package:starboyexchange/account1.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'finalb.dart';
+import 'fsell.dart';
 
 class Butcrypto extends StatefulWidget {
   const Butcrypto({Key? key}) : super(key: key);
@@ -17,10 +20,7 @@ class Butcrypto extends StatefulWidget {
 }
 
 class _ButcryptoState extends State<Butcrypto> {
-
-
-
-   //proofupload
+  //proofupload
   File? _selectedImage;
   final picker = ImagePicker();
 
@@ -37,7 +37,6 @@ class _ButcryptoState extends State<Butcrypto> {
     });
   }
 
-
 //Remote server
   RemoteConfig WALLETConfig = RemoteConfig.instance;
   Future waletconfig() async {
@@ -46,324 +45,397 @@ class _ButcryptoState extends State<Butcrypto> {
       fetchTimeout: Duration(seconds: 60),
       minimumFetchInterval: Duration(minutes: 5),
     ));
-    
   }
 
   //Database
- 
-  Uploadproof() async {
 
+  Uploadproof() async {
     FirebaseStorage fs = FirebaseStorage.instance;
     final reference = fs.ref();
     final picturefolder = reference.child("Proffs").child("Cards");
-    picturefolder.putFile(_selectedImage!).whenComplete(() => () async{
-     imageLink = await picturefolder.getDownloadURL();
-     print("Hellow");
-    });
-    
-
-   
-
+    picturefolder.putFile(_selectedImage!).whenComplete(() => () async {
+          imageLink = await picturefolder.getDownloadURL();
+          print("Hellow");
+        });
   }
 
+//Remote server
+  RemoteConfig remoteConfig = RemoteConfig.instance;
+  Future Activate() async {
+    bool updated = await remoteConfig.fetchAndActivate();
+    await remoteConfig.setConfigSettings(RemoteConfigSettings(
+      fetchTimeout: Duration(seconds: 60),
+      minimumFetchInterval: Duration(minutes: 5),
+    ));
+    if (updated) {
+      //actions
 
+    } else {
+      //reverseacions
 
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: green,
-        
         body: SingleChildScrollView(
-          child: Center(
+          child: Container(
             child: Column(
               children: [
                 SizedBox(
-                  height: 10,
+                  height: 70,
                 ),
-                //SvgPicture.asset(
-                 // "assets/btc.svg",
-                 // height: 250,
-                //  width: 250,
-                //),
-                SizedBox(
-                  height: 5,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    waletconfig();
-                  },
-                  child: Container(
-                    height: 70,
-                    width: 340,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              "BTC Wallet ",
-                              style: GoogleFonts.montserrat(
-                                  textStyle: const TextStyle(
-                                color: Colors.deepPurpleAccent,
-                                fontSize: 10,
-                                fontWeight: FontWeight.normal,
-                              )),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            GestureDetector(
-                              onTap: () {},
-                              child: Text(
-                                "${WALLETConfig.getString("bitcoin")}",
-                                style: GoogleFonts.montserrat(
-                                    textStyle: const TextStyle(
-                                  color: Colors.deepPurpleAccent,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.normal,
-                                )),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    waletconfig();
-                  },
-                  child: Container(
-                    height: 70,
-                    width: 340,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              "Eth Wallet",
-                              style: GoogleFonts.montserrat(
-                                  textStyle: const TextStyle(
-                                color: Colors.deepPurpleAccent,
-                                fontSize: 10,
-                                fontWeight: FontWeight.normal,
-                              )),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "${WALLETConfig.getString("eth")}",
-                              style: GoogleFonts.montserrat(
-                                  textStyle: const TextStyle(
-                                color: Colors.deepPurpleAccent,
-                                fontSize: 15,
-                                fontWeight: FontWeight.normal,
-                              )),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    waletconfig();
-                  },
-                  child: Container(
-                    height: 70,
-                    width: 340,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              "Usdt Wallet ",
-                              style: GoogleFonts.montserrat(
-                                  textStyle: const TextStyle(
-                                color: Colors.deepPurpleAccent,
-                                fontSize: 10,
-                                fontWeight: FontWeight.normal,
-                              )),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "${WALLETConfig.getString("usdt")}",
-                              style: GoogleFonts.montserrat(
-                                  textStyle: const TextStyle(
-                                color: Colors.deepPurpleAccent,
-                                fontSize: 15,
-                                fontWeight: FontWeight.normal,
-                              )),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
+
+                Text('Explore Our Rates As They Changes ',style: TextStyle(
+                    color: Colors.white,
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15
+
+                ),),
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          getImage();
-                        },
-                        child: Container(
-                          height: 100,
-                          width: 100,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white),
-                          child: _selectedImage == null
-                              ? InkWell(
-                                  onTap: () => getImage(),
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 250,
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey[300],
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Icon(
-                                      Icons.image,
-                                      size: 70,
-                                      color: Colors.deepPurpleAccent,
-                                    ),
-                                  ),
-                                )
-                              : InkWell(
-                                  onTap: () => getImage(),
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 250,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.circular(10),
-                                      image: DecorationImage(
-                                        image: FileImage(_selectedImage!),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                        ),
-                      ),
-                    ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Upload Screenshot ",
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: GestureDetector(
+                              onTap: () {
+                                //activate();
+                                waletconfig();
+                                // _globalKey.currentState!.openDrawer();
+                              },
+                              child: Icon(
+                                Icons.refresh,
+                                color: Colors.white,
+                              )),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                //SvgPicture.asset("assets/girls.svg",height: 200, width: 200,),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 70,
+                  width: 320,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "BITCOIN : ",
                           style: GoogleFonts.montserrat(
-                              textStyle: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                              textStyle: TextStyle(
+                            color: green,
                           )),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        GestureDetector(
-                          onTap: (){
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context){
-                                  return AlertDialog(
-                                    content: Text("Have you screenshot your transaction ?",style: GoogleFonts.montserrat(),),
-                                    actions: [
-                                      MaterialButton(
-                                          onPressed: (){
-                                            Uploadproof();
-                                            showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: Text("Success",style: GoogleFonts.montserrat(),),
-                                                  content: Text("Your Trade has been Submitted, You would be contacted soon",style: GoogleFonts.montserrat(),),
-                                                  actions: <Widget>[
-                                                    FlatButton(
-                                                      child: Text("Continue",style: GoogleFonts.montserrat()),
-                                                      onPressed: () {
-                                                       // Navigator.push(context, MaterialPageRoute(builder: (context)=>TradeGround()));
-                                                      },
-                                                    ),
-                                                    FlatButton(
-                                                      child: Text("Home",style: GoogleFonts.montserrat()),
-                                                      onPressed: () {
-                                                       // Navigator.push(context, MaterialPageRoute(builder: (context)=>TradeGround()));
-                                                      },
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                            //Navigator.push(context, MaterialPageRoute(builder: (context)=>TradeGround()));
-                                          },
-                                        child: Text("YES",style: GoogleFonts.montserrat(),),
-                                          ),
-                                      MaterialButton(
-                                        onPressed: (){
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text("NO",style: GoogleFonts.montserrat(),),
-                                      ),
-                                    ],
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "               ${remoteConfig.getString("bitcoin")}",
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        )),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
 
-                                  );
-                                },
-                            );
+                Container(
+                  height: 70,
+                  width: 320,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "USDT: ",
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                            color: green,
+                          )),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "                     ${remoteConfig.getString("usdt")}",
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        )),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 70,
+                  width: 320,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "ETHERIUM : ",
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                            color: green,
+                          )),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "             ${remoteConfig.getString("eth")}",
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        )),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+
+                Container(
+                  height: 70,
+                  width: 320,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "RIPPLE : ",
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                            color: green,
+                          )),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "                  ${remoteConfig.getString("ripple")}",
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        )),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 70,
+                  width: 320,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "CARDANO : ",
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                color: green,
+                              )),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "             ${remoteConfig.getString("cardano")}",
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                            )),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height:20),
+                Container(
+                  height: 70,
+                  width: 320,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "STELLAR : ",
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                color:green,
+                              )),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "                ${remoteConfig.getString("stellar")}",
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                            )),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height:20),
+
+                Container(
+                  height: 70,
+                  width: 320,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "LITECOIN : ",
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                color: green,
+                              )),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "               ${remoteConfig.getString("litecoin")}",
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                            )),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height:20,
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Activate();
+                        },
+                        child: GestureDetector(
+                          onTap: () {
+                             Navigator.push(context, MaterialPageRoute(builder: (context)=>Fbuy()));
                           },
                           child: Container(
-                            height: 60,
-                            width: 200,
+                            height: 50,
+                            width: 120,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white),
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                            ),
                             child: Center(
                               child: Text(
-                                "Finish Trade ",
+                                "Buy",
                                 style: GoogleFonts.montserrat(
-                                    textStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
+                                    textStyle: TextStyle(
+                                  color: green,
                                 )),
                               ),
                             ),
                           ),
-                        )
-                      ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 50,
+                    ),
+
+
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: GestureDetector(
+                        onTap: () {
+                           Navigator.push(context, MaterialPageRoute(builder: (context)=> Fsell()));
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 120,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.black,
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Sell",
+                              style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                color: Colors.white,
+                              )),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 )
@@ -371,7 +443,6 @@ class _ButcryptoState extends State<Butcrypto> {
             ),
           ),
         ),
-
       ),
     );
   }

@@ -27,9 +27,6 @@ class _HelpandsupportState extends State<Helpandsupport> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-
-
-
               Container(
                   width: 375,
                   height: 700,
@@ -63,6 +60,7 @@ class _HelpandsupportState extends State<Helpandsupport> {
                         ),
 
                          //new
+
 
 
 

@@ -368,7 +368,7 @@ class _MainuiState extends State<Mainui> {
                         top: 168,
                         left: 30.345726013183594,
                         child: Text(
-                          'Welcome ${widget.Hisname}',
+                          'Welcome Back',
                           textAlign: TextAlign.left,
                           style: TextStyle(
                               color: Color.fromRGBO(255, 255, 255, 1),
@@ -383,7 +383,7 @@ class _MainuiState extends State<Mainui> {
                         top: 192,
                         left: 30.345726013183594,
                         child: Text(
-                          " ${widget.Hisemail}",
+                          " ${Myuserid}",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Color.fromRGBO(255, 255, 255, 1),
@@ -534,6 +534,7 @@ class _MainuiState extends State<Mainui> {
                                                       Text("Trade Giftcards",style: TextStyle(
                                                         color: Colors.black,
                                                         fontFamily: "montserrat",
+                                                        fontSize: 12,
                                                         ),
                                                         ),
                                                   onPressed: () {
@@ -544,6 +545,7 @@ class _MainuiState extends State<Mainui> {
                                                   child: Text(" Trade Crypto",style: TextStyle(
                                                         color: Colors.black,
                                                         fontFamily: "montserrat",
+                                                    fontSize: 12,
                                                         ),),
                                                   onPressed: () {
                                                     Navigator.push(context, MaterialPageRoute(builder: (context)=> const Butcrypto()));

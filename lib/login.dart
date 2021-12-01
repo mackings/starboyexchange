@@ -149,7 +149,10 @@ class _LoginState extends State<Login> {
                                             autocorrect: true,
                                             validator: (value){
                                               if(value!.isEmpty){
-                                                return " Please Enter Details ";
+                                                //return " Please Enter Details ";
+                                             return "Please Enter Email";
+                                              
+                                               
                                               }
 
                                             },

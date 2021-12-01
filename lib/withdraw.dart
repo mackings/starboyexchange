@@ -1,6 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'dart:math' as math;
 
 import 'package:starboyexchange/withdraw2.dart';
@@ -233,6 +234,7 @@ class _Withdraw1State extends State<Withdraw1> {
                                         ),
                                       ),
                                       child: TextFormField(
+                                        controller: amountc,
                                         textAlign: TextAlign.start,
                                         cursorColor: Colors.black,
                                         keyboardType: TextInputType.number,
@@ -290,6 +292,8 @@ class _Withdraw1State extends State<Withdraw1> {
                                       left: 77,
                                       child: InkWell(
                                         onTap: (){
+
+
                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Withdraw2(
 
                                           )));

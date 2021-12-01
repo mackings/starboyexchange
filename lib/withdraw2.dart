@@ -124,14 +124,16 @@ class _Withdraw2State extends State<Withdraw2> {
                               onTap: (){
                                 Uploadwithdraw();
                                 Fluttertoast.showToast(
-                                    msg: "Kindly send a secure Mail to process your Payment",
+                                    msg: "Withdrawal request Sent",
                                   backgroundColor: Colors.green,
                                   toastLength: Toast.LENGTH_LONG,
                                   gravity: ToastGravity.TOP,
                                 );
 
-                                Navigator.pop(context);
-                                Mailadmin();
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui()));
+
+                                //Navigator.pop(context);
+                                //Mailadmin();
 
 
 

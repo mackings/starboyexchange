@@ -4,10 +4,12 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:starboyexchange/account1.dart';
 import 'package:starboyexchange/login.dart';
+import 'package:starboyexchange/mainui.dart';
 
 import 'account3.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import "package:sizer/sizer.dart";
 
 
 
@@ -373,7 +375,7 @@ class _Account2State extends State<Account2> {
                         "Bank Name": Bankname.text,
                         "Date Added": DateTime.now(),
                       });
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> Account3()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
                     },
                     child: Container(
                         width: 156.1904754638672,
