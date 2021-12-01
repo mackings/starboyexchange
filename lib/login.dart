@@ -309,10 +309,23 @@ class _LoginState extends State<Login> {
                       if(_formKey.currentState!.validate()){
                         Login();
                       }else{
-                        Fluttertoast.showToast(
-                            msg: "Please Enter a correct Value",
-                          backgroundColor: Colors.white,
-                          textColor: Colors.teal,
+                        
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text(' Login Error'),
+                              content: Text('Please Enter Valid Details and Try Again'),
+                              actions: <Widget>[
+                                FlatButton(
+                                  child: Text('Ok'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                )
+                              ],
+                            );
+                          },
                         );
                       }
                      //Login();

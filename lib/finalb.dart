@@ -60,7 +60,7 @@ class _FbuyState extends State<Fbuy> {
                   SizedBox(height: 10,),
                   Container(
                   
-                    height: 70,
+                   height: 70,
                     width: 280,
                     decoration: BoxDecoration(
                       color: Colors.white,

@@ -236,6 +236,7 @@ class _Rate1State extends State<Rate1> {
                                                 popupBarrierColor: green,
                                                 items:["Amazon", "Walmart", "Visa", 'Itunes',"Starbucks", "BestBuy","Cadano", "Steam","Ebay","Nordstorm","Sephora","Target","Cardano","Solana","Victoria's Secret","Chipotle","Dogecoin" ],
                                                 popupItemDisabled: (String s) => s.startsWith('u'),
+                                          
 
                                               ),
                                           )
@@ -533,7 +534,7 @@ class _Rate1State extends State<Rate1> {
                                                       left: 5,
                                                       child: InkWell(
                                                         onTap: (){
-                                                         // Navigator.push(context, MaterialPageRoute(builder: (context)=> Mainui()));
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Mainui()));
                                                         },
                                                         child: SvgPicture.asset(
                                                             'assets/home.svg',
@@ -544,7 +545,7 @@ class _Rate1State extends State<Rate1> {
                                                         top: 28,
                                                         left: 0,
                                                         child: Text('Home', textAlign: TextAlign.left, style: TextStyle(
-                                                            color: Color.fromRGBO(81, 163, 163, 0.5),
+                                                            color: Colors.black,
                                                             fontFamily: 'Montserrat',
                                                             fontSize: 12,
                                                             letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
@@ -577,7 +578,7 @@ class _Rate1State extends State<Rate1> {
                                                                       top: 0,
                                                                       left: 0,
                                                                       child: Text(' Calculate', textAlign: TextAlign.left, style: TextStyle(
-                                                                          color: Color.fromRGBO(81, 163, 163, 1),
+                                                                          color: Colors.black,
                                                                           fontFamily: 'Montserrat',
                                                                           fontSize: 12,
                                                                           letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
@@ -628,7 +629,7 @@ class _Rate1State extends State<Rate1> {
                                                                         top: 0,
                                                                         left: 0,
                                                                         child: Text('History', textAlign: TextAlign.left, style: TextStyle(
-                                                                            color: Color.fromRGBO(81, 163, 163, 0.5),
+                                                                            color: Colors.black,
                                                                             fontFamily: 'Montserrat',
                                                                             fontSize: 12,
                                                                             letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
