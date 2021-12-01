@@ -59,6 +59,7 @@ class _FbuyState extends State<Fbuy> {
                   SvgPicture.asset("assets/profile.svg",height: 250,width: 250,),
                   SizedBox(height: 10,),
                   Container(
+                  
                     height: 70,
                     width: 280,
                     decoration: BoxDecoration(
@@ -73,7 +74,7 @@ class _FbuyState extends State<Fbuy> {
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: " Enter Crypto Name",hintStyle: GoogleFonts.montserrat(color: green,),
+                            hintText: " Enter Crypto Network",hintStyle: GoogleFonts.montserrat(color: green,),
                             suffixIcon: Icon(Icons.assessment,color: green,),
 
                           ),
