@@ -10,7 +10,7 @@ import 'package:starboyexchange/account1.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:starboyexchange/mainui.dart';
-
+import 'package:selectable/selectable.dart';
 
 class Fsell extends StatefulWidget {
   const Fsell({Key? key}) : super(key: key);
@@ -20,8 +20,6 @@ class Fsell extends StatefulWidget {
 }
 
 class _FsellState extends State<Fsell> {
-
-
   File? _selectedImage;
   final picker = ImagePicker();
 
@@ -41,20 +39,17 @@ class _FsellState extends State<Fsell> {
   //Database
 
   Uploadproof() async {
-
     FirebaseStorage fs = FirebaseStorage.instance;
     final reference = fs.ref();
     final picturefolder = reference.child("Proffs").child("Cards");
-    picturefolder.putFile(_selectedImage!).whenComplete(() => () async{
-      imageLink = await picturefolder.getDownloadURL();
-      print("Hellow");
-    });
-
-
-
-
+    picturefolder.putFile(_selectedImage!).whenComplete(() => () async {
+          imageLink = await picturefolder.getDownloadURL();
+          print("Hellow");
+        });
   }
 
+  //select contrioller
+  //final SelectableController = SelectableController();
 
   //Remote server
   RemoteConfig WALLETConfig = RemoteConfig.instance;
@@ -72,14 +67,13 @@ class _FsellState extends State<Fsell> {
 
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: green,
-
-
-        body:  SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
@@ -89,15 +83,17 @@ class _FsellState extends State<Fsell> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Sell Your Cryptocurrencies ',style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15
-
-                    ),),
-                    SizedBox(width: 30,),
-
+                    Text(
+                      'Sell Your Cryptocurrencies ',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15),
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
                     GestureDetector(
                         onTap: () {
                           //activate();
@@ -113,7 +109,6 @@ class _FsellState extends State<Fsell> {
                 SizedBox(
                   height: 50,
                 ),
-
                 GestureDetector(
                   onTap: () {
                     waletconfig();
@@ -134,24 +129,28 @@ class _FsellState extends State<Fsell> {
                               "BTC Wallet ",
                               style: GoogleFonts.montserrat(
                                   textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
-                                  )),
+                                color: Colors.black,
+                                fontSize: 10,
+                                fontWeight: FontWeight.normal,
+                              )),
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             GestureDetector(
                               onTap: () {},
-                              child: Text(
-                                "${WALLETConfig.getString("btcwallet")}",
-                                style: GoogleFonts.montserrat(
-                                    textStyle: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal,
-                                    )),
+                              child: Selectable(
+                                selectWordOnLongPress: true,
+                                showPopup: true,
+                                child: Text(
+                                  "${WALLETConfig.getString("btcwallet")}",
+                                  style: GoogleFonts.montserrat(
+                                      textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal,
+                                  )),
+                                ),
                               ),
                             ),
                           ],
@@ -183,24 +182,28 @@ class _FsellState extends State<Fsell> {
                               "USDT Wallet ",
                               style: GoogleFonts.montserrat(
                                   textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
-                                  )),
+                                color: Colors.black,
+                                fontSize: 10,
+                                fontWeight: FontWeight.normal,
+                              )),
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             GestureDetector(
                               onTap: () {},
-                              child: Text(
-                                "${WALLETConfig.getString("usdtwallet")}",
-                                style: GoogleFonts.montserrat(
-                                    textStyle: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal,
-                                    )),
+                              child: Selectable(
+                                selectWordOnLongPress: true,
+                                showPopup: true,
+                                child: Text(
+                                  "${WALLETConfig.getString("usdtwallet")}",
+                                  style: GoogleFonts.montserrat(
+                                      textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal,
+                                  )),
+                                ),
                               ),
                             ),
                           ],
@@ -232,24 +235,28 @@ class _FsellState extends State<Fsell> {
                               "ETH Wallet ",
                               style: GoogleFonts.montserrat(
                                   textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
-                                  )),
+                                color: Colors.black,
+                                fontSize: 10,
+                                fontWeight: FontWeight.normal,
+                              )),
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             GestureDetector(
                               onTap: () {},
-                              child: Text(
-                                "${WALLETConfig.getString("ethwallet")}",
-                                style: GoogleFonts.montserrat(
-                                    textStyle: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal,
-                                    )),
+                              child: Selectable(
+                                selectWordOnLongPress: true,
+                                showPopup: true,
+                                child: Text(
+                                  "${WALLETConfig.getString("ethwallet")}",
+                                  style: GoogleFonts.montserrat(
+                                      textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal,
+                                  )),
+                                ),
                               ),
                             ),
                           ],
@@ -281,24 +288,28 @@ class _FsellState extends State<Fsell> {
                               "CARDANO Wallet ",
                               style: GoogleFonts.montserrat(
                                   textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
-                                  )),
+                                color: Colors.black,
+                                fontSize: 10,
+                                fontWeight: FontWeight.normal,
+                              )),
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             GestureDetector(
                               onTap: () {},
-                              child: Text(
-                                "${WALLETConfig.getString("cardanowallet")}",
-                                style: GoogleFonts.montserrat(
-                                    textStyle: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal,
-                                    )),
+                              child: Selectable(
+                                selectWordOnLongPress: true,
+                                showPopup: true,
+                                child: Text(
+                                  "${WALLETConfig.getString("cardanowallet")}",
+                                  style: GoogleFonts.montserrat(
+                                      textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal,
+                                  )),
+                                ),
                               ),
                             ),
                           ],
@@ -310,7 +321,6 @@ class _FsellState extends State<Fsell> {
                 SizedBox(
                   height: 40,
                 ),
-
                 Row(
                   children: [
                     Padding(
@@ -327,36 +337,36 @@ class _FsellState extends State<Fsell> {
                               color: Colors.white),
                           child: _selectedImage == null
                               ? InkWell(
-                            onTap: () => getImage(),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 250,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[300],
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Icon(
-                                Icons.image,
-                                size: 70,
-                                color: green,
-                              ),
-                            ),
-                          )
+                                  onTap: () => getImage(),
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 250,
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[300],
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Icon(
+                                      Icons.image,
+                                      size: 70,
+                                      color: green,
+                                    ),
+                                  ),
+                                )
                               : InkWell(
-                            onTap: () => getImage(),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 250,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  image: FileImage(_selectedImage!),
-                                  fit: BoxFit.cover,
+                                  onTap: () => getImage(),
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 250,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                        image: FileImage(_selectedImage!),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
                         ),
                       ),
                     ),
@@ -366,17 +376,36 @@ class _FsellState extends State<Fsell> {
                           "Upload Screenshot ",
                           style: GoogleFonts.montserrat(
                               textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              )),
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          )),
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         GestureDetector(
-                          onTap: (){
-                            showDialog(
+                          onTap: () {
+                            if (_selectedImage == null) {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Error", style: TextStyle( fontFamily: 'Montserrat'),),
+                                      content: Text("Please Upload a Transaction Recipt",style: TextStyle( fontFamily: 'Montserrat'),),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          child: Text("Ok"),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  });
+                            } else {
+
+                               showDialog(
                               context: context,
                               builder: (BuildContext context){
                                 return AlertDialog(
@@ -423,6 +452,7 @@ class _FsellState extends State<Fsell> {
                                 );
                               },
                             );
+                            }
                           },
                           child: Container(
                             height: 60,
@@ -435,10 +465,10 @@ class _FsellState extends State<Fsell> {
                                 "Finish Trade ",
                                 style: GoogleFonts.montserrat(
                                     textStyle: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold,
-                                    )),
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                )),
                               ),
                             ),
                           ),
@@ -451,11 +481,7 @@ class _FsellState extends State<Fsell> {
             ),
           ),
         ),
-
-
-
       ),
-
     );
   }
 }

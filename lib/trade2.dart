@@ -5,11 +5,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart';
 import 'package:starboyexchange/Data.dart';
 import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
 import 'package:flutter_svg/svg.dart';
+import 'package:starboyexchange/mainui.dart';
 import 'package:starboyexchange/rate1.dart';
 import 'package:path/path.dart' as path;
 import 'package:image_picker/image_picker.dart';
@@ -35,6 +37,10 @@ class _Trade2State extends State<Trade2> {
 
   late String imageLink;
 
+  get user => null;
+
+  get fs => null;
+
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     setState(() {
@@ -53,10 +59,15 @@ class _Trade2State extends State<Trade2> {
     final reference = fs.ref();
     final picturefolder = reference.child("Giftcards").child("Cards");
     picturefolder.putFile(_selectedImage!).whenComplete(() => () async {
-         String imageLink = await picturefolder.getDownloadURL();
+          String imageLink = await picturefolder.getDownloadURL();
           print(imageLink.toString());
-        
         });
+  }
+
+
+
+  Notifypersin(){
+
   }
 
   void Notify() async {
@@ -79,7 +90,7 @@ class _Trade2State extends State<Trade2> {
       displayOnForeground: true,
       displayOnBackground: true,
       notificationLayout: NotificationLayout.BigPicture,
-      //autoCancel: true,
+      
     ));
   }
 
@@ -93,7 +104,7 @@ class _Trade2State extends State<Trade2> {
   @override
   Widget build(BuildContext context) {
     return Sizer(
-      builder: (context, orientation, deviceType) =>  MaterialApp(
+      builder: (context, orientation, deviceType) => MaterialApp(
         home: Scaffold(
           backgroundColor: green,
           body: SingleChildScrollView(
@@ -136,7 +147,7 @@ class _Trade2State extends State<Trade2> {
                                     //ddddpp
                                     height: 40.h,
                                     //child: Image.network("https://www.piccolomondotoys.com/components/com_virtuemart/shop_image/product/full/GiftCardImage5e80bdc3b243e.jpg"),
-    
+
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         color: Color.fromRGBO(81, 163, 163, 1),
@@ -154,7 +165,8 @@ class _Trade2State extends State<Trade2> {
                                       'Upload Gift Cards',
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
                                           fontFamily: 'Montserrat',
                                           fontSize: 18,
                                           letterSpacing:
@@ -220,8 +232,8 @@ class _Trade2State extends State<Trade2> {
                                                 borderRadius:
                                                     BorderRadius.circular(10),
                                                 image: DecorationImage(
-                                                  image:
-                                                      FileImage(_selectedImage!),
+                                                  image: FileImage(
+                                                      _selectedImage!),
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
@@ -236,7 +248,8 @@ class _Trade2State extends State<Trade2> {
                                       'Tap To Upload Image',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
                                           fontFamily: 'Montserrat',
                                           fontSize: 10,
                                           letterSpacing:
@@ -295,13 +308,88 @@ class _Trade2State extends State<Trade2> {
                                               left: 0,
                                               child: InkWell(
                                                 onTap: () {
-                                                  Notify();
-                                                  SubmitTrade();
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              Rate1()));
+                                                  if (_selectedImage == null) {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return AlertDialog(
+                                                            title: Text(
+                                                              "Error",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'Montserrat'),
+                                                            ),
+                                                            content: Text(
+                                                              "Please Upload a Valid Giftcard",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'Montserrat'),
+                                                            ),
+                                                            actions: <Widget>[
+                                                              FlatButton(
+                                                                child:
+                                                                    Text("OK"),
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                              )
+                                                            ],
+                                                          );
+                                                        });
+                                                  } else {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return AlertDialog(
+                                                            title: Text(
+                                                              "Trade Gift Card ?",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Montserrat"),
+                                                            ),
+                                                            content: Text(
+                                                              "Your trade would be  submitted ,  and You would be Notified soon",
+                                                              style: GoogleFonts
+                                                                  .montserrat(),
+                                                            ),
+                                                            actions: <Widget>[
+                                                              MaterialButton(
+                                                                child:
+                                                                    const Text(
+                                                                        "Yes"),
+                                                                onPressed: () {
+                                                                  SubmitTrade();
+                                                                  Notify();
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                              ),
+                                                              MaterialButton(
+                                                                child:
+                                                                    const Text(
+                                                                        "Exit"),
+                                                                onPressed: () {
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                              ),
+                                                            ],
+                                                          );
+                                                        });
+
+                                                    //uploadImage();
+                                                  }
+
+                                                  //  Navigator.push(
+                                                  //context,
+                                                  //MaterialPageRoute(
+                                                  //builder: (context) =>
+                                                  // Rate1()));
                                                 },
                                                 child: Container(
                                                     width: 237,
@@ -332,14 +420,16 @@ class _Trade2State extends State<Trade2> {
                                                                     TextAlign
                                                                         .left,
                                                                 style: TextStyle(
-                                                                    color: Color.fromRGBO(
-                                                                        13,
-                                                                        14,
-                                                                        14,
-                                                                        1),
+                                                                    color: Color
+                                                                        .fromRGBO(
+                                                                            13,
+                                                                            14,
+                                                                            14,
+                                                                            1),
                                                                     fontFamily:
                                                                         'Montserrat',
-                                                                    fontSize: 14,
+                                                                    fontSize:
+                                                                        14,
                                                                     letterSpacing:
                                                                         0 /*percentages not used in flutter. defaulting to zero*/,
                                                                     fontWeight:

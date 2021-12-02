@@ -44,7 +44,7 @@ class _MainuiState extends State<Mainui> {
   //user data
   String? Myuserid = FirebaseAuth.instance.currentUser!.email;
 
-  late  String link =
+  late String link =
       "https://firebasestorage.googleapis.com/v0/b/starboyexchange-a9c9d.appspot.com/o/profile%2F";
 
   Future gpro() async {
@@ -99,8 +99,8 @@ class _MainuiState extends State<Mainui> {
             child: ListView(
               children: [
                 Container(
-                    width: 231.w,
-                    height: 812.h,
+                    width: 231,
+                    height: 812,
                     decoration: const BoxDecoration(
                       color: Color.fromRGBO(81, 163, 163, 1),
                     ),
@@ -117,7 +117,7 @@ class _MainuiState extends State<Mainui> {
                                   width: 1,
                                 ),
                                 image: DecorationImage(
-                                    image:NetworkImage(link),
+                                    image: NetworkImage(link),
                                     fit: BoxFit.fitWidth),
                                 borderRadius:
                                     BorderRadius.all(Radius.elliptical(80, 80)),
@@ -563,6 +563,7 @@ class _MainuiState extends State<Mainui> {
                                                       ),
                                                     ),
                                                     onPressed: () {
+                                                      gpro();
                                                       Navigator.push(
                                                           context,
                                                           MaterialPageRoute(

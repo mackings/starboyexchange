@@ -40,7 +40,10 @@ class _FbuyState extends State<Fbuy> {
 
       },
 
-    );
+    ).whenComplete(() => Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text("Your request has been sent"),
+      duration: Duration(seconds: 20),
+    )));
   }
   @override
   Widget build(BuildContext context) {
@@ -154,7 +157,7 @@ class _FbuyState extends State<Fbuy> {
 
                           ),
                           validator: (value){
-                            if(value==null || value.isEmpty){
+                            if(value==null || RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)==false){
                               return "Please Enter  a valid Wallet email";
                             }
                             return null;
@@ -192,7 +195,7 @@ class _FbuyState extends State<Fbuy> {
 
                           ),
                           validator: (value){
-                            if(value==null || value.isEmpty){
+                            if(value==null || value.length<11){
                               return "Please Enter a valid PhoneNumber";
                             }
                             return null;
