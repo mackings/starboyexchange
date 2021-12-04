@@ -12,6 +12,7 @@ import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/buycrypto.dart';
+import 'package:starboyexchange/fsell.dart';
 import 'package:starboyexchange/mainui.dart';
 import 'package:starboyexchange/rate1.dart';
 import 'package:path/path.dart' as path;
@@ -113,7 +114,7 @@ class _Trade2State extends State<Trade2> {
               children: [
                 Container(
                     width: 375,
-                    height: 812,
+                    height: 712,
                     decoration: BoxDecoration(
                       color: Color.fromRGBO(28, 24, 24, 1),
                     ),
@@ -365,10 +366,7 @@ class _Trade2State extends State<Trade2> {
                                                                 onPressed: () {
                                                                   SubmitTrade();
                                                                   Notify();
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pop();
-
+                                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Fsell()));
                                                     
 
                                                     //uploadImage();

@@ -55,19 +55,53 @@ class _ProfileState extends State<Profile> {
     UploadTask uploadTask = reference.putFile(_selectedImage!);
     uploadTask.then((res) async {
       String url = await res.ref.getDownloadURL();
-       print(url.toString());
-        print(url);
-         print('url.toString()');
-         
-         SharedPreferences prefs = await SharedPreferences.getInstance();
-          prefs.setString('url', url);
-          
-          
-         
-         
+      print(url.toString());
+      print(url);
+      print('url.toString()');
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('url', url);
     });
 
     print(url.toString());
+  }
+
+  //getstoreddetails() async {
+   // SharedPreferences prefs = await SharedPreferences.getInstance();
+   // var Thenames = prefs.getString('fullname');
+    //String? Theemails = prefs.getString('email');
+    //String? Thenumbers = prefs.getString('phonenumber');
+   // print(url);
+   // print(Thenames);
+   // print(Theemails);
+   // print(Thenumbers);
+
+    //setState(() {
+     // Thenames = profilename.text;
+     // Theemails = profileemail.text;
+     // Thenumbers = profilenumber.text;
+   // });
+
+    //String usernames = profileusername.text;
+ // }
+
+  Fetchfirestore() async {
+    final getdata = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      if (mounted  &&  null != value) {
+        setState(() {
+          profilename.text = value.data()!['fullname'];
+          profileemail.text = value.data()!['email'];
+         profileusername.text = value.data()!['username'];
+           profilenumber.text = value.data()!['phonenumber'];
+        });
+      }else {
+        print('not mounted');
+      }
+    }).whenComplete(() => print('Got the Datas'));
   }
 
   final _profikeKey = GlobalKey<FormState>();
@@ -86,7 +120,7 @@ class _ProfileState extends State<Profile> {
               children: [
                 Container(
                     width: 375,
-                    height: 700,
+                    height: 800,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
@@ -107,7 +141,7 @@ class _ProfileState extends State<Profile> {
                           top: 36,
                           left: 151,
                           child: Text(
-                            "${profileusername.text}",
+                            "${profilename.text}",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
@@ -164,7 +198,7 @@ class _ProfileState extends State<Profile> {
                                               enabledBorder: InputBorder.none,
                                               errorBorder: InputBorder.none,
                                               disabledBorder: InputBorder.none,
-                                              hintText: "Enter Full Name Here",
+                                              hintText: profilename.text,
                                               hintStyle: TextStyle(
                                                   color: inputcolor,
                                                   fontFamily: "Montserrat",
@@ -395,18 +429,23 @@ class _ProfileState extends State<Profile> {
                                 Positioned(
                                     top: 0,
                                     left: 0,
-                                    child: Text(
-                                      'Phone Number',
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 255, 255, 1),
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 14,
-                                          letterSpacing:
-                                              0 /*percentages not used in flutter. defaulting to zero*/,
-                                          fontWeight: FontWeight.normal,
-                                          height: 1),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Fetchfirestore();
+                                      },
+                                      child: Text(
+                                        'Phone Number',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(
+                                                255, 255, 255, 1),
+                                            fontFamily: 'Montserrat',
+                                            fontSize: 14,
+                                            letterSpacing:
+                                                0 /*percentages not used in flutter. defaulting to zero*/,
+                                            fontWeight: FontWeight.normal,
+                                            height: 1),
+                                      ),
                                     )),
                               ]))),
                       Positioned(
@@ -487,6 +526,7 @@ class _ProfileState extends State<Profile> {
                                             //image picker goes Here
                                             child: InkWell(
                                                 onTap: () {
+                                                  //getstoreddetails();
                                                   Profileimg();
                                                 },
                                                 child: Image.asset(
@@ -534,6 +574,8 @@ class _ProfileState extends State<Profile> {
                                               left: 0,
                                               child: InkWell(
                                                 onTap: () {
+                                                  Fetchfirestore();
+                                                 // getstoreddetails();
                                                   if (profileemail
                                                       .text.isEmpty) {
                                                     Fluttertoast.showToast(

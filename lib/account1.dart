@@ -28,6 +28,8 @@ class _Account1State extends State<Account1> {
   TextEditingController uphonenumber = TextEditingController();
   TextEditingController upassword = TextEditingController();
 
+  String? get userid => null;
+
   Future Signup() async {
     try {
       UserCredential userCredential =
@@ -47,13 +49,26 @@ class _Account1State extends State<Account1> {
   }
 
   Register() async {
-  
     if (_myKey.currentState!.validate()) {
       _myKey.currentState!.save();
       Signup();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('email', uemail.text.trim());
+      prefs.setString('fullname', ufullname.text.trim());
+      prefs.setString('phonenumber', uphonenumber.text.trim());
+
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => Account2()));
     }
+  }
+
+  savedatatodb() {
+    FirebaseFirestore.instance.collection('users').doc(userid).set({
+      'fullname': ufullname.text.trim(),
+      'email': uemail.text.trim(),
+      'phonenumber': uphonenumber.text.trim(),
+      'password': upassword.text.trim(),
+    }).whenComplete(() => print("Saved Data Successfully"));
   }
 
   final _myKey = GlobalKey<FormState>();
@@ -518,6 +533,7 @@ class _Account1State extends State<Account1> {
                     child: InkWell(
                       splashColor: Colors.grey,
                       onTap: () {
+                        savedatatodb();
                         Register();
                         //Signup();
                         //Navigator.push(context, MaterialPageRoute(builder: (context)=>Account2()));

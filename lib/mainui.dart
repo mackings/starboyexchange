@@ -71,6 +71,7 @@ class _MainuiState extends State<Mainui> {
                       onPressed: () => AwesomeNotifications()
                           .requestPermissionToSendNotifications()
                           .then((value) => Navigator.pop(context)),
+                        
                       child: Text("Enable"),
                     ),
                     MaterialButton(
