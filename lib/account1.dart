@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math' as math;
 
 import 'package:starboyexchange/account2.dart';
@@ -8,6 +9,7 @@ import 'package:starboyexchange/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 final green = const Color.fromRGBO(81, 163, 163, 1);
 final inputcolor = Color.fromRGBO(196, 196, 196, 1);
@@ -35,7 +37,7 @@ class _Account1State extends State<Account1> {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-         return ('The password provided is too weak.');
+        return ('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
         return ('The account already exists for that email.');
       }
@@ -44,13 +46,13 @@ class _Account1State extends State<Account1> {
     }
   }
 
-  Register() {
+  Register() async {
+  
     if (_myKey.currentState!.validate()) {
       _myKey.currentState!.save();
       Signup();
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => Account2()));
-      
     }
   }
 

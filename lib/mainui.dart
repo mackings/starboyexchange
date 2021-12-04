@@ -75,6 +75,7 @@ class _MainuiState extends State<Mainui> {
                     ),
                     MaterialButton(
                       onPressed: () {
+                        gpro();
                         Navigator.pop(context);
                       },
                       child: Text("Disable"),

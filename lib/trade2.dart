@@ -11,6 +11,7 @@ import 'package:starboyexchange/Data.dart';
 import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
 import 'package:flutter_svg/svg.dart';
+import 'package:starboyexchange/buycrypto.dart';
 import 'package:starboyexchange/mainui.dart';
 import 'package:starboyexchange/rate1.dart';
 import 'package:path/path.dart' as path;
@@ -352,7 +353,7 @@ class _Trade2State extends State<Trade2> {
                                                                       "Montserrat"),
                                                             ),
                                                             content: Text(
-                                                              "Your trade would be  submitted ,  and You would be Notified soon",
+                                                              "Your trade would be  submitted ,  and You would be Notified after Review",
                                                               style: GoogleFonts
                                                                   .montserrat(),
                                                             ),
@@ -360,14 +361,51 @@ class _Trade2State extends State<Trade2> {
                                                               MaterialButton(
                                                                 child:
                                                                     const Text(
-                                                                        "Yes"),
+                                                                        "Okay"),
                                                                 onPressed: () {
                                                                   SubmitTrade();
                                                                   Notify();
                                                                   Navigator.of(
                                                                           context)
                                                                       .pop();
+
+                                                    
+
+                                                    //uploadImage();
+                                                  
+                                                                  
                                                                 },
+                                                              ),
+                                                              MaterialButton(
+                                                                child:
+                                                                    const Text(
+                                                                        "Exit"),
+                                                                onPressed: () {
+                                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return AlertDialog(
+                                                            title: Text(
+                                                              "You can also Check our Crypto Rates ",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Montserrat"),
+                                                            ),
+                                                            content: Text(
+                                                              "Rates that Fills your Purses",
+                                                              style: GoogleFonts
+                                                                  .montserrat(),
+                                                            ),
+                                                            actions: <Widget>[
+                                                              MaterialButton(
+                                                                child:
+                                                                    const Text(
+                                                                        "okay"),
+                                                                onPressed: () {
+                                                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Butcrypto()));
+                                                                },
+                                                               
                                                               ),
                                                               MaterialButton(
                                                                 child:
@@ -376,6 +414,11 @@ class _Trade2State extends State<Trade2> {
                                                                 onPressed: () {
                                                                   Navigator.pop(
                                                                       context);
+                                                                },
+                                                              ),
+                                                            ],
+                                                          );
+                                                        });
                                                                 },
                                                               ),
                                                             ],

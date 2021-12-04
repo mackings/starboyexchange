@@ -82,7 +82,8 @@ class _Rate1State extends State<Rate1> {
                                     width: 1,
                                   ),
                                   image : DecorationImage(
-                                      image: AssetImage('assets/lawson.png'),
+                                      image: NetworkImage(
+                                          "https://firebasestorage.googleapis.com/v0/b/starboy-exchange.appspot.com/o/images%2Fstar.png?alt=media&token=f9f8f8c0-f8c9-4f3c-b8c8-f8c8c8c8c8c8"),
                                       fit: BoxFit.fitWidth
                                   ),
                                   borderRadius : BorderRadius.all(Radius.elliptical(40, 40)),
