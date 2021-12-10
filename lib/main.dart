@@ -17,18 +17,17 @@ import 'package:starboyexchange/trade1.dart';
 import 'package:starboyexchange/trade2.dart';
 import 'package:starboyexchange/withdraw.dart';
 import 'package:starboyexchange/withdraw2.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 import 'introsliders.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hive/hive.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
-import"package:awesome_notifications/awesome_notifications.dart";
+import "package:awesome_notifications/awesome_notifications.dart";
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
-
-
-
+import "package:supabase/supabase.dart";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,21 +37,24 @@ void main() async {
 
   Directory appDocDir = await getApplicationDocumentsDirectory();
   //final appDocPath = appDocDir.path;
- Hive.init(appDocDir.path);
+  Hive.init(appDocDir.path);
   await Hive.openBox("ProfileNames");
+  await Hive.openBox("Userdata");
   FirebaseMessaging.onBackgroundMessage(_handler);
 
-
-
-  runApp(
-    MultiProvider(
-        providers: [ 
-          ChangeNotifierProvider(create: (_)=> Users()),
-          ChangeNotifierProvider(create: (_)=> Usernames()),
-        ],
-            child: MyApp(),
-    )
+  //supabase
+  await Supabase.initialize(
+    url: "https://obrqmzctjutyobfrzpct.supabase.co",
+    anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzOTA4NTMyOSwiZXhwIjoxOTU0NjYxMzI5fQ.R6GHaN4M3Z_7yD5UAnDYXNzdC27KgQxuUcNzUasGb34"
   );
+
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => Users()),
+      ChangeNotifierProvider(create: (_) => Usernames()),
+    ],
+    child: MyApp(),
+  ));
   AwesomeNotifications().initialize("resource://drawable/lawson", [
     NotificationChannel(
       channelShowBadge: true,
@@ -66,7 +68,7 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key ? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -75,9 +77,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-
     return ChangeNotifierProvider(
-      create: (context){
+      create: (context) {
         return Data();
       },
       child: MaterialApp(
@@ -87,8 +88,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-Future<void> _handler( RemoteMessage message) async{
+Future<void> _handler(RemoteMessage message) async {
   print("Notifications ${message.data}");
- AwesomeNotifications().createNotificationFromJsonData(message.data);
-
+  AwesomeNotifications().createNotificationFromJsonData(message.data);
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,7 +14,14 @@ class ResetPassword2 extends StatefulWidget {
   _ResetPassword2State createState() => _ResetPassword2State();
 }
 
+
 class _ResetPassword2State extends State<ResetPassword2> {
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

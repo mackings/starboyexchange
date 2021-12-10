@@ -64,26 +64,28 @@ class _ProfileState extends State<Profile> {
     });
 
     print(url.toString());
+    Hive.openBox("ppics");
+    Hive.box("ppics").put("url", url);
   }
 
   //getstoreddetails() async {
-   // SharedPreferences prefs = await SharedPreferences.getInstance();
-   // var Thenames = prefs.getString('fullname');
-    //String? Theemails = prefs.getString('email');
-    //String? Thenumbers = prefs.getString('phonenumber');
-   // print(url);
-   // print(Thenames);
-   // print(Theemails);
-   // print(Thenumbers);
+  // SharedPreferences prefs = await SharedPreferences.getInstance();
+  // var Thenames = prefs.getString('fullname');
+  //String? Theemails = prefs.getString('email');
+  //String? Thenumbers = prefs.getString('phonenumber');
+  // print(url);
+  // print(Thenames);
+  // print(Theemails);
+  // print(Thenumbers);
 
-    //setState(() {
-     // Thenames = profilename.text;
-     // Theemails = profileemail.text;
-     // Thenumbers = profilenumber.text;
-   // });
+  //setState(() {
+  // Thenames = profilename.text;
+  // Theemails = profileemail.text;
+  // Thenumbers = profilenumber.text;
+  // });
 
-    //String usernames = profileusername.text;
- // }
+  //String usernames = profileusername.text;
+  // }
 
   Fetchfirestore() async {
     final getdata = await FirebaseFirestore.instance
@@ -91,17 +93,55 @@ class _ProfileState extends State<Profile> {
         .doc(user!.uid)
         .get()
         .then((value) {
-      if (mounted  &&  null != value) {
+      if (mounted && null != value) {
         setState(() {
           profilename.text = value.data()!['fullname'];
           profileemail.text = value.data()!['email'];
-         profileusername.text = value.data()!['username'];
-           profilenumber.text = value.data()!['phonenumber'];
+          profileusername.text = value.data()!['username'];
+          profilenumber.text = value.data()!['phonenumber'];
         });
-      }else {
+      } else {
         print('not mounted');
       }
     }).whenComplete(() => print('Got the Datas'));
+  }
+
+  gethivedata() {
+    final getdata = Hive.box('user').get('fullname');
+    final getdata1 = Hive.box('user').get('email');
+    final getdata2 = Hive.box('user').get('username');
+    final getdata3 = Hive.box('user').get('phonenumber');
+    print("Got Hive Data");
+    print(getdata);
+    print(getdata1);
+    print(getdata2);
+    print(getdata3);
+    print(getdata1);
+
+    setState(() {
+      profilename.text = getdata;
+      profileemail.text = getdata1;
+      profileusername.text = getdata2;
+      profilenumber.text = getdata3;
+    });
+  }
+
+  updateHive() async {
+    await Hive.box('user').put('fullname', profilename.text);
+    await Hive.box('user').put('email', profileemail.text);
+    await Hive.box('user').put('username', profileusername.text);
+    await Hive.box('user').put('phonenumber', profilenumber.text);
+
+    await FirebaseFirestore.instance.collection('users').doc(user!.uid).update({
+      'fullname': profilename.text,
+      'email': profileemail.text,
+      'username': profileusername.text,
+      'phonenumber': profilenumber.text,
+    });
+    print(profileemail.text);
+    print(profilenumber.text);
+    print(profilename.text);
+    print("Updated Hive Datas");
   }
 
   final _profikeKey = GlobalKey<FormState>();
@@ -139,22 +179,27 @@ class _ProfileState extends State<Profile> {
                     child: Stack(children: <Widget>[
                       Positioned(
                           top: 36,
-                          left: 151,
-                          child: Text(
-                            "${profilename.text}",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                color: Color.fromRGBO(255, 255, 255, 1),
-                                fontFamily: 'Montserrat',
-                                fontSize: 18,
-                                letterSpacing:
-                                    0 /*percentages not used in flutter. defaulting to zero*/,
-                                fontWeight: FontWeight.normal,
-                                height: 1),
+                          left: 121,
+                          child: GestureDetector(
+                            onTap: () {
+                              gethivedata();
+                            },
+                            child: Text(
+                              "View Profile",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 18,
+                                  letterSpacing:
+                                      0 /*percentages not used in flutter. defaulting to zero*/,
+                                  fontWeight: FontWeight.normal,
+                                  height: 1),
+                            ),
                           )),
                       Positioned(
                           top: 252,
-                          left: 31,
+                          left: 22,
                           child: Container(
                               width: 312,
                               height: 74,
@@ -198,7 +243,8 @@ class _ProfileState extends State<Profile> {
                                               enabledBorder: InputBorder.none,
                                               errorBorder: InputBorder.none,
                                               disabledBorder: InputBorder.none,
-                                              hintText: profilename.text,
+                                              hintText:
+                                                  "Please Enter Full Name",
                                               hintStyle: TextStyle(
                                                   color: inputcolor,
                                                   fontFamily: "Montserrat",
@@ -228,7 +274,7 @@ class _ProfileState extends State<Profile> {
                               ]))),
                       Positioned(
                           top: 335,
-                          left: 31,
+                          left: 25,
                           child: Container(
                               width: 312,
                               height: 74,
@@ -308,69 +354,11 @@ class _ProfileState extends State<Profile> {
                           child: Container(
                             width: 312,
                             height: 74,
-                            child: Stack(children: <Widget>[
-                              Positioned(
-                                  top: 24,
-                                  left: 0,
-                                  child: Container(
-                                      width: 312,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(5),
-                                          topRight: Radius.circular(5),
-                                          bottomLeft: Radius.circular(5),
-                                          bottomRight: Radius.circular(5),
-                                        ),
-                                        color: Color.fromRGBO(
-                                            13, 13, 13, 0.5099999904632568),
-                                        border: Border.all(
-                                          color: Color.fromRGBO(0, 0, 0, 1),
-                                          width: 1,
-                                        ),
-                                      ),
-                                      child: Stack(children: <Widget>[
-                                        TextFormField(
-                                          controller: profileusername,
-                                          textAlign: TextAlign.start,
-                                          cursorColor: Colors.black,
-                                          keyboardType: TextInputType.name,
-                                          decoration: InputDecoration(
-                                            border: InputBorder.none,
-                                            focusedBorder: InputBorder.none,
-                                            enabledBorder: InputBorder.none,
-                                            errorBorder: InputBorder.none,
-                                            disabledBorder: InputBorder.none,
-                                            hintText: "Enter Username Here",
-                                            hintStyle: TextStyle(
-                                                color: inputcolor,
-                                                fontFamily: "Montserrat",
-                                                fontSize: 12),
-                                            contentPadding: EdgeInsets.fromLTRB(
-                                                20.0, 10.0, 20.0, 10.0),
-                                          ),
-                                        ),
-                                      ]))),
-                              Positioned(
-                                  top: 0,
-                                  left: 0,
-                                  child: Text(
-                                    'Username',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(255, 255, 255, 1),
-                                        fontFamily: 'Montserrat',
-                                        fontSize: 14,
-                                        letterSpacing:
-                                            0 /*percentages not used in flutter. defaulting to zero*/,
-                                        fontWeight: FontWeight.normal,
-                                        height: 1),
-                                  )),
-                            ]),
+                            child: Stack(children: <Widget>[]),
                           )),
                       Positioned(
-                          top: 510,
-                          left: 31,
+                          top: 430,
+                          left: 22,
                           child: Container(
                               width: 312,
                               height: 74,
@@ -400,7 +388,7 @@ class _ProfileState extends State<Profile> {
                                             validator: (value) {
                                               if (value!.isEmpty ||
                                                   value == null) {
-                                                return 'Please Enter Password';
+                                                return 'Please Enter Phone Number';
                                               }
                                               return null;
                                             },
@@ -414,8 +402,7 @@ class _ProfileState extends State<Profile> {
                                               enabledBorder: InputBorder.none,
                                               errorBorder: InputBorder.none,
                                               disabledBorder: InputBorder.none,
-                                              hintText:
-                                                  "Enter Phone Number Here",
+                                              hintText: "Please Enter Number",
                                               hintStyle: TextStyle(
                                                   color: inputcolor,
                                                   fontFamily: "Montserrat",
@@ -432,6 +419,7 @@ class _ProfileState extends State<Profile> {
                                     child: GestureDetector(
                                       onTap: () {
                                         Fetchfirestore();
+                                        gethivedata();
                                       },
                                       child: Text(
                                         'Phone Number',
@@ -527,6 +515,7 @@ class _ProfileState extends State<Profile> {
                                             child: InkWell(
                                                 onTap: () {
                                                   //getstoreddetails();
+                                                  gethivedata();
                                                   Profileimg();
                                                 },
                                                 child: Image.asset(
@@ -574,8 +563,9 @@ class _ProfileState extends State<Profile> {
                                               left: 0,
                                               child: InkWell(
                                                 onTap: () {
+                                                  updateHive();
                                                   Fetchfirestore();
-                                                 // getstoreddetails();
+                                                  // getstoreddetails();
                                                   if (profileemail
                                                       .text.isEmpty) {
                                                     Fluttertoast.showToast(

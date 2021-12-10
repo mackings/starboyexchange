@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math' as math;
 
@@ -10,6 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 final green = const Color.fromRGBO(81, 163, 163, 1);
 final inputcolor = Color.fromRGBO(196, 196, 196, 1);
@@ -29,6 +31,9 @@ class _Account1State extends State<Account1> {
   TextEditingController upassword = TextEditingController();
 
   String? get userid => null;
+
+
+  
 
   Future Signup() async {
     try {
@@ -70,6 +75,19 @@ class _Account1State extends State<Account1> {
       'password': upassword.text.trim(),
     }).whenComplete(() => print("Saved Data Successfully"));
   }
+
+  saveetohive() async {
+    await Hive.openBox('user');
+    await Hive.box('user').put('fullname', ufullname.text.trim());
+    await Hive.box('user').put('email', uemail.text.trim());
+    await Hive.box('user').put('phonenumber', uphonenumber.text.trim());
+    await Hive.box('user').put('password', upassword.text.trim());
+    print("Saved  Hive Data Successfully");
+    print(Hive.box('user').get('fullname'));
+  }
+
+
+  
 
   final _myKey = GlobalKey<FormState>();
 
@@ -534,6 +552,7 @@ class _Account1State extends State<Account1> {
                       splashColor: Colors.grey,
                       onTap: () {
                         savedatatodb();
+                        saveetohive();
                         Register();
                         //Signup();
                         //Navigator.push(context, MaterialPageRoute(builder: (context)=>Account2()));

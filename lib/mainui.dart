@@ -7,6 +7,7 @@ import 'package:sizer/sizer.dart';
 import 'package:starboyexchange/Data.dart';
 import 'package:starboyexchange/account1.dart';
 import 'package:starboyexchange/account3.dart';
+import 'package:starboyexchange/buyCard.dart';
 import 'package:starboyexchange/buycrypto.dart';
 import 'package:starboyexchange/helpandsupport.dart';
 import 'package:starboyexchange/login.dart';
@@ -72,7 +73,7 @@ class _MainuiState extends State<Mainui> {
                           .requestPermissionToSendNotifications()
                           .then((value) => Navigator.pop(context)),
                         
-                      child: Text("Enable"),
+                      child: const Text("Enable"),
                     ),
                     MaterialButton(
                       onPressed: () {
@@ -571,7 +572,7 @@ class _MainuiState extends State<Mainui> {
                                                           MaterialPageRoute(
                                                               builder:
                                                                   (context) =>
-                                                                      Trade1()));
+                                                                      Buycard()));
                                                     },
                                                   ),
                                                   FlatButton(

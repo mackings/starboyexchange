@@ -28,6 +28,10 @@ class _Account2State extends State<Account2> {
   TextEditingController Accountname = TextEditingController();
   TextEditingController Bankname = TextEditingController();
 
+
+
+  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -120,7 +124,7 @@ class _Account2State extends State<Account2> {
                                   popupBackgroundColor: Colors.white,
                                   popupBarrierColor: green,
                                   items: ["Naira", "Dollar", "Euros", 'Btc',"Yen"],
-                                  popupItemDisabled: (String s) => s.startsWith('I'),
+                                  popupItemDisabled: (String s) => s.startsWith('B'),
 
                                 ),
                               ),
@@ -375,6 +379,8 @@ class _Account2State extends State<Account2> {
                         "Bank Name": Bankname.text,
                         "Date Added": DateTime.now(),
                       });
+
+                    
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
                     },
                     child: Container(
