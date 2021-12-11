@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/history2.dart';
+import 'package:starboyexchange/mainui.dart';
 
 
 class History1 extends StatefulWidget {
@@ -758,79 +759,86 @@ class _History1State extends State<History1> {
                                           children: [
                                             SizedBox(width: 15,),
 
-                                            Container(
-                                                width: 40,
-                                                height: 44,
-
-                                                child: Stack(
-                                                    children: <Widget>[
-                                                      Positioned(
-                                                          top: 0,
-                                                          left: 5,
-                                                          child: SvgPicture.asset(
-                                                              'assets/home.svg',
-                                                              semanticsLabel: 'vector',
-                                                            height: 20,
-                                                            width: 20,
-                                                          ),
-                                                      ),Positioned(
-                                                          top: 28,
-                                                          left: 0,
-                                                          child: Text('Home', textAlign: TextAlign.left, style: TextStyle(
-                                                              color: Color.fromRGBO(81, 163, 163, 0.5),
-                                                              fontFamily: 'Montserrat',
-                                                              fontSize: 12,
-                                                              letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                              fontWeight: FontWeight.normal,
-                                                              height: 1
-                                                          ),)
-                                                      ),
-                                                    ]
-                                                )
+                                            GestureDetector(
+                                              onTap: (){
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => Mainui()));
+                                              },
+                                              child: Container(
+                                                  width: 40,
+                                                  height: 44,
+                                            
+                                                  child: Stack(
+                                                      children: <Widget>[
+                                                        Positioned(
+                                                            top: 0,
+                                                            left: 5,
+                                                            child: SvgPicture.asset(
+                                                                'assets/home.svg',
+                                                                semanticsLabel: 'vector',
+                                                              height: 20,
+                                                              width: 20,
+                                                            ),
+                                                        ),Positioned(
+                                                            top: 28,
+                                                            left: 0,
+                                                            child: Text('Home', textAlign: TextAlign.left, style: TextStyle(
+                                                                color: Colors.black,
+                                                                fontFamily: 'Montserrat',
+                                                                fontSize: 12,
+                                                                letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                                fontWeight: FontWeight.normal,
+                                                                height: 1
+                                                            ),)
+                                                        ),
+                                                      ]
+                                                  )
+                                              ),
                                             ),
                                             SizedBox(width: 10,),
-                                            Container(
-                                                width: 64,
-                                                height: 42,
-
-                                                child: Stack(
-                                                    children: <Widget>[
-                                                      Positioned(
-                                                          top: 28,
-                                                          left: 0,
-                                                          child: Container(
-                                                              width: 64,
-                                                              height: 14,
-
-                                                              child: Stack(
-                                                                  children: <Widget>[
-                                                                    Positioned(
-                                                                        top: 0,
-                                                                        left: 0,
-                                                                        child: Text(' Calculate', textAlign: TextAlign.left, style: TextStyle(
-                                                                            color: Color.fromRGBO(81, 163, 163, 0.5),
-                                                                            fontFamily: 'Montserrat',
-                                                                            fontSize: 12,
-                                                                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                                            fontWeight: FontWeight.normal,
-                                                                            height: 1
-                                                                        ),)
-                                                                    ),
-                                                                  ]
-                                                              )
-                                                          )
-                                                      ),Positioned(
-                                                          top: 0,
-                                                          left: 21,
-                                                          child: SvgPicture.asset(
-                                                              'assets/calculator.svg',
-                                                              semanticsLabel: 'vector',
-                                                              height: 20,
-                                                            width: 20,
-                                                          ),
-                                                      ),
-                                                    ]
-                                                )
+                                            GestureDetector(
+                                              child: Container(
+                                                  width: 64,
+                                                  height: 42,
+                                            
+                                                  child: Stack(
+                                                      children: <Widget>[
+                                                        Positioned(
+                                                            top: 28,
+                                                            left: 0,
+                                                            child: Container(
+                                                                width: 64,
+                                                                height: 14,
+                                            
+                                                                child: Stack(
+                                                                    children: <Widget>[
+                                                                      Positioned(
+                                                                          top: 0,
+                                                                          left: 0,
+                                                                          child: Text(' Calculate', textAlign: TextAlign.left, style: TextStyle(
+                                                                              color: Colors.black,
+                                                                              fontFamily: 'Montserrat',
+                                                                              fontSize: 12,
+                                                                              letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                                              fontWeight: FontWeight.normal,
+                                                                              height: 1
+                                                                          ),)
+                                                                      ),
+                                                                    ]
+                                                                )
+                                                            )
+                                                        ),Positioned(
+                                                            top: 0,
+                                                            left: 21,
+                                                            child: SvgPicture.asset(
+                                                                'assets/calculator.svg',
+                                                                semanticsLabel: 'vector',
+                                                                height: 20,
+                                                              width: 20,
+                                                            ),
+                                                        ),
+                                                      ]
+                                                  )
+                                              ),
                                             ),
                                             SizedBox(width: 10,),
                                             InkWell(

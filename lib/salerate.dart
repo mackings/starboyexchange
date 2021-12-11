@@ -8,18 +8,20 @@ import 'package:image_picker/image_picker.dart';
 import 'package:starboyexchange/account1.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:starboyexchange/checkoutcards.dart';
+import 'package:starboyexchange/trade2.dart';
 
 import 'finalb.dart';
 import 'Sellcrypto.dart';
 
-class Butcrypto extends StatefulWidget {
-  const Butcrypto({Key? key}) : super(key: key);
+class Salecardrate extends StatefulWidget {
+  const  Salecardrate({Key? key}) : super(key: key);
 
   @override
-  _ButcryptoState createState() => _ButcryptoState();
+  _SalecardrateState createState() => _SalecardrateState();
 }
 
-class _ButcryptoState extends State<Butcrypto> {
+class _SalecardrateState extends State< Salecardrate> {
   //proofupload
   File? _selectedImage;
   final picker = ImagePicker();
@@ -81,19 +83,23 @@ class _ButcryptoState extends State<Butcrypto> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: green,
+       // backgroundColor: Colors.black,
         body: SingleChildScrollView(
           child: Container(
+           
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height +200 ,
             child: Column(
               children: [
                 SizedBox(
                   height: 70,
                 ),
 
-                Text('Explore Our Rates As They Changes ',style: TextStyle(
+                Text('Explore Our Giftcard Sales Rates  ',style: TextStyle(
                     color: Colors.white,
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.bold,
-                  fontSize: 15
+                  fontSize: 18
 
                 ),),
                 Row(
@@ -134,7 +140,7 @@ class _ButcryptoState extends State<Butcrypto> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Text(
-                          "BITCOIN : ",
+                          "AMAZON : ",
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                             color: green,
@@ -171,7 +177,7 @@ class _ButcryptoState extends State<Butcrypto> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Text(
-                          "USDT: ",
+                          "STEAM: ",
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                             color: green,
@@ -207,7 +213,7 @@ class _ButcryptoState extends State<Butcrypto> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Text(
-                          "ETHERIUM : ",
+                          "EBAY: ",
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                             color: green,
@@ -218,7 +224,7 @@ class _ButcryptoState extends State<Butcrypto> {
                         width: 20,
                       ),
                       Text(
-                        "             ${remoteConfig.getString("eth")}",
+                        "                        ${remoteConfig.getString("eth")}",
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                           color: Colors.black,
@@ -244,7 +250,7 @@ class _ButcryptoState extends State<Butcrypto> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Text(
-                          "RIPPLE : ",
+                          "ITUNES : ",
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                             color: green,
@@ -255,7 +261,7 @@ class _ButcryptoState extends State<Butcrypto> {
                         width: 20,
                       ),
                       Text(
-                        "                  ${remoteConfig.getString("ripple")}",
+                        "                      ${remoteConfig.getString("ripple")}",
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                           color: Colors.black,
@@ -280,7 +286,7 @@ class _ButcryptoState extends State<Butcrypto> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Text(
-                          "CARDANO : ",
+                          "SEPHORA : ",
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                                 color: green,
@@ -314,7 +320,7 @@ class _ButcryptoState extends State<Butcrypto> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Text(
-                          "STELLAR : ",
+                          "STARBUCKS : ",
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                                 color:green,
@@ -349,7 +355,7 @@ class _ButcryptoState extends State<Butcrypto> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Text(
-                          "LITECOIN : ",
+                          "CHARITY : ",
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                                 color: green,
@@ -374,71 +380,54 @@ class _ButcryptoState extends State<Butcrypto> {
                   height:20,
                 ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Activate();
-                        },
-                        child: GestureDetector(
-                          onTap: () {
-                             Navigator.push(context, MaterialPageRoute(builder: (context)=>Fbuy()));
-                          },
-                          child: Container(
-                            height: 50,
-                            width: 120,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Buy",
-                                style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
-                                  color: green,
-                                )),
+                GestureDetector(
+                  onTap: (){
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context){
+                          return AlertDialog(
+                            title: Text("Ready to Sell ?",style: GoogleFonts.montserrat(textStyle: TextStyle(color: green,fontSize: 20))),
+                            content: Text("Are you sure you want to sell your Giftcard ?",style: GoogleFonts.montserrat(textStyle: TextStyle(color: Colors.black,fontSize: 20))),
+                            actions: <Widget>[
+                              FlatButton(
+                                child: Text("Yes",style: GoogleFonts.montserrat(textStyle: TextStyle(color: green,fontSize: 20))),
+                                onPressed: (){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Trade2()));
+                                },
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 50,
-                    ),
 
-
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: GestureDetector(
-                        onTap: () {
-                           Navigator.push(context, MaterialPageRoute(builder: (context)=> Fsell()));
-                        },
-                        child: Container(
-                          height: 50,
-                          width: 120,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.black,
-                          ),
-                          child: Center(
-                            child: Text(
-                              "Sell",
-                              style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
+                               FlatButton(
+                                child: Text("No",style: GoogleFonts.montserrat(textStyle: TextStyle(color: green,fontSize: 20))),
+                                onPressed: (){
+                                Navigator.pop(context);
+                                },
+                                
+                              )
+                            ],
+                          );
+                        }
+                    );
+                  },
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.black,
+                    ),
+                
+                    child: Center(
+                      child: Text(" Sell My Giftcard ",
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
                                 color: Colors.white,
-                              )),
-                            ),
-                          ),
-                        ),
-                      ),
+                                fontSize: 20,
+                              ))),
                     ),
-                  ],
+                  ),
                 )
+
+                
               ],
             ),
           ),

@@ -37,12 +37,13 @@ class _Rate1State extends State<Rate1> {
     print(xresult);
   }
 
-  usehiveimages() async {
-    String userurl = Hive.box('ppics').get('url');
-    print(userurl);
-  }
+  //usehiveimages() async {
+  //  Hive.openBox("ppics");
+  //  String userurl = Hive.box('ppics').get('url');
+  //  print(userurl);
+ /// }
 
-final userurl = Hive.box('ppics').get('url');
+//final userurl = Hive.box('ppics').get('url');
 
   @override
   Widget build(BuildContext context) {
@@ -71,25 +72,25 @@ final userurl = Hive.box('ppics').get('url');
                     color: Color.fromRGBO(13, 14, 14, 1),
                   ),
                   child: Stack(children: <Widget>[
-                    Positioned(
-                        top: 35,
-                        left: 298,
-                        child: Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Color.fromRGBO(81, 163, 163, 1),
-                                width: 1,
-                              ),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                    userurl.toString(),
-                                  ),
-                                  fit: BoxFit.fitWidth),
-                              borderRadius:
-                                  BorderRadius.all(Radius.elliptical(40, 40)),
-                            ))),
+                   // Positioned(
+                      //  top: 35,
+                      //  left: 298,
+                       // child: Container(
+                       //     width: 40,
+                       //     height: 40,
+                           /// decoration: BoxDecoration(
+                           //   border: Border.all(
+                            //    color: Color.fromRGBO(81, 163, 163, 1),
+                            //    width: 1,
+                            //  ),
+                              //image: DecorationImage(
+                                //  image: NetworkImage(
+                                    //userurl.toString(),
+                                //  ),
+                                 // fit: BoxFit.fitWidth),
+                             // borderRadius:
+                                //  BorderRadius.all(Radius.elliptical(40, 40)),
+                           // ))),
                     Positioned(
                         top: 37,
                         left: 109,
@@ -507,7 +508,7 @@ final userurl = Hive.box('ppics').get('url');
                         left: 60,
                         child: InkWell(
                           onTap: () {
-                            usehiveimages();
+                            //usehiveimages();
                             setState(() {
                               var myresult = xresult;
                             });

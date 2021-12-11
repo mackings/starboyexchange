@@ -87,36 +87,32 @@ class _ProfileState extends State<Profile> {
   //String usernames = profileusername.text;
   // }
 
-  Fetchfirestore() async {
-    final getdata = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      if (mounted && null != value) {
-        setState(() {
-          profilename.text = value.data()!['fullname'];
-          profileemail.text = value.data()!['email'];
-          profileusername.text = value.data()!['username'];
-          profilenumber.text = value.data()!['phonenumber'];
-        });
-      } else {
-        print('not mounted');
-      }
-    }).whenComplete(() => print('Got the Datas'));
+  final Profileurl = Hive.box("ppics").get("url");
+
+  SavetoHive() async {
+    Hive.openBox("user");
+    await Hive.box('user').put('fullname', profilename.text);
+    await Hive.box('user').put('email', profileemail.text);
+    await Hive.box('user').put('username', profileusername.text);
+    await Hive.box('user').put('phonenumber', profilenumber.text);
+    await Hive.box('user').put('urls', Profileurl);
+    print("Saved  User Datas to Hive");
   }
 
-  gethivedata() {
+  ViewHivedata() {
+    Hive.openBox("user");
     final getdata = Hive.box('user').get('fullname');
     final getdata1 = Hive.box('user').get('email');
     final getdata2 = Hive.box('user').get('username');
     final getdata3 = Hive.box('user').get('phonenumber');
-    print("Got Hive Data");
+    final getdata4 = Hive.box('user').get('urls');
+    print("Got  View Datas ");
     print(getdata);
     print(getdata1);
     print(getdata2);
     print(getdata3);
     print(getdata1);
+    print(getdata4);
 
     setState(() {
       profilename.text = getdata;
@@ -126,28 +122,27 @@ class _ProfileState extends State<Profile> {
     });
   }
 
-  updateHive() async {
-    await Hive.box('user').put('fullname', profilename.text);
-    await Hive.box('user').put('email', profileemail.text);
-    await Hive.box('user').put('username', profileusername.text);
-    await Hive.box('user').put('phonenumber', profilenumber.text);
-
-    await FirebaseFirestore.instance.collection('users').doc(user!.uid).update({
-      'fullname': profilename.text,
-      'email': profileemail.text,
-      'username': profileusername.text,
-      'phonenumber': profilenumber.text,
+  Fetchfirestore() async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      print(value.data().toString());
     });
-    print(profileemail.text);
-    print(profilenumber.text);
-    print(profilename.text);
-    print("Updated Hive Datas");
   }
 
   final _profikeKey = GlobalKey<FormState>();
 
   //initialize notifications
   @override
+  void initState() {
+    // TODO: implement initState
+    ViewHivedata();
+    SavetoHive();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -182,10 +177,14 @@ class _ProfileState extends State<Profile> {
                           left: 121,
                           child: GestureDetector(
                             onTap: () {
-                              gethivedata();
+                              ViewHivedata();
+                              Fetchfirestore();
+                              //SavetoHive();
+                              //Hive.openBox("user");
+                              //gethivedata();
                             },
                             child: Text(
-                              "View Profile",
+                              "View Profile ",
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 1),
@@ -418,8 +417,7 @@ class _ProfileState extends State<Profile> {
                                     left: 0,
                                     child: GestureDetector(
                                       onTap: () {
-                                        Fetchfirestore();
-                                        gethivedata();
+                                        //firestore data
                                       },
                                       child: Text(
                                         'Phone Number',
@@ -515,7 +513,7 @@ class _ProfileState extends State<Profile> {
                                             child: InkWell(
                                                 onTap: () {
                                                   //getstoreddetails();
-                                                  gethivedata();
+
                                                   Profileimg();
                                                 },
                                                 child: Image.asset(
@@ -563,8 +561,6 @@ class _ProfileState extends State<Profile> {
                                               left: 0,
                                               child: InkWell(
                                                 onTap: () {
-                                                  updateHive();
-                                                  Fetchfirestore();
                                                   // getstoreddetails();
                                                   if (profileemail
                                                       .text.isEmpty) {
@@ -577,19 +573,8 @@ class _ProfileState extends State<Profile> {
                                                             ToastGravity.TOP);
                                                     Navigator.pop(context);
                                                   } else {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder:
-                                                                (context) =>
-                                                                    Mainui(
-                                                                      Hisname:
-                                                                          profileusername
-                                                                              .text,
-                                                                      Hisemail:
-                                                                          profileemail
-                                                                              .text,
-                                                                    )));
+                                                    //Navigator
+                                                    Navigator.pop(context);
                                                   }
                                                 },
                                                 child: Container(
@@ -616,7 +601,7 @@ class _ProfileState extends State<Profile> {
                                                               top: 11,
                                                               left: 85,
                                                               child: Text(
-                                                                'SUBMIT ',
+                                                                'DONE ',
                                                                 textAlign:
                                                                     TextAlign
                                                                         .left,

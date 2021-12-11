@@ -92,7 +92,7 @@ class _FsellState extends State<Fsell> {
                             color: Colors.white,
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
-                            fontSize: 15),
+                            fontSize: 18),
                       ),
                       SizedBox(
                         width: 30,
@@ -117,8 +117,8 @@ class _FsellState extends State<Fsell> {
                       waletconfig();
                     },
                     child: Container(
-                      height: 70,
-                      width: 340,
+                     height: MediaQuery.of(context).size.height -620,
+                     width: MediaQuery.of(context).size.width -20,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -170,8 +170,8 @@ class _FsellState extends State<Fsell> {
                       waletconfig();
                     },
                     child: Container(
-                      height: 70,
-                      width: 340,
+                      height: MediaQuery.of(context).size.height -620,
+                     width: MediaQuery.of(context).size.width -20,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -223,8 +223,8 @@ class _FsellState extends State<Fsell> {
                       waletconfig();
                     },
                     child: Container(
-                      height: 70,
-                      width: 340,
+                      height: MediaQuery.of(context).size.height -620,
+                     width: MediaQuery.of(context).size.width -20,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -276,8 +276,8 @@ class _FsellState extends State<Fsell> {
                       waletconfig();
                     },
                     child: Container(
-                      height: 70,
-                      width: 340,
+                      height: MediaQuery.of(context).size.height -620,
+                     width: MediaQuery.of(context).size.width -20,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),

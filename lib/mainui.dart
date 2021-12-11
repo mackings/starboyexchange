@@ -64,9 +64,9 @@ class _MainuiState extends State<Mainui> {
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
-                  title: Text("StarExchange Notifications"),
+                  title: Text("StarExchange Notifications", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,fontFamily: "Montserrat"),),
                   content:
-                      Text("Starexchange would like to show you Notifications"),
+                      Text("Starexchange would like to show you Notifications", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,fontFamily: "Montserrat"),),
                   actions: [
                     MaterialButton(
                       onPressed: () => AwesomeNotifications()
@@ -120,7 +120,8 @@ class _MainuiState extends State<Mainui> {
                                   width: 1,
                                 ),
                                 image: DecorationImage(
-                                    image: NetworkImage(link),
+                                    image: NetworkImage(link) ,
+
                                     fit: BoxFit.fitWidth),
                                 borderRadius:
                                     BorderRadius.all(Radius.elliptical(80, 80)),
@@ -659,8 +660,11 @@ class _MainuiState extends State<Mainui> {
                                               left: 0,
                                               child: InkWell(
                                                 onTap: () {
-                                                  _globalKey.currentState!
-                                                      .openDrawer();
+                                                  gpro().whenComplete(() =>  _globalKey.currentState!
+                                                      .openDrawer()
+                                                      );
+                                                  //_globalKey.currentState!
+                                                      //.openDrawer();
                                                 },
                                                 child: SvgPicture.asset(
                                                   "assets/fmenu.svg",

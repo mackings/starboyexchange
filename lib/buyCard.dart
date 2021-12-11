@@ -9,9 +9,11 @@ import 'package:starboyexchange/account1.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:starboyexchange/checkoutcards.dart';
+import 'package:starboyexchange/salerate.dart';
+import 'package:starboyexchange/trade2.dart';
 
 import 'finalb.dart';
-import 'fsell.dart';
+import 'Sellcrypto.dart';
 
 class Buycard extends StatefulWidget {
   const Buycard({Key? key}) : super(key: key);
@@ -44,7 +46,7 @@ class _BuycardState extends State<Buycard> {
     bool updated = await WALLETConfig.fetchAndActivate();
     await WALLETConfig.setConfigSettings(RemoteConfigSettings(
       fetchTimeout: Duration(seconds: 60),
-      minimumFetchInterval: Duration(minutes: 5),
+      minimumFetchInterval: Duration(minutes: 1),
     ));
   }
 
@@ -66,7 +68,7 @@ class _BuycardState extends State<Buycard> {
     bool updated = await remoteConfig.fetchAndActivate();
     await remoteConfig.setConfigSettings(RemoteConfigSettings(
       fetchTimeout: Duration(seconds: 60),
-      minimumFetchInterval: Duration(minutes: 5),
+      minimumFetchInterval: Duration(minutes: 1),
     ));
     if (updated) {
       //actions
@@ -93,7 +95,7 @@ class _BuycardState extends State<Buycard> {
                   height: 70,
                 ),
 
-                Text('Explore Our  Trade Rates ',style: TextStyle(
+                Text('Explore Our Buying Rates  ',style: TextStyle(
                     color: Colors.white,
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.bold,
@@ -109,8 +111,8 @@ class _BuycardState extends State<Buycard> {
                           padding: const EdgeInsets.all(20.0),
                           child: GestureDetector(
                               onTap: () {
-                                //activate();
-                                waletconfig();
+                                Activate();
+                               // waletconfig();
                                 // _globalKey.currentState!.openDrawer();
                               },
                               child: Icon(
@@ -149,7 +151,7 @@ class _BuycardState extends State<Buycard> {
                         width: 20,
                       ),
                       Text(
-                        "               ${remoteConfig.getString("bitcoin")}",
+                        "               ${remoteConfig.getString("amazonrate")}",
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                           color: Colors.black,
@@ -186,7 +188,7 @@ class _BuycardState extends State<Buycard> {
                         width: 20,
                       ),
                       Text(
-                        "                     ${remoteConfig.getString("usdt")}",
+                        "                     ${remoteConfig.getString("steamrate")}",
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                           color: Colors.black,
@@ -222,7 +224,7 @@ class _BuycardState extends State<Buycard> {
                         width: 20,
                       ),
                       Text(
-                        "                        ${remoteConfig.getString("eth")}",
+                        "                        ${remoteConfig.getString("ebayrate")}",
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                           color: Colors.black,
@@ -259,7 +261,7 @@ class _BuycardState extends State<Buycard> {
                         width: 20,
                       ),
                       Text(
-                        "                      ${remoteConfig.getString("ripple")}",
+                        "                      ${remoteConfig.getString("itunesrate")}",
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                           color: Colors.black,
@@ -295,7 +297,7 @@ class _BuycardState extends State<Buycard> {
                         width: 20,
                       ),
                       Text(
-                        "             ${remoteConfig.getString("cardano")}",
+                        "             ${remoteConfig.getString("sephorarate")}",
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                               color: Colors.black,
@@ -329,7 +331,7 @@ class _BuycardState extends State<Buycard> {
                         width: 20,
                       ),
                       Text(
-                        "                ${remoteConfig.getString("stellar")}",
+                        "                ${remoteConfig.getString("starbucksrate")}",
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                               color: Colors.black,
@@ -364,7 +366,7 @@ class _BuycardState extends State<Buycard> {
                         width: 20,
                       ),
                       Text(
-                        "               ${remoteConfig.getString("litecoin")}",
+                        "               ${remoteConfig.getString("charityrate")}",
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                               color: Colors.black,
@@ -420,7 +422,7 @@ class _BuycardState extends State<Buycard> {
                       padding: const EdgeInsets.all(10.0),
                       child: GestureDetector(
                         onTap: () {
-                           Navigator.push(context, MaterialPageRoute(builder: (context)=> Fsell()));
+                           Navigator.push(context, MaterialPageRoute(builder: (context)=> Salecardrate()));
                         },
                         child: Container(
                           height: 50,

@@ -175,15 +175,15 @@ class _CcardState extends State<Ccard> {
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
                             controller: _walletaddressController,
-                            keyboardType: TextInputType.text,
+                            keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: " Enter wallet Address",
+                              hintText: " Enter Amount to Buy",
                               hintStyle: GoogleFonts.montserrat(
                                 color: green,
                               ),
                               suffixIcon: Icon(
-                                Icons.vpn_key,
+                                Icons.attach_money,
                                 color: green,
                               ),
                             ),
@@ -221,7 +221,7 @@ class _CcardState extends State<Ccard> {
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: " Enter Wallet Email Address",
+                              hintText: " Enter Your Email Address",
                               hintStyle: GoogleFonts.montserrat(
                                 color: green,
                               ),

@@ -12,7 +12,7 @@ import 'package:starboyexchange/account1.dart';
 import 'dart:math' as math;
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/buycrypto.dart';
-import 'package:starboyexchange/fsell.dart';
+import 'package:starboyexchange/Sellcrypto.dart';
 import 'package:starboyexchange/mainui.dart';
 import 'package:starboyexchange/rate1.dart';
 import 'package:path/path.dart' as path;
@@ -348,7 +348,7 @@ class _Trade2State extends State<Trade2> {
                                                             context) {
                                                           return AlertDialog(
                                                             title: Text(
-                                                              "Trade Gift Card ?",
+                                                              "Have you Checked our rates?",
                                                               style: TextStyle(
                                                                   fontFamily:
                                                                       "Montserrat"),
@@ -366,7 +366,7 @@ class _Trade2State extends State<Trade2> {
                                                                 onPressed: () {
                                                                   SubmitTrade();
                                                                   Notify();
-                                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Fsell()));
+                                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Butcrypto()));
                                                     
 
                                                     //uploadImage();

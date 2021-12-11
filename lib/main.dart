@@ -38,8 +38,9 @@ void main() async {
   Directory appDocDir = await getApplicationDocumentsDirectory();
   //final appDocPath = appDocDir.path;
   Hive.init(appDocDir.path);
-  await Hive.openBox("ProfileNames");
-  await Hive.openBox("Userdata");
+  await Hive.openBox('ppics');
+ 
+  
   FirebaseMessaging.onBackgroundMessage(_handler);
 
   //supabase
@@ -82,6 +83,7 @@ class _MyAppState extends State<MyApp> {
         return Data();
       },
       child: MaterialApp(
+      
         home: Openapp(),
       ),
     );

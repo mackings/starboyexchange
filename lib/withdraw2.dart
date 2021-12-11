@@ -130,7 +130,7 @@ class _Withdraw2State extends State<Withdraw2> {
                                   gravity: ToastGravity.TOP,
                                 );
 
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui()));
+                                Navigator.pop(context);
 
                                 //Navigator.pop(context);
                                 //Mailadmin();
