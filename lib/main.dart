@@ -39,6 +39,7 @@ void main() async {
   //final appDocPath = appDocDir.path;
   Hive.init(appDocDir.path);
   await Hive.openBox('ppics');
+  
  
   
   FirebaseMessaging.onBackgroundMessage(_handler);
@@ -54,7 +55,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => Users()),
       ChangeNotifierProvider(create: (_) => Usernames()),
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ));
   AwesomeNotifications().initialize("resource://drawable/lawson", [
     NotificationChannel(
@@ -82,7 +83,7 @@ class _MyAppState extends State<MyApp> {
       create: (context) {
         return Data();
       },
-      child: MaterialApp(
+      child: const MaterialApp(
       
         home: Openapp(),
       ),

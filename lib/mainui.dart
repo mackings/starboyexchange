@@ -102,8 +102,9 @@ class _MainuiState extends State<Mainui> {
             child: ListView(
               children: [
                 Container(
-                    width: 231,
-                    height: 812,
+                    width: MediaQuery.of(context).size.width -10,
+                    height: MediaQuery.of(context).size.height -20,
+                
                     decoration: const BoxDecoration(
                       color: Color.fromRGBO(81, 163, 163, 1),
                     ),
@@ -427,8 +428,8 @@ class _MainuiState extends State<Mainui> {
               child: Column(
                 children: [
                   Container(
-                      width: 375,
-                      height: 378,
+                     width: MediaQuery.of(context).size.width,
+                     height: MediaQuery.of(context).size.height -340,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),

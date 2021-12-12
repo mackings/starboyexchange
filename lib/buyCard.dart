@@ -41,14 +41,7 @@ class _BuycardState extends State<Buycard> {
   }
 
 //Remote server
-  RemoteConfig WALLETConfig = RemoteConfig.instance;
-  Future waletconfig() async {
-    bool updated = await WALLETConfig.fetchAndActivate();
-    await WALLETConfig.setConfigSettings(RemoteConfigSettings(
-      fetchTimeout: Duration(seconds: 60),
-      minimumFetchInterval: Duration(minutes: 1),
-    ));
-  }
+
 
   //Database
 
@@ -112,7 +105,7 @@ class _BuycardState extends State<Buycard> {
                           child: GestureDetector(
                               onTap: () {
                                 Activate();
-                               // waletconfig();
+                                //waletconfig();
                                 // _globalKey.currentState!.openDrawer();
                               },
                               child: Icon(

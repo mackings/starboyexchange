@@ -99,20 +99,20 @@ class _ProfileState extends State<Profile> {
     print("Saved  User Datas to Hive");
   }
 
-  ViewHivedata() {
-    Hive.openBox("user");
+  ViewHivedata() async{
+     await Hive.openBox("user");
     final getdata = Hive.box('user').get('fullname');
     final getdata1 = Hive.box('user').get('email');
     final getdata2 = Hive.box('user').get('username');
     final getdata3 = Hive.box('user').get('phonenumber');
-    final getdata4 = Hive.box('user').get('urls');
+    //final getdata4 = Hive.box('user').get('urls');
     print("Got  View Datas ");
     print(getdata);
     print(getdata1);
     print(getdata2);
     print(getdata3);
     print(getdata1);
-    print(getdata4);
+   // print(getdata4);
 
     setState(() {
       profilename.text = getdata;
@@ -138,8 +138,8 @@ class _ProfileState extends State<Profile> {
   @override
   void initState() {
     // TODO: implement initState
-    ViewHivedata();
-    SavetoHive();
+   // ViewHivedata();
+   // SavetoHive();
     super.initState();
   }
 
