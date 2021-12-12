@@ -254,7 +254,7 @@ class _BuycardState extends State<Buycard> {
                         width: 20,
                       ),
                       Text(
-                        "                      ${remoteConfig.getString("itunesrate")}",
+                        "                    ${remoteConfig.getString("itunesrate")}",
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                           color: Colors.black,
@@ -290,7 +290,7 @@ class _BuycardState extends State<Buycard> {
                         width: 20,
                       ),
                       Text(
-                        "             ${remoteConfig.getString("sephorarate")}",
+                        "                 ${remoteConfig.getString("sephorarate")}",
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                               color: Colors.black,
@@ -324,7 +324,7 @@ class _BuycardState extends State<Buycard> {
                         width: 20,
                       ),
                       Text(
-                        "                ${remoteConfig.getString("starbucksrate")}",
+                        "              ${remoteConfig.getString("starbucksrate")}",
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                               color: Colors.black,
@@ -359,7 +359,7 @@ class _BuycardState extends State<Buycard> {
                         width: 20,
                       ),
                       Text(
-                        "               ${remoteConfig.getString("charityrate")}",
+                        "                 ${remoteConfig.getString("charityrate")}",
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                               color: Colors.black,

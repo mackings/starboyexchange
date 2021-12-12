@@ -49,26 +49,26 @@ class _Withdraw1State extends State<Withdraw1> {
                 child: Stack(
                     children: <Widget>[
                       //signat
-                    Positioned(
-                    top: 35,
-                    left: 298,
-                    child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Color.fromRGBO(81, 163, 163, 1),
-                            width: 1,
-                          ),
-                          image: DecorationImage(
-                              image: AssetImage('assets/signat.png'),
-                              fit: BoxFit.fitWidth
-                          ),
-                          borderRadius: BorderRadius.all(
-                              Radius.elliptical(40, 40)),
-                        )
-                    )
-                ),
+                   // Positioned(
+                    //top: 35,
+                   // left: 298,
+                    //child: Container(
+                     //   width: 40,
+                      //  height: 40,
+                      //  decoration: BoxDecoration(
+                       //   border: Border.all(
+                        //    color: Color.fromRGBO(81, 163, 163, 1),
+                        //    width: 1,
+                        //  ),
+                         // image: DecorationImage(
+                           //   image: AssetImage('assets/signat.png'),
+                           //   fit: BoxFit.fitWidth
+                         // ),
+                          //borderRadius: BorderRadius.all(
+                          //    Radius.elliptical(40, 40)),
+                        //)
+                  //  )
+               // ),
                 Positioned(
                     top: 47,
                     left: 128,

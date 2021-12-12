@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:starboyexchange/history2.dart';
 import 'package:starboyexchange/mainui.dart';
+import 'package:starboyexchange/withdraw.dart';
 
 
 class History1 extends StatefulWidget {
@@ -20,14 +21,14 @@ class _History1State extends State<History1> {
           child: Column(
             children: [
               Container(
-                  width: 375,
-                  height: 780,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height + 10,
                   decoration: BoxDecoration(
                     borderRadius : BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
+                     // topLeft: Radius.circular(20),
+                      //topRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(0),
+                      bottomRight: Radius.circular(0),
                     ),
                     boxShadow : [BoxShadow(
                         color: Color.fromRGBO(0, 0, 0, 0.25),
@@ -110,10 +111,10 @@ class _History1State extends State<History1> {
                             )
                         ),
                         Positioned(
-                            top: 642,
+                            top: 600,
                             left: 31,
                             child: Container(
-                                width: 287,
+                                width: 300,
                                 height: 70,
 
                                 child: Stack(
@@ -166,6 +167,9 @@ class _History1State extends State<History1> {
                                             ),
                                             SizedBox(width: 10,),
                                             GestureDetector(
+                                              onTap: (){
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => History1()));
+                                              },
                                               child: Container(
                                                   width: 64,
                                                   height: 42,
@@ -260,48 +264,53 @@ class _History1State extends State<History1> {
                                               ),
                                             ),
                                             SizedBox(width: 10,),
-                                            Container(
-                                                width: 64,
-                                                height: 42,
-
-                                                child: Stack(
-                                                    children: <Widget>[
-                                                      Positioned(
-                                                          top: 28,
-                                                          left: 0,
-                                                          child: Container(
-                                                              width: 64,
-                                                              height: 14,
-
-                                                              child: Stack(
-                                                                  children: <Widget>[
-                                                                    Positioned(
-                                                                        top: 0,
-                                                                        left: 0,
-                                                                        child: Text(' Withdraw', textAlign: TextAlign.left, style: TextStyle(
-                                                                            color: Color.fromRGBO(81, 163, 163, 0.5),
-                                                                            fontFamily: 'Montserrat',
-                                                                            fontSize: 12,
-                                                                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                                                            fontWeight: FontWeight.normal,
-                                                                            height: 1
-                                                                        ),)
-                                                                    ),
-                                                                  ]
-                                                              )
-                                                          )
-                                                      ),Positioned(
-                                                        top: 0,
-                                                        left: 21,
-                                                        child: SvgPicture.asset(
-                                                          'assets/atm.svg',
-                                                          semanticsLabel: 'vector',
-                                                          height: 20,
-                                                          width: 20,
+                                            GestureDetector(
+                                              onTap: (){
+                                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Withdraw1()));
+                                              },
+                                              child: Container(
+                                                  width: 64,
+                                                  height: 42,
+                                            
+                                                  child: Stack(
+                                                      children: <Widget>[
+                                                        Positioned(
+                                                            top: 28,
+                                                            left: 0,
+                                                            child: Container(
+                                                                width: 64,
+                                                                height: 14,
+                                            
+                                                                child: Stack(
+                                                                    children: <Widget>[
+                                                                      Positioned(
+                                                                          top: 0,
+                                                                          left: 0,
+                                                                          child: Text(' Withdraw', textAlign: TextAlign.left, style: TextStyle(
+                                                                              color: Colors.black,
+                                                                              fontFamily: 'Montserrat',
+                                                                              fontSize: 12,
+                                                                              letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                                              fontWeight: FontWeight.normal,
+                                                                              height: 1
+                                                                          ),)
+                                                                      ),
+                                                                    ]
+                                                                )
+                                                            )
+                                                        ),Positioned(
+                                                          top: 0,
+                                                          left: 21,
+                                                          child: SvgPicture.asset(
+                                                            'assets/atm.svg',
+                                                            semanticsLabel: 'vector',
+                                                            height: 20,
+                                                            width: 20,
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ]
-                                                )
+                                                      ]
+                                                  )
+                                              ),
                                             ),
 
                                           ],
