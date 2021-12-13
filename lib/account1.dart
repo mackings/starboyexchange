@@ -12,6 +12,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:http/http.dart' as http;
 
 final green = const Color.fromRGBO(81, 163, 163, 1);
 final inputcolor = Color.fromRGBO(196, 196, 196, 1);
@@ -32,8 +33,8 @@ class _Account1State extends State<Account1> {
 
   String? get userid => null;
 
-
-  
+  final Walleturl = ("");
+  final secret = ('dspk6tws8g9i');
 
   Future Signup() async {
     try {
@@ -85,9 +86,6 @@ class _Account1State extends State<Account1> {
     print("Saved  Hive Data Successfully");
     print(Hive.box('user').get('fullname'));
   }
-
-
-  
 
   final _myKey = GlobalKey<FormState>();
 
