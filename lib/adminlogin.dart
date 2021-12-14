@@ -26,8 +26,9 @@ class _AdminloginState extends State<Adminlogin> {
   final balanceurl = ("https://sandbox.wallets.africa/wallet/balance");
   final secret = ('hfucj5jatq8h');
   String bearer = ('uvjqzm5xl6bw');
-  int? Respo;
+
   dynamic alldata;
+  String? walletBalance;
 
   Future getuserbalance() async {
     var response = await http.post(
@@ -47,7 +48,10 @@ class _AdminloginState extends State<Adminlogin> {
     );
 
     if (response.statusCode == 200) {
-      return alldata = json.decode(response.body);
+      var data = json.decode(response.body)['data'];
+      setState(() {
+        walletBalance = '${data['walletBalance']}';
+      });
     } else {
       throw Exception('Failed to load post');
     }
@@ -98,33 +102,17 @@ class _AdminloginState extends State<Adminlogin> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: FutureBuilder(
-                      future: getuserbalance(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          var data = alldata['data'];
-                          return Text(
-                            "Balance: ${data['walletBalance']}",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: "Montserrat",
-                              fontWeight: FontWeight.bold,
-                            ),
-                          );
-                        } else {
-                          return Text(
-                            "Balance: 0",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: "Montserrat",
-                              fontWeight: FontWeight.bold,
-                            ),
-                          );
-                        }
-                      }),
-
+                  child: Text(
+                    walletBalance == null
+                        ? "Balance: "
+                        : "Balance: $walletBalance",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: "Montserrat",
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   //API response
                 ),
 
