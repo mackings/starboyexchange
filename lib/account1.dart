@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +35,45 @@ class _Account1State extends State<Account1> {
 
   String? get userid => null;
 
-  final Walleturl = ("");
-  final secret = ('dspk6tws8g9i');
+  final Walleturl = ("https://sandbox.wallets.africa/wallet/generate");
+  final secret = ('hfucj5jatq8h');
+  String bearer = ('uvjqzm5xl6bw');
+
+  Future Createwallet() async {
+
+    final response = await http.post(
+      Uri.parse(Walleturl),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $bearer",
+      },
+      body: jsonEncode(
+        {
+          "name": ufullname.text,
+          "firstname": ufullname.text,
+          "lastname": ufullname.text,
+          "bvn": uphonenumber.text,
+          "dateOfBirth": "",
+          
+          "email": uemail.text,
+          "phone": uphonenumber.text,
+          "password": upassword.text,
+          "secretKey": 'hfucj5jatq8h',
+          "currency": "NGN",
+          
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      print("wallet created" + response.body);
+    } else {
+      print(response.statusCode);
+      print(bearer);
+    }
+
+    //print(response.body);
+  }
 
   Future Signup() async {
     try {
@@ -552,6 +591,7 @@ class _Account1State extends State<Account1> {
                         savedatatodb();
                         saveetohive();
                         Register();
+                        Createwallet();
                         //Signup();
                         //Navigator.push(context, MaterialPageRoute(builder: (context)=>Account2()));
                       },
@@ -638,4 +678,6 @@ class _Account1State extends State<Account1> {
       ),
     );
   }
+
+  
 }
