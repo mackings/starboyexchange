@@ -122,6 +122,7 @@ class _Account1State extends State<Account1> {
     await Hive.box('user').put('email', uemail.text.trim());
     await Hive.box('user').put('phonenumber', uphonenumber.text.trim());
     await Hive.box('user').put('password', upassword.text.trim());
+    
     print("Saved  Hive Data Successfully");
     print(Hive.box('user').get('fullname'));
   }

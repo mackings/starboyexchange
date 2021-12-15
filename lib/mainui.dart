@@ -58,21 +58,42 @@ class _MainuiState extends State<Mainui> {
     });
   }
 
+  dynamic Actualbal;
+
+  Future viewhive() async {
+    final balbox = Hive.box('user');
+    print(balbox.get('walletBalance'));
+    setState(() {
+      Actualbal = balbox.get('walletBalance');
+    });
+    print('Actualbalance is $Actualbal');
+  }
+
   void initState() {
     AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
       if (isAllowed) {
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
-                  title: Text("StarExchange Notifications", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,fontFamily: "Montserrat"),),
-                  content:
-                      Text("Starexchange would like to show you Notifications", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,fontFamily: "Montserrat"),),
+                  title: Text(
+                    "StarExchange Notifications",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Montserrat"),
+                  ),
+                  content: Text(
+                    "Starexchange would like to show you Notifications",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Montserrat"),
+                  ),
                   actions: [
                     MaterialButton(
                       onPressed: () => AwesomeNotifications()
                           .requestPermissionToSendNotifications()
                           .then((value) => Navigator.pop(context)),
-                        
                       child: const Text("Enable"),
                     ),
                     MaterialButton(
@@ -102,9 +123,8 @@ class _MainuiState extends State<Mainui> {
             child: ListView(
               children: [
                 Container(
-                    width: MediaQuery.of(context).size.width -10,
-                    height: MediaQuery.of(context).size.height -20,
-                
+                    width: MediaQuery.of(context).size.width - 10,
+                    height: MediaQuery.of(context).size.height - 20,
                     decoration: const BoxDecoration(
                       color: Color.fromRGBO(81, 163, 163, 1),
                     ),
@@ -121,8 +141,7 @@ class _MainuiState extends State<Mainui> {
                                   width: 1,
                                 ),
                                 image: DecorationImage(
-                                    image: NetworkImage(link) ,
-
+                                    image: NetworkImage(link),
                                     fit: BoxFit.fitWidth),
                                 borderRadius:
                                     BorderRadius.all(Radius.elliptical(80, 80)),
@@ -428,8 +447,8 @@ class _MainuiState extends State<Mainui> {
               child: Column(
                 children: [
                   Container(
-                     width: MediaQuery.of(context).size.width,
-                     height: MediaQuery.of(context).size.height -340,
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height - 340,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),
@@ -483,18 +502,36 @@ class _MainuiState extends State<Mainui> {
                             )),
                         Positioned(
                             top: 201,
-                            left: 139,
-                            child: Text(
-                              'N0.00',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  color: Color.fromRGBO(255, 255, 255, 1),
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 24,
-                                  letterSpacing:
-                                      0 /*percentages not used in flutter. defaulting to zero*/,
-                                  fontWeight: FontWeight.normal,
-                                  height: 1),
+                            left: 125,
+                            child: Row(
+                              children: [
+                                Text(
+                                  Actualbal == null
+                                      ? "N **** "
+                                      : 'N ${Actualbal.toString()}',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 24,
+                                      letterSpacing:
+                                          0 /*percentages not used in flutter. defaulting to zero*/,
+                                      fontWeight: FontWeight.normal,
+                                      height: 1),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                GestureDetector(
+                                    onTap: () {
+                                      viewhive();
+                                    },
+                                    child: Icon(
+                                      Icons.visibility_rounded,
+                                      color: Colors.white,
+                                      size: 20,
+                                    )),
+                              ],
                             )),
                         Positioned(
                             top: 120,
@@ -568,6 +605,7 @@ class _MainuiState extends State<Mainui> {
                                                       ),
                                                     ),
                                                     onPressed: () {
+                                                      viewhive();
                                                       gpro();
                                                       Navigator.push(
                                                           context,
@@ -661,11 +699,11 @@ class _MainuiState extends State<Mainui> {
                                               left: 0,
                                               child: InkWell(
                                                 onTap: () {
-                                                  gpro().whenComplete(() =>  _globalKey.currentState!
-                                                      .openDrawer()
-                                                      );
+                                                  gpro().whenComplete(() =>
+                                                      _globalKey.currentState!
+                                                          .openDrawer());
                                                   //_globalKey.currentState!
-                                                      //.openDrawer();
+                                                  //.openDrawer();
                                                 },
                                                 child: SvgPicture.asset(
                                                   "assets/fmenu.svg",

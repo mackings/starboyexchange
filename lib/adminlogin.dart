@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:starboyexchange/admin.dart';
 import 'package:starboyexchange/introsliders.dart';
 import 'package:starboyexchange/account1.dart';
@@ -55,6 +57,15 @@ class _AdminloginState extends State<Adminlogin> {
     } else {
       throw Exception('Failed to load post');
     }
+  }
+
+  SavebalancetoHivedb() async {
+    await Hive.openBox('user');
+
+    var box = Hive.box('user');
+    box.put('walletBalance', walletBalance);
+    print(box.get('walletBalance'));
+    //print(prefs.getString('walletBalance' + 'From SharedPreferences'));
   }
 
   @override
@@ -202,6 +213,7 @@ class _AdminloginState extends State<Adminlogin> {
                 GestureDetector(
                   onTap: () {
                     getuserbalance();
+                    SavebalancetoHivedb();
                   },
                   child: Container(
                       width: 156.1904754638672,
