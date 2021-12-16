@@ -115,8 +115,8 @@ class _AdminloginState extends State<Adminlogin> {
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
                     walletBalance == null
-                        ? "Balance: "
-                        : "Balance: $walletBalance",
+                        ? "Balance:  N"
+                        : "Main Balance : N $walletBalance",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -212,8 +212,13 @@ class _AdminloginState extends State<Adminlogin> {
                 //loginbtn
                 GestureDetector(
                   onTap: () {
-                    getuserbalance();
-                    SavebalancetoHivedb();
+                    
+              
+
+                  getuserbalance();
+                    
+                    
+                SavebalancetoHivedb();
                   },
                   child: Container(
                       width: 156.1904754638672,
@@ -235,22 +240,21 @@ class _AdminloginState extends State<Adminlogin> {
                                   color: Color.fromRGBO(229, 229, 229, 1),
                                 ),
                                 child: Stack(children: <Widget>[
-                                  Positioned(
-                                      top: 15,
-                                      left: 53,
-                                      child: Text(
-                                        'View  Bal',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromRGBO(13, 14, 14, 1),
-                                            fontFamily: 'Montserrat',
-                                            fontSize: 14,
-                                            letterSpacing:
-                                                0 /*percentages not used in flutter. defaulting to zero*/,
-                                            fontWeight: FontWeight.normal,
-                                            height: 1),
-                                      )),
+                                  Center(
+                                    child: Text(
+                                      'View  Balance',
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(13, 14, 14, 1),
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 14,
+                                          letterSpacing:
+                                              0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1),
+                                    ),
+                                  ),
                                 ]))),
                       ])),
                 ),

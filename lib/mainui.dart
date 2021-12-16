@@ -7,6 +7,7 @@ import 'package:sizer/sizer.dart';
 import 'package:starboyexchange/Data.dart';
 import 'package:starboyexchange/account1.dart';
 import 'package:starboyexchange/account3.dart';
+import 'package:starboyexchange/administrative.dart';
 import 'package:starboyexchange/buyCard.dart';
 import 'package:starboyexchange/buycrypto.dart';
 import 'package:starboyexchange/helpandsupport.dart';
@@ -354,10 +355,59 @@ class _MainuiState extends State<Mainui> {
                                       height: 1),
                                 ),
                               ),
+
+                              //Administrative
+                              
+
+
                             ],
                           )),
+
+                           Positioned(
+                          top: 450,
+                          left: 58.345726013183594,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.lock,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Administrative()));
+                                },
+                                child: Text(
+                                  'Administrative',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 14,
+                                      letterSpacing:
+                                          0 /*percentages not used in flutter. defaulting to zero*/,
+                                      fontWeight: FontWeight.normal,
+                                      height: 1),
+                                ),
+                              ),
+
+                              //Administrative
+                              
+
+
+                            ],
+                          )),
+
+                        
+
+
                       Positioned(
-                          top: 447,
+                          top: 490,
                           left: 40.345726013183594,
                           child: Container(
                               width: 156.1904754638672,
