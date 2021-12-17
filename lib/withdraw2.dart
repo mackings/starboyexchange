@@ -12,6 +12,8 @@ import 'package:starboyexchange/mainui.dart';
 import 'package:starboyexchange/withdraw.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 
+import "package:awesome_notifications/awesome_notifications.dart";
+
 late final currency;
 late final Amount;
 
@@ -28,7 +30,7 @@ class _Withdraw2State extends State<Withdraw2> {
   Uploadwithdraw() async {
     final storewithdraw = withdrawdb.child("Withdraw Requests").set({
       "Account Name": Aname.text,
-      "Account Num": Anum.text,
+      "Wallet ID": Anum.text,
     });
   }
 
@@ -36,19 +38,10 @@ class _Withdraw2State extends State<Withdraw2> {
   TextEditingController Anum = TextEditingController();
   TextEditingController Aname = TextEditingController();
   TextEditingController bankname = TextEditingController();
+
   final _recipientController = TextEditingController(
     text: 'macsonline500@gmail.com',
   );
-
-  Future Mailadmin() async {
-    final email = Email(
-      body: bankname.text,
-      subject: Anum.text,
-      recipients: [_recipientController.text],
-      isHTML: false,
-    );
-    await FlutterEmailSender.send(email);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +100,7 @@ class _Withdraw2State extends State<Withdraw2> {
                         left: 100,
                         child: InkWell(
                           onTap: () {
+                            // Withdrawrequest();
                             Uploadwithdraw();
                             showDialog(
                                 context: context,
@@ -330,7 +324,7 @@ class _Withdraw2State extends State<Withdraw2> {
                                 top: 0,
                                 left: 0,
                                 child: Text(
-                                  'Enter Account Number',
+                                  'Enter Wallet ID',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                       color: Color.fromRGBO(255, 255, 255, 1),
@@ -439,11 +433,7 @@ class _Withdraw2State extends State<Withdraw2> {
                                           left: 5,
                                           child: InkWell(
                                             onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Mainui()));
+                                              Navigator.pop(context);
                                             },
                                             child: SvgPicture.asset(
                                                 'assets/home.svg',
@@ -457,8 +447,7 @@ class _Withdraw2State extends State<Withdraw2> {
                                               'Home',
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      81, 163, 163, 0.5),
+                                                  color: Colors.black,
                                                   fontFamily: 'Montserrat',
                                                   fontSize: 12,
                                                   letterSpacing:
@@ -489,13 +478,7 @@ class _Withdraw2State extends State<Withdraw2> {
                                                         textAlign:
                                                             TextAlign.left,
                                                         style: TextStyle(
-                                                            color:
-                                                                Color
-                                                                    .fromRGBO(
-                                                                        81,
-                                                                        163,
-                                                                        163,
-                                                                        1),
+                                                            color: Colors.black,
                                                             fontFamily:
                                                                 'Montserrat',
                                                             fontSize: 12,
@@ -550,12 +533,8 @@ class _Withdraw2State extends State<Withdraw2> {
                                                           textAlign:
                                                               TextAlign.left,
                                                           style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      81,
-                                                                      163,
-                                                                      163,
-                                                                      0.5),
+                                                              color:
+                                                                  Colors.black,
                                                               fontFamily:
                                                                   'Montserrat',
                                                               fontSize: 12,

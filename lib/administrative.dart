@@ -29,6 +29,7 @@ class _AdministrativeState extends State<Administrative> {
   TextEditingController debitnumcontroller = TextEditingController();
   TextEditingController debitamountcontroller = TextEditingController();
   TextEditingController transactionref = TextEditingController();
+  TextEditingController debitref = TextEditingController();
   TextEditingController balancecontroller = TextEditingController();
 
   final balanceurl = ("https://sandbox.wallets.africa/wallet/balance");
@@ -39,7 +40,7 @@ class _AdministrativeState extends State<Administrative> {
   String bearer = ('uvjqzm5xl6bw');
 
   dynamic alldata;
-  String? walletBalance;
+  dynamic walletBalance;
 
   Future getuserbalance() async {
     var response = await http.post(
@@ -88,7 +89,7 @@ class _AdministrativeState extends State<Administrative> {
       body: jsonEncode(
         {
           "transactionReference": transactionref.text,
-          "amount": 200.0,
+          "amount": 1000.0,
           "phoneNumber": creditnumcontroller.text,
           "secretKey": "hfucj5jatq8h"
         },
@@ -126,7 +127,6 @@ class _AdministrativeState extends State<Administrative> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    
                   ),
                 ],
               ));
@@ -164,8 +164,7 @@ class _AdministrativeState extends State<Administrative> {
                     },
                   ),
                 ],
-              )
-              );
+              ));
     }
   }
 
@@ -179,7 +178,7 @@ class _AdministrativeState extends State<Administrative> {
       },
       body: jsonEncode(
         {
-          "transactionReference": transactionref.text,
+          "transactionReference": debitref.text,
           "amount": 100.0,
           "phoneNumber": debitnumcontroller.text,
           "secretKey": "hfucj5jatq8h"
@@ -190,12 +189,35 @@ class _AdministrativeState extends State<Administrative> {
     if (debit.statusCode == 200) {
       var data = json.decode(debit.body)['data'];
       print(data);
-      
-      
     }
   }
 
-  ViewUserBalance() {}
+  Future Fetchuserbalance() async {
+    var response = await http.post(
+      Uri.parse(balanceurl),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $bearer",
+      },
+      body: jsonEncode(
+        {
+          "phoneNumber": balancecontroller.text,
+          "secretKey": 'hfucj5jatq8h',
+          "currency": "NGN",
+        },
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body)['data'];
+      setState(() {
+        walletBalance = '${data['walletBalance']}';
+      });
+    } else {
+      throw Exception('Failed to load post');
+    }
+  }
 
   @override
   void initState() {
@@ -203,6 +225,7 @@ class _AdministrativeState extends State<Administrative> {
     super.initState();
     getuserbalance();
     Debituser();
+    Fetchuserbalance();
   }
 
   @override
@@ -319,8 +342,6 @@ class _AdministrativeState extends State<Administrative> {
                       );
                     } else {
                       Credituser();
-                     
-                      
                     }
                   },
                   child: Container(
@@ -362,7 +383,7 @@ class _AdministrativeState extends State<Administrative> {
                 Container(
                   margin: EdgeInsets.all(20),
                   child: TextField(
-                    controller: transactionref,
+                    controller: debitref,
                     decoration: InputDecoration(
                       hintText: 'Enter Reference number',
                       hintStyle: TextStyle(
@@ -378,7 +399,7 @@ class _AdministrativeState extends State<Administrative> {
                   ),
                 ),
 
-                 Container(
+                Container(
                   margin: EdgeInsets.all(20),
                   child: TextField(
                     controller: debitnumcontroller,
@@ -476,8 +497,7 @@ class _AdministrativeState extends State<Administrative> {
                                               fontSize: 16.0,
                                             )
                                           });
-                                     // Navigator.pop(context);
-                                      
+                                      // Navigator.pop(context);
                                     },
                                   ),
                                   FlatButton(
@@ -537,7 +557,7 @@ class _AdministrativeState extends State<Administrative> {
                   height: 10,
                 ),
                 Text(
-                  'User Balance',
+                  walletBalance == null ? '0' : walletBalance,
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       fontSize: 20,
@@ -551,7 +571,7 @@ class _AdministrativeState extends State<Administrative> {
                   child: TextField(
                     controller: balancecontroller,
                     decoration: InputDecoration(
-                      hintText: 'Enter User Number',
+                      hintText: 'Enter User Wallet ID',
                       hintStyle: TextStyle(
                         color: Colors.white,
                       ),
@@ -567,7 +587,7 @@ class _AdministrativeState extends State<Administrative> {
 
                 GestureDetector(
                   onTap: () {
-                    ViewUserBalance();
+                    Fetchuserbalance();
                   },
                   child: Container(
                     height: MediaQuery.of(context).size.height - 640,

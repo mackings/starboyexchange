@@ -115,7 +115,7 @@ class _AdminloginState extends State<Adminlogin> {
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
                     walletBalance == null
-                        ? "Balance:  N"
+                        ? "Balance: N ****  "
                         : "Main Balance : N $walletBalance",
                     style: TextStyle(
                       color: Colors.white,
@@ -210,53 +210,108 @@ class _AdminloginState extends State<Adminlogin> {
                   height: 15,
                 ),
                 //loginbtn
-                GestureDetector(
-                  onTap: () {
-                    
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        
               
 
-                  getuserbalance();
-                    
-                    
-                SavebalancetoHivedb();
-                  },
-                  child: Container(
-                      width: 156.1904754638672,
-                      height: 40,
-                      child: Stack(children: <Widget>[
-                        Positioned(
-                            top: 0,
-                            left: 0,
-                            child: Container(
-                                width: 156.1904754638672,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(5),
-                                    topRight: Radius.circular(5),
-                                    bottomLeft: Radius.circular(5),
-                                    bottomRight: Radius.circular(5),
-                                  ),
-                                  color: Color.fromRGBO(229, 229, 229, 1),
-                                ),
-                                child: Stack(children: <Widget>[
-                                  Center(
-                                    child: Text(
-                                      'View  Balance',
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(13, 14, 14, 1),
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 14,
-                                          letterSpacing:
-                                              0 /*percentages not used in flutter. defaulting to zero*/,
-                                          fontWeight: FontWeight.normal,
-                                          height: 1),
+                      getuserbalance();
+                        
+                        
+                    SavebalancetoHivedb();
+                      },
+                      child: Container(
+                          width: 156.1904754638672,
+                          height: 40,
+                          child: Stack(children: <Widget>[
+                            Positioned(
+                                top: 0,
+                                left: 0,
+                                child: Container(
+                                    width: 150.1904754638672,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(5),
+                                        topRight: Radius.circular(5),
+                                        bottomLeft: Radius.circular(5),
+                                        bottomRight: Radius.circular(5),
+                                      ),
+                                      color: Color.fromRGBO(229, 229, 229, 1),
                                     ),
-                                  ),
-                                ]))),
-                      ])),
+                                    child: Stack(children: <Widget>[
+                                      Center(
+                                        child: Text(
+                                          'View  Balance',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                              color:
+                                                  Color.fromRGBO(13, 14, 14, 1),
+                                              fontFamily: 'Montserrat',
+                                              fontSize: 14,
+                                              letterSpacing:
+                                                  0 /*percentages not used in flutter. defaulting to zero*/,
+                                              fontWeight: FontWeight.normal,
+                                              height: 1),
+                                        ),
+                                      ),
+                                    ]))),
+                          ])),
+                    ),
+
+
+                    GestureDetector(
+                      onTap: () {
+                        
+              
+
+                      //getuserbalance();
+                        
+                        
+                    SavebalancetoHivedb();
+                      },
+                      child: Container(
+                          width: 156.1904754638672,
+                          height: 40,
+                          child: Stack(children: <Widget>[
+                            Positioned(
+                                top: 0,
+                                left: 0,
+                                child: Container(
+                                    width: 156.1904754638672,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(5),
+                                        topRight: Radius.circular(5),
+                                        bottomLeft: Radius.circular(5),
+                                        bottomRight: Radius.circular(5),
+                                      ),
+                                      color: Color.fromRGBO(229, 229, 229, 1),
+                                    ),
+                                    child: Stack(children: <Widget>[
+                                      Center(
+                                        child: Text(
+                                          'Save My Balance',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                              color:
+                                                  Color.fromRGBO(13, 14, 14, 1),
+                                              fontFamily: 'Montserrat',
+                                              fontSize: 14,
+                                              letterSpacing:
+                                                  0 /*percentages not used in flutter. defaulting to zero*/,
+                                              fontWeight: FontWeight.normal,
+                                              height: 1),
+                                        ),
+                                      ),
+                                    ]))),
+                          ])),
+                    ),
+                  ],
                 ),
                 //Noget account?oya register
                 SizedBox(

@@ -109,7 +109,7 @@ class _SettingsState extends State<Settings> {
                               onTap: (){
                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Adminlogin()));
                               },
-                              child: Text('Admin', textAlign: TextAlign.left, style: TextStyle(
+                              child: Text('Wallet', textAlign: TextAlign.left, style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   fontFamily: 'Montserrat',
                                   fontSize: 14,

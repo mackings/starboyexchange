@@ -39,6 +39,10 @@ class _Account1State extends State<Account1> {
   final secret = ('hfucj5jatq8h');
   String bearer = ('uvjqzm5xl6bw');
 
+  dynamic WalletID;
+
+
+
   Future Createwallet() async {
 
     final response = await http.post(
@@ -50,27 +54,39 @@ class _Account1State extends State<Account1> {
       },
       body: jsonEncode(
         {
-          "name": ufullname.text,
-          "firstname": ufullname.text,
-          "lastname": ufullname.text,
-          "bvn": uphonenumber.text,
-          "dateOfBirth": "",
           
-          "email": uemail.text,
-          "phone": uphonenumber.text,
-          "password": upassword.text,
-          "secretKey": 'hfucj5jatq8h',
-          "currency": "NGN",
+  "firstName": ufullname.text,
+  "lastName": ufullname.text,  
+  "Bvn":uphonenumber.text, 
+  "email": uemail.text,  
+  "secretKey": secret,
+  "dateOfBirth": "1946-01-12",
+  "phoneNumber": 0000000000,
+  "password": upassword.text,
+  "currency": "NGN"
+          
+          
+      
           
         },
       ),
     );
     if (response.statusCode == 200) {
-      print("wallet created" + response.body);
+      var responseJson = json.decode(response.body);
+      setState(() {
+        WalletID = responseJson['data']['phoneNumber'];
+      });
+
+     
     } else {
       print(response.statusCode);
       print(bearer);
     }
+
+
+    
+    var walletbox = Hive.box('user');
+    await walletbox.put('walletid', WalletID).whenComplete(() => print("Hive saved" + WalletID));
 
     //print(response.body);
   }
@@ -113,6 +129,7 @@ class _Account1State extends State<Account1> {
       'email': uemail.text.trim(),
       'phonenumber': uphonenumber.text.trim(),
       'password': upassword.text.trim(),
+      "walletid": WalletID,
     }).whenComplete(() => print("Saved Data Successfully"));
   }
 
@@ -122,9 +139,11 @@ class _Account1State extends State<Account1> {
     await Hive.box('user').put('email', uemail.text.trim());
     await Hive.box('user').put('phonenumber', uphonenumber.text.trim());
     await Hive.box('user').put('password', upassword.text.trim());
+    await Hive.box('user').put('walletid', WalletID);
     
     print("Saved  Hive Data Successfully");
     print(Hive.box('user').get('fullname'));
+    print(Hive.box('user').get('walletid'));
   }
 
   final _myKey = GlobalKey<FormState>();

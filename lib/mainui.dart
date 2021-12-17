@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:starboyexchange/Data.dart';
+import 'package:starboyexchange/Locks.dart';
 import 'package:starboyexchange/account1.dart';
 import 'package:starboyexchange/account3.dart';
 import 'package:starboyexchange/administrative.dart';
@@ -16,6 +17,7 @@ import 'package:starboyexchange/news.dart';
 import 'package:starboyexchange/notifications.dart';
 import 'package:starboyexchange/profile.dart';
 import 'package:starboyexchange/rate1.dart';
+
 import 'package:starboyexchange/settings.dart';
 import 'package:starboyexchange/testing.dart';
 import 'package:starboyexchange/trade1.dart';
@@ -27,6 +29,7 @@ import 'account2.dart';
 import 'history.dart';
 import 'package:provider/provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:selectable/selectable.dart';
 
 class Mainui extends StatefulWidget {
   final Hisname;
@@ -45,6 +48,7 @@ class Mainui extends StatefulWidget {
 class _MainuiState extends State<Mainui> {
   //user data
   String? Myuserid = FirebaseAuth.instance.currentUser!.email;
+  var walletID;
 
   late String link =
       "https://firebasestorage.googleapis.com/v0/b/starboyexchange-a9c9d.appspot.com/o/profile%2F";
@@ -64,10 +68,13 @@ class _MainuiState extends State<Mainui> {
   Future viewhive() async {
     final balbox = Hive.box('user');
     print(balbox.get('walletBalance'));
+    print(balbox.get('walletid'));
     setState(() {
       Actualbal = balbox.get('walletBalance');
+      walletID = balbox.get('walletid');
     });
     print('Actualbalance is $Actualbal');
+    print('walletID is $walletID');
   }
 
   void initState() {
@@ -131,7 +138,7 @@ class _MainuiState extends State<Mainui> {
                     ),
                     child: Stack(children: <Widget>[
                       Positioned(
-                          top: 72,
+                          top: 62,
                           left: 78.3457260131836,
                           child: Container(
                               width: 80,
@@ -148,7 +155,7 @@ class _MainuiState extends State<Mainui> {
                                     BorderRadius.all(Radius.elliptical(80, 80)),
                               ))),
                       Positioned(
-                          top: 237,
+                          top: 257,
                           left: 58.345726013183594,
                           child: Row(
                             children: [
@@ -183,7 +190,7 @@ class _MainuiState extends State<Mainui> {
                             ],
                           )),
                       Positioned(
-                          top: 272,
+                          top: 292,
                           left: 58.345726013183594,
                           child: Row(
                             children: [
@@ -217,7 +224,7 @@ class _MainuiState extends State<Mainui> {
                             ],
                           )),
                       Positioned(
-                          top: 307,
+                          top: 330,
                           left: 58.345726013183594,
                           child: Row(
                             children: [
@@ -252,7 +259,7 @@ class _MainuiState extends State<Mainui> {
                             ],
                           )),
                       Positioned(
-                          top: 342,
+                          top: 362,
                           left: 58.345726013183594,
                           child: Row(
                             children: [
@@ -287,7 +294,7 @@ class _MainuiState extends State<Mainui> {
                             ],
                           )),
                       Positioned(
-                          top: 377,
+                          top: 397,
                           left: 58.345726013183594,
                           child: Row(
                             children: [
@@ -324,7 +331,7 @@ class _MainuiState extends State<Mainui> {
                         height: 10,
                       ),
                       Positioned(
-                          top: 410,
+                          top: 440,
                           left: 58.345726013183594,
                           child: Row(
                             children: [
@@ -357,14 +364,10 @@ class _MainuiState extends State<Mainui> {
                               ),
 
                               //Administrative
-                              
-
-
                             ],
                           )),
-
-                           Positioned(
-                          top: 450,
+                      Positioned(
+                          top: 480,
                           left: 58.345726013183594,
                           child: Row(
                             children: [
@@ -380,7 +383,12 @@ class _MainuiState extends State<Mainui> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Administrative()));
+                                          builder: (context) =>
+                                            Locks()));
+                                
+                                
+                                  
+                                 
                                 },
                                 child: Text(
                                   'Administrative',
@@ -397,17 +405,10 @@ class _MainuiState extends State<Mainui> {
                               ),
 
                               //Administrative
-                              
-
-
                             ],
                           )),
-
-                        
-
-
                       Positioned(
-                          top: 490,
+                          top: 530,
                           left: 40.345726013183594,
                           child: Container(
                               width: 156.1904754638672,
@@ -473,19 +474,37 @@ class _MainuiState extends State<Mainui> {
                                 height: 1),
                           )),
                       Positioned(
-                          top: 192,
+                          top: 189,
                           left: 30.345726013183594,
                           child: Text(
-                            " ${Myuserid}",
+                            " $Myuserid",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Color.fromRGBO(255, 255, 255, 1),
                                 fontFamily: 'Montserrat',
-                                fontSize: 10,
+                                fontSize: 15,
                                 letterSpacing:
                                     0 /*percentages not used in flutter. defaulting to zero*/,
                                 fontWeight: FontWeight.normal,
                                 height: 1),
+                          )),
+                      Positioned(
+                          top: 220,
+                          left: 30.345726013183594,
+                          child: Selectable(
+                            topOverlayHeight: 40,
+                            child: Text(
+                              " ID : ${walletID == null ? 'Loading...' : walletID}",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 15,
+                                  letterSpacing:
+                                      0 /*percentages not used in flutter. defaulting to zero*/,
+                                  fontWeight: FontWeight.normal,
+                                  height: 1),
+                            ),
                           )),
                     ]))
               ],
@@ -574,6 +593,8 @@ class _MainuiState extends State<Mainui> {
                                 ),
                                 GestureDetector(
                                     onTap: () {
+                                      gpro();
+
                                       viewhive();
                                     },
                                     child: Icon(
@@ -749,9 +770,11 @@ class _MainuiState extends State<Mainui> {
                                               left: 0,
                                               child: InkWell(
                                                 onTap: () {
+                                                  viewhive();
                                                   gpro().whenComplete(() =>
                                                       _globalKey.currentState!
                                                           .openDrawer());
+
                                                   //_globalKey.currentState!
                                                   //.openDrawer();
                                                 },
