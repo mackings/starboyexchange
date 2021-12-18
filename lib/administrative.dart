@@ -263,7 +263,7 @@ class _AdministrativeState extends State<Administrative> {
                   child: TextField(
                     controller: creditnumcontroller,
                     decoration: InputDecoration(
-                      hintText: 'Enter Phone Number',
+                      hintText: 'Enter User Wallet ID',
                       hintStyle: TextStyle(
                         color: Colors.white,
                       ),
@@ -322,7 +322,7 @@ class _AdministrativeState extends State<Administrative> {
                   onTap: () {
                     if (creditnumcontroller.text.isEmpty) {
                       Fluttertoast.showToast(
-                        msg: "Please Enter Phone Number",
+                        msg: "Please Enter Wallet ID",
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.BOTTOM,
                         timeInSecForIosWeb: 1,
@@ -404,7 +404,7 @@ class _AdministrativeState extends State<Administrative> {
                   child: TextField(
                     controller: debitnumcontroller,
                     decoration: InputDecoration(
-                      hintText: 'Enter Phone Number',
+                      hintText: 'Enter User Wallet ID',
                       hintStyle: TextStyle(
                         color: Colors.white,
                       ),

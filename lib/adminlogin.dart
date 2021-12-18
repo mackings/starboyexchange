@@ -169,7 +169,7 @@ class _AdminloginState extends State<Adminlogin> {
                                   enabledBorder: InputBorder.none,
                                   errorBorder: InputBorder.none,
                                   disabledBorder: InputBorder.none,
-                                  hintText: "Enter Wallet Number",
+                                  hintText: "Enter Wallet ID",
                                   hintStyle: TextStyle(
                                       color: inputcolor,
                                       fontFamily: "Montserrat",

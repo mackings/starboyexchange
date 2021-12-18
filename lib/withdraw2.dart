@@ -251,7 +251,7 @@ class _Withdraw2State extends State<Withdraw2> {
                                         enabledBorder: InputBorder.none,
                                         errorBorder: InputBorder.none,
                                         disabledBorder: InputBorder.none,
-                                        hintText: "Access Bank",
+                                        hintText: "Access Bank / 0976554455",
                                         hintStyle:
                                             TextStyle(color: Colors.teal),
                                         contentPadding: EdgeInsets.fromLTRB(
@@ -263,7 +263,7 @@ class _Withdraw2State extends State<Withdraw2> {
                                   top: 0,
                                   left: 0,
                                   child: Text(
-                                    'Bank Name',
+                                    'Bank Name / Acc Number',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                         color: Color.fromRGBO(255, 255, 255, 1),
