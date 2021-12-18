@@ -203,7 +203,7 @@ class _History1State extends State<History1> {
                     hintStyle: TextStyle(
                       fontFamily: 'Montserrat',
                       color: green,
-                      fontSize: 15,
+                      fontSize: 18,
                     ),
                     prefixIcon: Icon(
                       Icons.search,
@@ -238,7 +238,7 @@ class _History1State extends State<History1> {
                         child: Text(
                           Histories== null ? '***' : '$noHistories',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 16,
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Montserrat',
@@ -257,7 +257,7 @@ class _History1State extends State<History1> {
                         child: Text(
                           Histories== null ? '***' : '$Histories',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 18,
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Montserrat',

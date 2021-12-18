@@ -109,20 +109,25 @@ class _Withdraw1State extends State<Withdraw1> {
                                 Positioned(
                                     top: 0,
                                     left: 0,
-                                    child: Container(
-                                        width: 22.6119384765625,
-                                        height: 15.903846740722656,
-                                        child: Stack(children: <Widget>[
-                                          Positioned(
-                                            top: 0,
-                                            left: 0,
-                                            child: SvgPicture.asset(
-                                              'assets/arrowleft.svg',
-                                              semanticsLabel: 'vector',
-                                              color: Colors.white,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Container(
+                                          width: 22.6119384765625,
+                                          height: 15.903846740722656,
+                                          child: Stack(children: <Widget>[
+                                            Positioned(
+                                              top: 0,
+                                              left: 0,
+                                              child: SvgPicture.asset(
+                                                'assets/arrowleft.svg',
+                                                semanticsLabel: 'vector',
+                                                color: Colors.white,
+                                              ),
                                             ),
-                                          ),
-                                        ]))),
+                                          ])),
+                                    )),
                               ]))),
                       Positioned(
                           //menu Icon
