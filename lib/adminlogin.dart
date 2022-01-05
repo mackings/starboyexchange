@@ -31,6 +31,36 @@ class _AdminloginState extends State<Adminlogin> {
 
   dynamic alldata;
   String? walletBalance;
+  dynamic result;
+
+  var walletcreate = 'https://api.getwallets.co/v1/wallets';
+  var getbearer = 'sk_live_61c1f2e4dc36008ee80295f961c1f2e4dc36008ee80295fa';
+ 
+
+  Future createwallet() async {
+    var response = await http.post(Uri.parse(walletcreate),
+        headers: {
+          'Authorization': 'Bearer $getbearer',
+          'Content-Type': 'application/json',
+          "Accept": "application/json"
+        },
+        //body
+        body: jsonEncode(
+            {'customer_email': "tony@gmail.com"}));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      setState(() {
+        response.body == result;
+      });
+
+      print(result);
+      
+     
+    } else {
+      throw Exception('Failed ');
+    }
+  }
 
   Future getuserbalance() async {
     var response = await http.post(
@@ -73,6 +103,7 @@ class _AdminloginState extends State<Adminlogin> {
     // TODO: implement initState
     super.initState();
     getuserbalance();
+    createwallet();
   }
 
   @override
@@ -215,13 +246,10 @@ class _AdminloginState extends State<Adminlogin> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        
-              
+                        createwallet();
+                        // getuserbalance();
 
-                      getuserbalance();
-                        
-                        
-                    SavebalancetoHivedb();
+                        // SavebalancetoHivedb();
                       },
                       child: Container(
                           width: 156.1904754638672,
@@ -261,17 +289,11 @@ class _AdminloginState extends State<Adminlogin> {
                                     ]))),
                           ])),
                     ),
-
-
                     GestureDetector(
                       onTap: () {
-                        
-              
+                        //getuserbalance();
 
-                      //getuserbalance();
-                        
-                        
-                    SavebalancetoHivedb();
+                        SavebalancetoHivedb();
                       },
                       child: Container(
                           width: 156.1904754638672,
