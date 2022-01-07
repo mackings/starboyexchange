@@ -67,10 +67,10 @@ class _MainuiState extends State<Mainui> {
 
   Future viewhive() async {
     final balbox = Hive.box('user');
-    print(balbox.get('walletBalance'));
+    print(balbox.get('balance'));
     print(balbox.get('walletid'));
     setState(() {
-      Actualbal = balbox.get('walletBalance');
+      Actualbal = balbox.get('balance');
       walletID = balbox.get('walletid');
     });
     print('Actualbalance is $Actualbal');

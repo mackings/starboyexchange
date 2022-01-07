@@ -25,28 +25,27 @@ class _AdminloginState extends State<Adminlogin> {
   TextEditingController admincontroller = TextEditingController();
   TextEditingController Amountcontroller = TextEditingController();
 
-  final balanceurl = ("https://sandbox.wallets.africa/wallet/balance");
+  var  balanceurl = ('https://api.getwallets.co/v1/wallets/61d7d276ea5aa2f41200889b');
   final secret = ('hfucj5jatq8h');
   String bearer = ('uvjqzm5xl6bw');
 
   dynamic alldata;
   String? walletBalance;
   dynamic result;
+  
 
-  var walletcreate = 'https://api.getwallets.co/v1/wallets';
-  var getbearer = 'sk_live_61c1f2e4dc36008ee80295f961c1f2e4dc36008ee80295fa';
- 
+  //var walletcreate = 'https://api.getwallets.co/v1/wallets';
+  var getbearer = 'sk_live_61d69f09ea5aa2f41200885961d69f09ea5aa2f41200885a';
 
-  Future createwallet() async {
-    var response = await http.post(Uri.parse(walletcreate),
+  Future getubal() async {
+    var response = await http.post(Uri.parse(balanceurl+admincontroller.text),
         headers: {
           'Authorization': 'Bearer $getbearer',
           'Content-Type': 'application/json',
           "Accept": "application/json"
         },
-        //body
-        body: jsonEncode(
-            {'customer_email': "tony@gmail.com"}));
+   
+        body: jsonEncode({'customer_email': "tony@gmail.com"}));
 
     if (response.statusCode == 200) {
       print(response.body);
@@ -55,37 +54,31 @@ class _AdminloginState extends State<Adminlogin> {
       });
 
       print(result);
-      
-     
     } else {
       throw Exception('Failed ');
     }
   }
 
   Future getuserbalance() async {
-    var response = await http.post(
-      Uri.parse(balanceurl),
+    var response = await http.get(
+      Uri.parse(balanceurl.toString()),
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
+        //"Accept": "application/json",
         "Authorization": "Bearer $bearer",
       },
-      body: jsonEncode(
-        {
-          "phoneNumber": admincontroller.text,
-          "secretKey": 'hfucj5jatq8h',
-          "currency": "NGN",
-        },
-      ),
+     
     );
 
     if (response.statusCode == 200) {
-      var data = json.decode(response.body)['data'];
+      var jsonResponse = json.decode(response.body);
+      print(jsonResponse);
+      //var data = json.decode(response.body)['balance'];
       setState(() {
-        walletBalance = '${data['walletBalance']}';
+       // walletBalance = '${data['balance']}';
       });
     } else {
-      throw Exception('Failed to load post');
+      print(response.statusCode);
     }
   }
 
@@ -103,7 +96,7 @@ class _AdminloginState extends State<Adminlogin> {
     // TODO: implement initState
     super.initState();
     getuserbalance();
-    createwallet();
+    
   }
 
   @override
@@ -246,8 +239,8 @@ class _AdminloginState extends State<Adminlogin> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        createwallet();
-                        // getuserbalance();
+                       // getubal();
+                         getuserbalance();
 
                         // SavebalancetoHivedb();
                       },

@@ -41,10 +41,41 @@ class _Account1State extends State<Account1> {
 
   dynamic WalletID;
 
+  var walletcreate = 'https://api.getwallets.co/v1/wallets';
+  var getbearer = 'sk_live_61d69f09ea5aa2f41200885961d69f09ea5aa2f41200885a';
+  dynamic result;
+  dynamic demwallet;
+  dynamic dembalance;
 
+  Future cwallet() async {
+    var response = await http.post(Uri.parse(walletcreate),
+        headers: {
+          'Authorization': 'Bearer $getbearer',
+          'Content-Type': 'application/json',
+          "Accept": "application/json"
+        },
+        //body
+        body: jsonEncode({'customer_email': uemail.text}));
+
+    if (response.statusCode == 200) {
+      result = json.decode(response.body);
+
+      print(result);
+
+      setState(() {
+        demwallet = '${result['data']['wallet_id']}';
+        dembalance = '${result['data']['balance']}';
+      });
+      print(demwallet);
+      print('user balance is $dembalance');
+    } else {
+      throw Exception('Failed ');
+    }
+
+    
+  }
 
   Future Createwallet() async {
-
     final response = await http.post(
       Uri.parse(Walleturl),
       headers: {
@@ -54,20 +85,15 @@ class _Account1State extends State<Account1> {
       },
       body: jsonEncode(
         {
-          
-  "firstName": ufullname.text,
-  "lastName": ufullname.text,  
-  "Bvn":uphonenumber.text, 
-  "email": uemail.text,  
-  "secretKey": secret,
-  "dateOfBirth": "1946-01-12",
-  "phoneNumber": 0000000000,
-  "password": upassword.text,
-  "currency": "NGN"
-          
-          
-      
-          
+          "firstName": ufullname.text,
+          "lastName": ufullname.text,
+          "Bvn": uphonenumber.text,
+          "email": uemail.text,
+          "secretKey": secret,
+          "dateOfBirth": "1946-01-12",
+          "phoneNumber": 0000000000,
+          "password": upassword.text,
+          "currency": "NGN"
         },
       ),
     );
@@ -76,17 +102,11 @@ class _Account1State extends State<Account1> {
       setState(() {
         WalletID = responseJson['data']['phoneNumber'];
       });
-
-     
     } else {
       print(response.statusCode);
       print(bearer);
     }
 
-
-    
-    var walletbox = Hive.box('user');
-    await walletbox.put('walletid', WalletID).whenComplete(() => print("Hive saved" + WalletID));
 
     //print(response.body);
   }
@@ -139,11 +159,13 @@ class _Account1State extends State<Account1> {
     await Hive.box('user').put('email', uemail.text.trim());
     await Hive.box('user').put('phonenumber', uphonenumber.text.trim());
     await Hive.box('user').put('password', upassword.text.trim());
-    await Hive.box('user').put('walletid', WalletID);
-    
+    await Hive.box('user').put('walletid', demwallet);
+    await Hive.box('user').put('balance', dembalance);
+
     print("Saved  Hive Data Successfully");
     print(Hive.box('user').get('fullname'));
     print(Hive.box('user').get('walletid'));
+    print(Hive.box('user').get('balance'));
   }
 
   final _myKey = GlobalKey<FormState>();
@@ -608,10 +630,12 @@ class _Account1State extends State<Account1> {
                     child: InkWell(
                       splashColor: Colors.grey,
                       onTap: () {
-                        savedatatodb();
+                        cwallet();
                         saveetohive();
+                        savedatatodb();
+                      
                         Register();
-                        Createwallet();
+                        //Createwallet();
                         //Signup();
                         //Navigator.push(context, MaterialPageRoute(builder: (context)=>Account2()));
                       },
@@ -698,6 +722,4 @@ class _Account1State extends State<Account1> {
       ),
     );
   }
-
-  
 }

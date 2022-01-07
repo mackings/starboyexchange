@@ -34,13 +34,88 @@ class _AdministrativeState extends State<Administrative> {
 
   final balanceurl = ("https://sandbox.wallets.africa/wallet/balance");
   final crediturl = ("https://sandbox.wallets.africa/wallet/credit");
-  final debiturl = ("https://sandbox.wallets.africa/wallet/debit");
+  //final debiturl = ("https://sandbox.wallets.africa/wallet/debit");
 
   final secret = ('hfucj5jatq8h');
   String bearer = ('uvjqzm5xl6bw');
 
   dynamic alldata;
   dynamic walletBalance;
+
+  var fundurl = 'https://api.getwallets.co/v1/wallets/funds/manual';
+  var debiturl = 'https://api.getwallets.co/v1/wallets/debit/manual';
+  var cbalanceurl = 'https://api.getwallets.co/v1/wallets/';
+  var getbearer = 'sk_live_61d69f09ea5aa2f41200885961d69f09ea5aa2f41200885a';
+
+
+  dynamic result;
+  dynamic demwallet;
+  dynamic dembalance;
+
+  Future fwallet() async {
+    var response = await http.post(Uri.parse(fundurl),
+        headers: {
+          'Authorization': 'Bearer $getbearer',
+          'Content-Type': 'application/json',
+          "Accept": "application/json"
+        },
+        //body
+        body: jsonEncode({
+          'wallet_id': creditnumcontroller.text,
+          'amount': 100,
+          'currency': 'NGN',
+          
+        }));
+
+    if (response.statusCode == 200) {
+   
+      result = json.decode(response.body);
+
+      print(result);
+
+      setState(() {
+        // demwallet = '${result['data']['wallet_id']}';
+        //  dembalance = '${result['data']['balance']}';
+      });
+      // print(demwallet);
+      // print('user balance is $dembalance');
+    } else {
+      throw Exception('Failed ');
+    }
+  }
+
+
+
+   Future dwallet() async {
+    var response = await http.post(Uri.parse(debiturl),
+        headers: {
+          'Authorization': 'Bearer $getbearer',
+          'Content-Type': 'application/json',
+          "Accept": "application/json"
+        },
+        //body
+        body: jsonEncode({
+          'wallet_id': debitnumcontroller.text,
+          'amount': 300,
+          'currency': 'NGN',
+          
+        }));
+
+    if (response.statusCode == 200) {
+      result = json.decode(response.body);
+
+      print(result);
+
+      setState(() {
+        // demwallet = '${result['data']['wallet_id']}';
+        //  dembalance = '${result['data']['balance']}';
+      });
+      // print(demwallet);
+      // print('user balance is $dembalance');
+    } else {
+      print(response.statusCode);
+    }
+  }
 
   Future getuserbalance() async {
     var response = await http.post(
@@ -223,9 +298,11 @@ class _AdministrativeState extends State<Administrative> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getuserbalance();
-    Debituser();
-    Fetchuserbalance();
+
+    /// getuserbalance();
+    // Debituser();
+    // Fetchuserbalance();
+    fwallet();
   }
 
   @override
@@ -341,7 +418,8 @@ class _AdministrativeState extends State<Administrative> {
                         fontSize: 16.0,
                       );
                     } else {
-                      Credituser();
+                     // Credituser();
+                     fwallet();
                     }
                   },
                   child: Container(
@@ -485,7 +563,7 @@ class _AdministrativeState extends State<Administrative> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      Debituser().then((value) => {
+                                      dwallet().then((value) => {
                                             Navigator.pop(context),
                                             Fluttertoast.showToast(
                                               msg: "User Debit Successfully",
