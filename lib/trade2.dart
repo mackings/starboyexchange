@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -25,6 +26,7 @@ import 'package:flutter_sms/flutter_sms.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:sizer/sizer.dart';
+import 'package:http/http.dart' as http;
 
 class Trade2 extends StatefulWidget {
   const Trade2({Key? key}) : super(key: key);
@@ -66,11 +68,7 @@ class _Trade2State extends State<Trade2> {
         });
   }
 
-
-
-  Notifypersin(){
-
-  }
+  Notifypersin() {}
 
   void Notify() async {
     final Defuser = FirebaseAuth.instance.currentUser;
@@ -92,7 +90,6 @@ class _Trade2State extends State<Trade2> {
       displayOnForeground: true,
       displayOnBackground: true,
       notificationLayout: NotificationLayout.BigPicture,
-      
     ));
   }
 
@@ -101,6 +98,37 @@ class _Trade2State extends State<Trade2> {
 
   Future _sendSMS(String message, List<String> recipents) async {
     String _result = await sendSMS(message: message, recipients: recipents);
+  }
+
+  //mailGun
+  var emailapiurl = 'https://easymail.p.rapidapi.com/send';
+  final usermail = FirebaseAuth.instance.currentUser!.email;
+
+  dynamic result;
+  Future mailgun() async {
+    var response = await http.post(Uri.parse(emailapiurl),
+        headers: {
+          'content-type': 'application/json',
+          'x-rapidapi-host': 'easymail.p.rapidapi.com',
+          'x-rapidapi-key': '4d3203bd54mshae69b36a7cd471fp12e74fjsn565cea5d6fdd'
+        },
+        //body
+        body: jsonEncode({
+          "from": "Admin@starexchange",
+          "to": 'macsonline500@gmail.com',
+          "subject": "Trade Alert",
+          "message":
+              "<h1>${usermail} Has Uploaded a Giftcard for Trade, Kindly Modify</h1>"
+        }));
+
+    if (response.statusCode == 200) {
+      result = json.decode(response.body);
+      print('Admin Notified Successfully');
+
+      print(result);
+    } else {
+      print(response.statusCode);
+    }
   }
 
   @override
@@ -365,13 +393,15 @@ class _Trade2State extends State<Trade2> {
                                                                         "Okay"),
                                                                 onPressed: () {
                                                                   SubmitTrade();
+                                                                  mailgun();
                                                                   Notify();
-                                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Butcrypto()));
-                                                    
+                                                                  Navigator.push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) =>
+                                                                              Butcrypto()));
 
-                                                    //uploadImage();
-                                                  
-                                                                  
+                                                                  //uploadImage();
                                                                 },
                                                               ),
                                                               MaterialButton(
@@ -379,44 +409,42 @@ class _Trade2State extends State<Trade2> {
                                                                     const Text(
                                                                         "Exit"),
                                                                 onPressed: () {
-                                                                      showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return AlertDialog(
-                                                            title: Text(
-                                                              "You can also Check our Crypto Rates ",
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      "Montserrat"),
-                                                            ),
-                                                            content: Text(
-                                                              "Rates that Fills your Purses",
-                                                              style: GoogleFonts
-                                                                  .montserrat(),
-                                                            ),
-                                                            actions: <Widget>[
-                                                              MaterialButton(
-                                                                child:
-                                                                    const Text(
-                                                                        "okay"),
-                                                                onPressed: () {
-                                                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Butcrypto()));
-                                                                },
-                                                               
-                                                              ),
-                                                              MaterialButton(
-                                                                child:
-                                                                    const Text(
-                                                                        "Exit"),
-                                                                onPressed: () {
-                                                                  Navigator.pop(
-                                                                      context);
-                                                                },
-                                                              ),
-                                                            ],
-                                                          );
-                                                        });
+                                                                  showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (BuildContext
+                                                                              context) {
+                                                                        return AlertDialog(
+                                                                          title:
+                                                                              Text(
+                                                                            "You can also Check our Crypto Rates ",
+                                                                            style:
+                                                                                TextStyle(fontFamily: "Montserrat"),
+                                                                          ),
+                                                                          content:
+                                                                              Text(
+                                                                            "Rates that Fills your Purses",
+                                                                            style:
+                                                                                GoogleFonts.montserrat(),
+                                                                          ),
+                                                                          actions: <
+                                                                              Widget>[
+                                                                            MaterialButton(
+                                                                              child: const Text("okay"),
+                                                                              onPressed: () {
+                                                                                Navigator.push(context, MaterialPageRoute(builder: (context) => Butcrypto()));
+                                                                              },
+                                                                            ),
+                                                                            MaterialButton(
+                                                                              child: const Text("Exit"),
+                                                                              onPressed: () {
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                            ),
+                                                                          ],
+                                                                        );
+                                                                      });
                                                                 },
                                                               ),
                                                             ],

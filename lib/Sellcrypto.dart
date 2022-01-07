@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,8 +11,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:starboyexchange/account1.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:starboyexchange/buycrypto.dart';
 import 'package:starboyexchange/mainui.dart';
 import 'package:selectable/selectable.dart';
+import 'package:http/http.dart' as http;
 
 class Fsell extends StatefulWidget {
   const Fsell({Key? key}) : super(key: key);
@@ -68,6 +72,38 @@ class _FsellState extends State<Fsell> {
     }
   }
 
+  //mailgun
+  var emailapiurl = 'https://easymail.p.rapidapi.com/send';
+
+  final usermail = FirebaseAuth.instance.currentUser!.email;
+
+  dynamic result;
+  Future mailgun() async {
+    var response = await http.post(Uri.parse(emailapiurl),
+        headers: {
+          'content-type': 'application/json',
+          'x-rapidapi-host': 'easymail.p.rapidapi.com',
+          'x-rapidapi-key': '4d3203bd54mshae69b36a7cd471fp12e74fjsn565cea5d6fdd'
+        },
+        //body
+        body: jsonEncode({
+          "from": "Admin@starexchange",
+          "to": 'macsonline500@gmail.com',
+          "subject": "Trade Alert",
+          "message":
+              "<h1>${usermail} Has Requested to Sell Cryptocurrency, Kindly Modify</h1>"
+        }));
+
+    if (response.statusCode == 200) {
+      result = json.decode(response.body);
+      print('Admin Notified Successfully');
+
+      print(result);
+    } else {
+      print(response.statusCode);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -117,8 +153,8 @@ class _FsellState extends State<Fsell> {
                       waletconfig();
                     },
                     child: Container(
-                     height: MediaQuery.of(context).size.height -620,
-                     width: MediaQuery.of(context).size.width -20,
+                      height: MediaQuery.of(context).size.height - 620,
+                      width: MediaQuery.of(context).size.width - 20,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -170,8 +206,8 @@ class _FsellState extends State<Fsell> {
                       waletconfig();
                     },
                     child: Container(
-                      height: MediaQuery.of(context).size.height -620,
-                     width: MediaQuery.of(context).size.width -20,
+                      height: MediaQuery.of(context).size.height - 620,
+                      width: MediaQuery.of(context).size.width - 20,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -223,8 +259,8 @@ class _FsellState extends State<Fsell> {
                       waletconfig();
                     },
                     child: Container(
-                      height: MediaQuery.of(context).size.height -620,
-                     width: MediaQuery.of(context).size.width -20,
+                      height: MediaQuery.of(context).size.height - 620,
+                      width: MediaQuery.of(context).size.width - 20,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -276,8 +312,8 @@ class _FsellState extends State<Fsell> {
                       waletconfig();
                     },
                     child: Container(
-                      height: MediaQuery.of(context).size.height -620,
-                     width: MediaQuery.of(context).size.width -20,
+                      height: MediaQuery.of(context).size.height - 620,
+                      width: MediaQuery.of(context).size.width - 20,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -394,8 +430,16 @@ class _FsellState extends State<Fsell> {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        title: Text("Error", style: TextStyle( fontFamily: 'Montserrat'),),
-                                        content: Text("Please Upload a Transaction Recipt",style: TextStyle( fontFamily: 'Montserrat'),),
+                                        title: Text(
+                                          "Error",
+                                          style: TextStyle(
+                                              fontFamily: 'Montserrat'),
+                                        ),
+                                        content: Text(
+                                          "Please Upload a Transaction Recipt",
+                                          style: TextStyle(
+                                              fontFamily: 'Montserrat'),
+                                        ),
                                         actions: <Widget>[
                                           FlatButton(
                                             child: Text("Ok"),
@@ -407,54 +451,74 @@ class _FsellState extends State<Fsell> {
                                       );
                                     });
                               } else {
-
-                                 showDialog(
-                                context: context,
-                                builder: (BuildContext context){
-                                  return AlertDialog(
-                                    content: Text("Have you screenshot your transaction ?",style: GoogleFonts.montserrat(),),
-                                    actions: [
-                                      MaterialButton(
-                                        onPressed: (){
-                                          Uploadproof();
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: Text("Success",style: GoogleFonts.montserrat(),),
-                                                content: Text("Your Trade has been Submitted, You would be contacted soon",style: GoogleFonts.montserrat(),),
-                                                actions: <Widget>[
-                                                  FlatButton(
-                                                    child: Text("Continue",style: GoogleFonts.montserrat()),
-                                                    onPressed: () {
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui()));
-                                                    },
-                                                  ),
-                                                  FlatButton(
-                                                    child: Text("Home",style: GoogleFonts.montserrat()),
-                                                    onPressed: () {
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Mainui()));
-                                                    },
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                          //Navigator.push(context, MaterialPageRoute(builder: (context)=>TradeGround()));
-                                        },
-                                        child: Text("YES",style: GoogleFonts.montserrat(),),
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      content: Text(
+                                        "Have you screenshot your transaction ?",
+                                        style: GoogleFonts.montserrat(),
                                       ),
-                                      MaterialButton(
-                                        onPressed: (){
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text("NO",style: GoogleFonts.montserrat(),),
-                                      ),
-                                    ],
-
-                                  );
-                                },
-                              );
+                                      actions: [
+                                        MaterialButton(
+                                          onPressed: () {
+                                            Uploadproof();
+                                            mailgun();
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                    "Success",
+                                                    style: GoogleFonts
+                                                        .montserrat(),
+                                                  ),
+                                                  content: Text(
+                                                    "Your Trade has been Submitted, You would be contacted soon",
+                                                    style: GoogleFonts
+                                                        .montserrat(),
+                                                  ),
+                                                  actions: <Widget>[
+                                                    FlatButton(
+                                                      child: Text("Continue",
+                                                          style: GoogleFonts
+                                                              .montserrat()),
+                                                      onPressed: () {
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Butcrypto()));
+                                                      },
+                                                    ),
+                                                    FlatButton(
+                                                      child: Text("Exit",
+                                                          style: GoogleFonts
+                                                              .montserrat()),
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                            //Navigator.push(context, MaterialPageRoute(builder: (context)=>TradeGround()));
+                                          },
+                                          child: Text(
+                                            "YES",
+                                            style: GoogleFonts.montserrat(),
+                                          ),
+                                        ),
+                                        MaterialButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text(
+                                            "NO",
+                                            style: GoogleFonts.montserrat(),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               }
                             },
                             child: Container(

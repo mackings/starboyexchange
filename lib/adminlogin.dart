@@ -25,26 +25,25 @@ class _AdminloginState extends State<Adminlogin> {
   TextEditingController admincontroller = TextEditingController();
   TextEditingController Amountcontroller = TextEditingController();
 
-  var  balanceurl = ('https://api.getwallets.co/v1/wallets/61d7d276ea5aa2f41200889b');
+  var balanceurl = ('https://api.getwallets.co/v1/wallets/+');
   final secret = ('hfucj5jatq8h');
   String bearer = ('uvjqzm5xl6bw');
 
   dynamic alldata;
   String? walletBalance;
   dynamic result;
-  
+  var wba = "61d7d276ea5aa2f41200889b";
 
   //var walletcreate = 'https://api.getwallets.co/v1/wallets';
   var getbearer = 'sk_live_61d69f09ea5aa2f41200885961d69f09ea5aa2f41200885a';
 
   Future getubal() async {
-    var response = await http.post(Uri.parse(balanceurl+admincontroller.text),
+    var response = await http.post(Uri.parse(balanceurl + admincontroller.text),
         headers: {
           'Authorization': 'Bearer $getbearer',
           'Content-Type': 'application/json',
           "Accept": "application/json"
         },
-   
         body: jsonEncode({'customer_email': "tony@gmail.com"}));
 
     if (response.statusCode == 200) {
@@ -67,7 +66,6 @@ class _AdminloginState extends State<Adminlogin> {
         //"Accept": "application/json",
         "Authorization": "Bearer $bearer",
       },
-     
     );
 
     if (response.statusCode == 200) {
@@ -75,7 +73,7 @@ class _AdminloginState extends State<Adminlogin> {
       print(jsonResponse);
       //var data = json.decode(response.body)['balance'];
       setState(() {
-       // walletBalance = '${data['balance']}';
+        // walletBalance = '${data['balance']}';
       });
     } else {
       print(response.statusCode);
@@ -91,12 +89,37 @@ class _AdminloginState extends State<Adminlogin> {
     //print(prefs.getString('walletBalance' + 'From SharedPreferences'));
   }
 
+  var emailapiurl = 'https://easymail.p.rapidapi.com/send';
+  Future mailgun() async {
+    var response = await http.post(Uri.parse(emailapiurl),
+        headers: {
+          'content-type': 'application/json',
+          'x-rapidapi-host': 'easymail.p.rapidapi.com',
+          'x-rapidapi-key': '4d3203bd54mshae69b36a7cd471fp12e74fjsn565cea5d6fdd'
+        },
+        //body
+        body: jsonEncode({
+          "from": "Admin@starexchange",
+          "to": admincontroller.text,
+          "subject": "Trade Alert",
+          "message": "<h1>User Has sent a Trade Request, Kindly Modify</h1>"
+        }));
+
+    if (response.statusCode == 200) {
+      result = json.decode(response.body);
+
+      print(result);
+    } else {
+      print(response.statusCode);
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getuserbalance();
-    
+    mailgun();
   }
 
   @override
@@ -186,7 +209,7 @@ class _AdminloginState extends State<Adminlogin> {
                                 controller: admincontroller,
                                 textAlign: TextAlign.start,
                                 cursorColor: Colors.black,
-                                keyboardType: TextInputType.number,
+                                keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
@@ -239,8 +262,8 @@ class _AdminloginState extends State<Adminlogin> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                       // getubal();
-                         getuserbalance();
+                        mailgun();
+                        getuserbalance();
 
                         // SavebalancetoHivedb();
                       },
