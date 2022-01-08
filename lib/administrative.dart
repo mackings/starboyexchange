@@ -47,7 +47,6 @@ class _AdministrativeState extends State<Administrative> {
   var cbalanceurl = 'https://api.getwallets.co/v1/wallets/';
   var getbearer = 'sk_live_61d69f09ea5aa2f41200885961d69f09ea5aa2f41200885a';
 
-
   dynamic result;
   dynamic demwallet;
   dynamic dembalance;
@@ -62,13 +61,11 @@ class _AdministrativeState extends State<Administrative> {
         //body
         body: jsonEncode({
           'wallet_id': creditnumcontroller.text,
-          'amount': 100,
+          'amount': 1000,
           'currency': 'NGN',
-          
         }));
 
     if (response.statusCode == 200) {
-   
       result = json.decode(response.body);
 
       print(result);
@@ -84,9 +81,7 @@ class _AdministrativeState extends State<Administrative> {
     }
   }
 
-
-
-   Future dwallet() async {
+  Future dwallet() async {
     var response = await http.post(Uri.parse(debiturl),
         headers: {
           'Authorization': 'Bearer $getbearer',
@@ -96,9 +91,8 @@ class _AdministrativeState extends State<Administrative> {
         //body
         body: jsonEncode({
           'wallet_id': debitnumcontroller.text,
-          'amount': 300,
+          'amount': 1000,
           'currency': 'NGN',
-          
         }));
 
     if (response.statusCode == 200) {
@@ -267,30 +261,31 @@ class _AdministrativeState extends State<Administrative> {
     }
   }
 
+  dynamic walletdata;
   Future Fetchuserbalance() async {
-    var response = await http.post(
+    var balanceurl =
+        ('https://api.getwallets.co/v1/wallets/${balancecontroller.text}');
+
+    var response = await http.get(
       Uri.parse(balanceurl),
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": "Bearer $bearer",
+        //"Accept": "application/json",
+        "Authorization": "Bearer $getbearer",
       },
-      body: jsonEncode(
-        {
-          "phoneNumber": balancecontroller.text,
-          "secretKey": 'hfucj5jatq8h',
-          "currency": "NGN",
-        },
-      ),
     );
 
     if (response.statusCode == 200) {
-      var data = json.decode(response.body)['data'];
+      walletdata = json.decode(response.body);
+      //print(walletdata["data"]['balances'][0]['balance']);
+
       setState(() {
-        walletBalance = '${data['walletBalance']}';
+        walletBalance = '${walletdata['data']['balances'][0]['balance']}';
       });
+
+      // print('user balance is $walletBalance');
     } else {
-      throw Exception('Failed to load post');
+      print(response.statusCode);
     }
   }
 
@@ -301,7 +296,7 @@ class _AdministrativeState extends State<Administrative> {
 
     /// getuserbalance();
     // Debituser();
-    // Fetchuserbalance();
+  Fetchuserbalance();
     fwallet();
   }
 
@@ -418,9 +413,36 @@ class _AdministrativeState extends State<Administrative> {
                         fontSize: 16.0,
                       );
                     } else {
-                     // Credituser();
-                     fwallet();
-                     
+                      // Credituser();
+                      fwallet().whenComplete(() => showDialog(context: context, builder: (context) => AlertDialog(
+                        title: Text(
+                          'User Credited Successfully',
+                          style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        actions: [
+                          FlatButton(
+                            child: Text(
+                              'Ok',
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      )));
                     }
                   },
                   child: Container(
@@ -636,7 +658,7 @@ class _AdministrativeState extends State<Administrative> {
                   height: 10,
                 ),
                 Text(
-                  walletBalance == null ? '0' : walletBalance,
+                  walletBalance == null ? 'Loading...' : walletBalance,
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       fontSize: 20,

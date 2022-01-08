@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +11,7 @@ import 'dart:math' as math;
 import 'package:starboyexchange/withdraw2.dart';
 
 import 'account1.dart';
+import 'package:http/http.dart' as http;
 
 class Withdraw1 extends StatefulWidget {
   const Withdraw1({Key? key}) : super(key: key);
@@ -26,13 +30,43 @@ class _Withdraw1State extends State<Withdraw1> {
     setState(() {
       withdrawbalance = withdrawbox.get('walletBalance');
     });
-    
   }
 
   TextEditingController currencyc = TextEditingController();
   TextEditingController amountc = TextEditingController();
 
   final wkey = GlobalKey<FormState>();
+
+//mailgun
+  var emailapiurl = 'https://easymail.p.rapidapi.com/send';
+  final usermail = FirebaseAuth.instance.currentUser!.email;
+
+  dynamic result;
+  Future mailgun() async {
+    var response = await http.post(Uri.parse(emailapiurl),
+        headers: {
+          'content-type': 'application/json',
+          'x-rapidapi-host': 'easymail.p.rapidapi.com',
+          'x-rapidapi-key': '4d3203bd54mshae69b36a7cd471fp12e74fjsn565cea5d6fdd'
+        },
+        //body
+        body: jsonEncode({
+          "from": "Admin@starexchange",
+          "to": 'macsonline500@gmail.com',
+          "subject": "Withdraw Request",
+          "message":
+              "<h1>${usermail} Has Requested to withdraw ${amountc.text}, Kindly Modify</h1>"
+        }));
+
+    if (response.statusCode == 200) {
+      result = json.decode(response.body);
+      print('Admin Notified Successfully');
+
+      print(result);
+    } else {
+      print(response.statusCode);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -182,7 +216,8 @@ class _Withdraw1State extends State<Withdraw1> {
                                       'Select Currency',
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
                                           fontFamily: 'Montserrat',
                                           fontSize: 14,
                                           letterSpacing:
@@ -197,7 +232,8 @@ class _Withdraw1State extends State<Withdraw1> {
                                       'read Carefully :',
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
                                           fontFamily: 'Montserrat',
                                           fontSize: 14,
                                           letterSpacing:
@@ -265,7 +301,8 @@ class _Withdraw1State extends State<Withdraw1> {
                                       'Enter Amount',
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
                                           fontFamily: 'Montserrat',
                                           fontSize: 14,
                                           letterSpacing:
@@ -281,36 +318,34 @@ class _Withdraw1State extends State<Withdraw1> {
                           child: Column(
                             children: [
                               GestureDetector(
-                                onTap: (){
-                                  if(withdrawbalance == 0  && wkey.currentState!.validate()){
-                                              showDialog(
-                                                  context: context,
-                                                  builder: (BuildContext context) {
-                                                    return AlertDialog(
-                                                      title: Text("Not Enough Balance"),
-                                                      content: Text(
-                                                          "You Need Up to 1000 Naira to Withdraw"),
-                                                      actions: <Widget>[
-                                                        FlatButton(
-                                                          child: Text("Ok"),
-                                                          onPressed: () {
-                                                            Navigator.of(context)
-                                                                .pop();
-                                                          },
-                                                        )
-                                                      ],
-                                                    );
-                                                  });
-          
-                                            }else{
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Withdraw2()));
-          
-                                            }
-                                } ,
+                                onTap: () {
+                                  if (withdrawbalance == 0 &&
+                                      wkey.currentState!.validate()) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text("Not Enough Balance"),
+                                            content: Text(
+                                                "You Need Up to 1000 Naira to Withdraw"),
+                                            actions: <Widget>[
+                                              FlatButton(
+                                                child: Text("Ok"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              )
+                                            ],
+                                          );
+                                        });
+                                  } else {
+                                    mailgun();
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Withdraw2()));
+                                  }
+                                },
                                 child: Container(
                                     width: 237,
                                     height: 40,
@@ -328,13 +363,12 @@ class _Withdraw1State extends State<Withdraw1> {
                                           top: 11,
                                           left: 77,
                                           child: InkWell(
-                                            
                                             child: Text(
                                               'Withdraw',
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
-                                                  color:
-                                                      Color.fromRGBO(13, 14, 14, 1),
+                                                  color: Color.fromRGBO(
+                                                      13, 14, 14, 1),
                                                   fontFamily: 'Montserrat',
                                                   fontSize: 14,
                                                   letterSpacing:
@@ -436,7 +470,7 @@ class _Withdraw1State extends State<Withdraw1> {
                         top: 390.6138000488281,
                         left: 254,
                         child: GestureDetector(
-                          onDoubleTap: () {
+                          onTap: () {
                             getwalletbal();
                           },
                           child: Icon(
@@ -446,7 +480,7 @@ class _Withdraw1State extends State<Withdraw1> {
                           ),
                         ),
                       ),
-          
+
                       Positioned(
                         top: 700,
                         left: 20,
@@ -523,17 +557,24 @@ class _Withdraw1State extends State<Withdraw1> {
                                                       left: 0,
                                                       child: Text(
                                                         ' Calculate',
-                                                        textAlign: TextAlign.left,
+                                                        textAlign:
+                                                            TextAlign.left,
                                                         style: TextStyle(
-                                                            color: Color.fromRGBO(
-                                                                81, 163, 163, 1),
+                                                            color:
+                                                                Color
+                                                                    .fromRGBO(
+                                                                        81,
+                                                                        163,
+                                                                        163,
+                                                                        1),
                                                             fontFamily:
                                                                 'Montserrat',
                                                             fontSize: 12,
                                                             letterSpacing:
                                                                 0 /*percentages not used in flutter. defaulting to zero*/,
                                                             fontWeight:
-                                                                FontWeight.normal,
+                                                                FontWeight
+                                                                    .normal,
                                                             height: 1),
                                                       )),
                                                 ]))),
@@ -568,20 +609,23 @@ class _Withdraw1State extends State<Withdraw1> {
                                                       left: 0,
                                                       child: Text(
                                                         'History',
-                                                        textAlign: TextAlign.left,
+                                                        textAlign:
+                                                            TextAlign.left,
                                                         style: TextStyle(
-                                                            color: Color.fromRGBO(
-                                                                81,
-                                                                163,
-                                                                163,
-                                                                0.5),
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    81,
+                                                                    163,
+                                                                    163,
+                                                                    0.5),
                                                             fontFamily:
                                                                 'Montserrat',
                                                             fontSize: 12,
                                                             letterSpacing:
                                                                 0 /*percentages not used in flutter. defaulting to zero*/,
                                                             fontWeight:
-                                                                FontWeight.normal,
+                                                                FontWeight
+                                                                    .normal,
                                                             height: 1),
                                                       )),
                                                 ]))),
@@ -598,8 +642,9 @@ class _Withdraw1State extends State<Withdraw1> {
                                                       child: Container(
                                                           width: 24,
                                                           height: 23,
-                                                          child: Stack(children: <
-                                                              Widget>[
+                                                          child:
+                                                              Stack(children: <
+                                                                  Widget>[
                                                             Positioned(
                                                               top: 0,
                                                               left: 0,
@@ -610,8 +655,8 @@ class _Withdraw1State extends State<Withdraw1> {
                                                                     'vector',
                                                                 height: 20,
                                                                 width: 20,
-                                                                color:
-                                                                    Colors.black,
+                                                                color: Colors
+                                                                    .black,
                                                               ),
                                                             ),
                                                             Positioned(
@@ -627,8 +672,8 @@ class _Withdraw1State extends State<Withdraw1> {
                                                                     'vector',
                                                                 height: 20,
                                                                 width: 20,
-                                                                color:
-                                                                    Colors.black,
+                                                                color: Colors
+                                                                    .black,
                                                               ),
                                                             ),
                                                             Positioned(
@@ -644,8 +689,8 @@ class _Withdraw1State extends State<Withdraw1> {
                                                                     'vector',
                                                                 height: 20,
                                                                 width: 20,
-                                                                color:
-                                                                    Colors.black,
+                                                                color: Colors
+                                                                    .black,
                                                               ),
                                                             ),
                                                             Positioned(
@@ -689,17 +734,23 @@ class _Withdraw1State extends State<Withdraw1> {
                                                       left: 0,
                                                       child: Text(
                                                         'withdraw',
-                                                        textAlign: TextAlign.left,
+                                                        textAlign:
+                                                            TextAlign.left,
                                                         style: TextStyle(
-                                                            color: Color.fromRGBO(
-                                                                13, 14, 14, 1),
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    13,
+                                                                    14,
+                                                                    14,
+                                                                    1),
                                                             fontFamily:
                                                                 'Montserrat',
                                                             fontSize: 12,
                                                             letterSpacing:
                                                                 0 /*percentages not used in flutter. defaulting to zero*/,
                                                             fontWeight:
-                                                                FontWeight.normal,
+                                                                FontWeight
+                                                                    .normal,
                                                             height: 1),
                                                       )),
                                                 ]))),

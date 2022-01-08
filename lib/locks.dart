@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:starboyexchange/admin.dart';
+import 'package:starboyexchange/buycrypto.dart';
 import 'package:starboyexchange/introsliders.dart';
 import 'package:starboyexchange/account1.dart';
 import 'package:starboyexchange/mainui.dart';
@@ -22,7 +23,25 @@ class Locks extends StatefulWidget {
 
 class _LocksState extends State<Locks> {
   TextEditingController _code = TextEditingController();
-  final code = 00000;
+  var passme = 00000;
+
+  unlockpage() {
+    if (_code.text.toString() == passme.toString()) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Butcrypto()),
+      );
+    } else {
+      Fluttertoast.showToast(
+          msg: "Invalid Code",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,24 +103,7 @@ class _LocksState extends State<Locks> {
               ),
               GestureDetector(
                 onTap: () async {
-                  if (_code.text == code) {
-                   // SharedPreferences prefs =
-                    ////    await SharedPreferences.getInstance();
-                    //prefs.setBool('admin', true);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Administrative(),
-                      ),
-                    );
-                  } else {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Administrative(),
-                      ),
-                    );
-                  }
+                  unlockpage();
                 },
                 child: Container(
                   height: 50,

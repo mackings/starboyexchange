@@ -67,13 +67,13 @@ class _MainuiState extends State<Mainui> {
 
   Future viewhive() async {
     final balbox = Hive.box('user');
-    print(balbox.get('balance'));
+    print(balbox.get('walletBalance'));
     print(balbox.get('walletid'));
     setState(() {
-      Actualbal = balbox.get('balance');
+      Actualbal = balbox.get('walletBalance');
       walletID = balbox.get('walletid');
     });
-    print('Actualbalance is $Actualbal');
+    print('walletBalance is $Actualbal');
     print('walletID is $walletID');
   }
 
@@ -313,7 +313,7 @@ class _MainuiState extends State<Mainui> {
                                           builder: (context) => Settings()));
                                 },
                                 child: Text(
-                                  'Settings',
+                                  'User Settings',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                       color: Color.fromRGBO(255, 255, 255, 1),

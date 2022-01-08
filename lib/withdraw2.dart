@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -7,6 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:starboyexchange/account1.dart';
 import 'package:starboyexchange/history.dart';
 import 'dart:math' as math;
+import 'package:http/http.dart' as http;
 
 import 'package:starboyexchange/mainui.dart';
 import 'package:starboyexchange/withdraw.dart';
@@ -42,6 +45,39 @@ class _Withdraw2State extends State<Withdraw2> {
   final _recipientController = TextEditingController(
     text: 'macsonline500@gmail.com',
   );
+
+
+  var emailapiurl = 'https://easymail.p.rapidapi.com/send';
+  final usermail = FirebaseAuth.instance.currentUser!.email;
+
+  dynamic result;
+  Future mailgun() async {
+    var response = await http.post(Uri.parse(emailapiurl),
+    
+        headers: {
+          'content-type': 'application/json',
+          'x-rapidapi-host': 'easymail.p.rapidapi.com',
+          'x-rapidapi-key': '4d3203bd54mshae69b36a7cd471fp12e74fjsn565cea5d6fdd'
+        },
+        //body
+        body: jsonEncode({
+          "from": "Admin@starexchange",
+          "to": 'macsonline500@gmail.com',
+          "subject": "Withdraw Request",
+          "message":
+              "<h1>${usermail} Has Requested to withdraw, Kindly Modify</h1>"
+        }));
+
+    if (response.statusCode == 200) {
+      result = json.decode(response.body);
+      print('Admin Notified Successfully');
+
+      print(result);
+    } else {
+      print(response.statusCode);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {

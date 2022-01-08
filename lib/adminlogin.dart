@@ -25,56 +25,70 @@ class _AdminloginState extends State<Adminlogin> {
   TextEditingController admincontroller = TextEditingController();
   TextEditingController Amountcontroller = TextEditingController();
 
-  var balanceurl = ('https://api.getwallets.co/v1/wallets/+');
+  
+
   final secret = ('hfucj5jatq8h');
   String bearer = ('uvjqzm5xl6bw');
 
-  dynamic alldata;
+  dynamic walletdata;
   String? walletBalance;
   dynamic result;
-  var wba = "61d7d276ea5aa2f41200889b";
+  
 
-  //var walletcreate = 'https://api.getwallets.co/v1/wallets';
-  var getbearer = 'sk_live_61d69f09ea5aa2f41200885961d69f09ea5aa2f41200885a';
 
-  Future getubal() async {
-    var response = await http.post(Uri.parse(balanceurl + admincontroller.text),
-        headers: {
-          'Authorization': 'Bearer $getbearer',
-          'Content-Type': 'application/json',
-          "Accept": "application/json"
-        },
-        body: jsonEncode({'customer_email': "tony@gmail.com"}));
+  //var walletcreate = 'https://api.getwallets.co/v1/wallets/61d7d276ea5aa2f41200889b';
+  String getbearer = 'sk_live_61d69f09ea5aa2f41200885961d69f09ea5aa2f41200885a';
 
-    if (response.statusCode == 200) {
-      print(response.body);
-      setState(() {
-        response.body == result;
-      });
+  static get $balanceurl => null;
+  dynamic walletid;
 
-      print(result);
-    } else {
-      throw Exception('Failed ');
-    }
+  static get $walletid => null;
+  
+  dynamic walletid1;
+
+  ViewHivedata() async {
+    await Hive.openBox("user");
+    final walletid1 = Hive.box('user').get('walletid');
+
+
+    print("Got  View Datas ");
+    print(walletid1);
+
+    setState(() {
+      admincontroller.text = walletid1;
+
+    });
   }
 
+  
+
   Future getuserbalance() async {
+    var balanceurl = ('https://api.getwallets.co/v1/wallets/${admincontroller.text}');
+
+
     var response = await http.get(
-      Uri.parse(balanceurl.toString()),
+      Uri.parse(balanceurl),
       headers: {
         "Content-Type": "application/json",
         //"Accept": "application/json",
-        "Authorization": "Bearer $bearer",
+        "Authorization": "Bearer $getbearer",
       },
     );
 
     if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
-      print(jsonResponse);
-      //var data = json.decode(response.body)['balance'];
-      setState(() {
-        // walletBalance = '${data['balance']}';
+
+      walletdata = json.decode(response.body);
+      //print(walletdata["data"]['balances'][0]['balance']);
+  
+     setState(() {
+
+      walletBalance = '${walletdata['data']['balances'][0]['balance']}';
+
+
       });
+
+
+     // print('user balance is $walletBalance');
     } else {
       print(response.statusCode);
     }
@@ -89,37 +103,11 @@ class _AdminloginState extends State<Adminlogin> {
     //print(prefs.getString('walletBalance' + 'From SharedPreferences'));
   }
 
-  var emailapiurl = 'https://easymail.p.rapidapi.com/send';
-  Future mailgun() async {
-    var response = await http.post(Uri.parse(emailapiurl),
-        headers: {
-          'content-type': 'application/json',
-          'x-rapidapi-host': 'easymail.p.rapidapi.com',
-          'x-rapidapi-key': '4d3203bd54mshae69b36a7cd471fp12e74fjsn565cea5d6fdd'
-        },
-        //body
-        body: jsonEncode({
-          "from": "Admin@starexchange",
-          "to": admincontroller.text,
-          "subject": "Trade Alert",
-          "message": "<h1>User Has sent a Trade Request, Kindly Modify</h1>"
-        }));
-
-    if (response.statusCode == 200) {
-      result = json.decode(response.body);
-
-      print(result);
-    } else {
-      print(response.statusCode);
-    }
-  }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getuserbalance();
-    mailgun();
   }
 
   @override
@@ -160,17 +148,16 @@ class _AdminloginState extends State<Adminlogin> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: Text(
-                    walletBalance == null
-                        ? "Balance: N ****  "
-                        : "Main Balance : N $walletBalance",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontFamily: "Montserrat",
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  //  child: Text(
+                  // walletBalance == null
+                  //   ? "Balance: N ****  "
+                  //   : "Main Balance : N $walletBalance",
+                  // style: TextStyle(
+                  //  color: Colors.white,
+                  // fontSize: 20,
+                  // fontFamily: "Montserrat",
+                  //  ),
+                  // ),
                   //API response
                 ),
 
@@ -232,7 +219,7 @@ class _AdminloginState extends State<Adminlogin> {
                             top: 0,
                             left: 0,
                             child: Text(
-                              'Wallet Balance',
+                              'Check Balance (Twice)',
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 1),
@@ -247,7 +234,7 @@ class _AdminloginState extends State<Adminlogin> {
                 ),
 
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 SizedBox(
                   height: 10,
@@ -262,10 +249,47 @@ class _AdminloginState extends State<Adminlogin> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        mailgun();
+                        ViewHivedata();
                         getuserbalance();
 
-                        // SavebalancetoHivedb();
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(
+                                  "Wallet Balance",
+                                  style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                content: Text(
+                                  "Your Wallet Balance is N  $walletBalance" == null?
+                                       "Balance: N ****  "
+                                      : "Main Balance : N $walletBalance",
+                                  style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text(
+                                      "Close",
+                                      style: TextStyle(
+                                          fontFamily: "Montserrat",
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  )
+                                ],
+                              );
+                            });
+
+                         SavebalancetoHivedb();
                       },
                       child: Container(
                           width: 156.1904754638672,
@@ -307,7 +331,7 @@ class _AdminloginState extends State<Adminlogin> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        //getuserbalance();
+                        getuserbalance();
 
                         SavebalancetoHivedb();
                       },

@@ -107,6 +107,7 @@ class _Trade2State extends State<Trade2> {
   dynamic result;
   Future mailgun() async {
     var response = await http.post(Uri.parse(emailapiurl),
+    
         headers: {
           'content-type': 'application/json',
           'x-rapidapi-host': 'easymail.p.rapidapi.com',
