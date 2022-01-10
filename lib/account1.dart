@@ -40,12 +40,14 @@ class _Account1State extends State<Account1> {
   String bearer = ('uvjqzm5xl6bw');
 
   dynamic WalletID;
+  dynamic WalletBalance;
 
   var walletcreate = 'https://api.getwallets.co/v1/wallets';
   var getbearer = 'sk_live_61d69f09ea5aa2f41200885961d69f09ea5aa2f41200885a';
   dynamic result;
   dynamic demwallet;
   dynamic dembalance;
+  dynamic defaultid;
 
   Future cwallet() async {
     var response = await http.post(Uri.parse(walletcreate),
@@ -65,51 +67,85 @@ class _Account1State extends State<Account1> {
       setState(() {
         demwallet = '${result['data']['wallet_id']}';
         dembalance = '${result['data']['balance']}';
+        defaultid = demwallet;
       });
+
+      saveetohive();
+      SaveIdtoFirestore();
+      GetWalletidandbalance();
+
       print(demwallet);
       print('user balance is $dembalance');
+      print('default Id is  $defaultid');
     } else {
       throw Exception('Failed ');
     }
-
-    
   }
 
-  Future Createwallet() async {
-    final response = await http.post(
-      Uri.parse(Walleturl),
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": "Bearer $bearer",
-      },
-      body: jsonEncode(
-        {
-          "firstName": ufullname.text,
-          "lastName": ufullname.text,
-          "Bvn": uphonenumber.text,
-          "email": uemail.text,
-          "secretKey": secret,
-          "dateOfBirth": "1946-01-12",
-          "phoneNumber": 0000000000,
-          "password": upassword.text,
-          "currency": "NGN"
-        },
-      ),
-    );
-    if (response.statusCode == 200) {
-      var responseJson = json.decode(response.body);
+  SaveIdtoFirestore() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseUseruser = await _auth.currentUser!.email;
+    await FirebaseFirestore.instance
+        .collection('wallets')
+        .doc(FirebaseUseruser)
+        .set({
+      'walletid': demwallet ?? '',
+      'balance': dembalance ?? '',
+    }).whenComplete(() {
+      GetWalletidandbalance();
+    });
+
+    print('Firestore wallet is $demwallet');
+    print('Firestore balance is $dembalance');
+  }
+
+  var walletdetails = FirebaseFirestore.instance.collection('wallets');
+
+  GetWalletidandbalance() async {
+    return await walletdetails.doc(uemail.text).get().then((value) {
       setState(() {
-        WalletID = responseJson['data']['phoneNumber'];
+        WalletID = value.data()!['walletid'];
+        WalletBalance = value.data()!['balance'];
+
+        print('Firestore Got  is $WalletID');
       });
-    } else {
-      print(response.statusCode);
-      print(bearer);
-    }
-
-
-    //print(response.body);
+    });
   }
+
+  //Future Createwallet() async {
+  //final response = await http.post(
+  // Uri.parse(Walleturl),
+  // // headers: {
+  // "Content-Type": "application/json",
+  // "Accept": "application/json",
+  //  "Authorization": "Bearer $bearer",
+  //},
+  //  body: jsonEncode(
+  // {
+  // "firstName": ufullname.text,
+  // "lastName": ufullname.text,
+  // "Bvn": uphonenumber.text,
+  //  "email": uemail.text,
+  //  "secretKey": secret,
+  //  "dateOfBirth": "1946-01-12",
+  // "phoneNumber": 0000000000,
+  // "password": upassword.text,
+  //"currency": "NGN"
+  // },
+  //  ),
+  // );
+  // if (response.statusCode == 200) {
+  //  var responseJson = json.decode(response.body);
+  // setState(() {
+  //  WalletID = responseJson['data']['phoneNumber'];
+  //  });
+  // } else {
+  //  print(response.statusCode);
+  //  print(bearer);
+  // }
+
+  //print(response.body);
+  //}
 
   Future Signup() async {
     try {
@@ -132,7 +168,7 @@ class _Account1State extends State<Account1> {
   Register() async {
     if (_myKey.currentState!.validate()) {
       _myKey.currentState!.save();
-      Signup();
+      Signup().whenComplete(() => saveetohive());
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('email', uemail.text.trim());
       prefs.setString('fullname', ufullname.text.trim());
@@ -150,7 +186,7 @@ class _Account1State extends State<Account1> {
       'phonenumber': uphonenumber.text.trim(),
       'password': upassword.text.trim(),
       "walletid": WalletID,
-    }).whenComplete(() => print("Saved Data Successfully"));
+    }).whenComplete(() => print("Saved  fS Data Successfully"));
   }
 
   saveetohive() async {
@@ -160,15 +196,25 @@ class _Account1State extends State<Account1> {
     await Hive.box('user').put('phonenumber', uphonenumber.text.trim());
     await Hive.box('user').put('password', upassword.text.trim());
     await Hive.box('user').put('walletid', demwallet);
-    await Hive.box('user').put('balance', dembalance);
+    await Hive.box('user').put('walletBalance', dembalance);
+    await Hive.box('user').put('defaultid', defaultid);
 
     print("Saved  Hive Data Successfully");
     print(Hive.box('user').get('fullname'));
     print(Hive.box('user').get('walletid'));
-    print(Hive.box('user').get('balance'));
+    print(Hive.box('user').get('walletBalance'));
+    print(Hive.box('user').get('defaultid'));
   }
 
   final _myKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    //Register();
+    //saveetohive();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -630,14 +676,11 @@ class _Account1State extends State<Account1> {
                     child: InkWell(
                       splashColor: Colors.grey,
                       onTap: () {
-                        cwallet();
-                        saveetohive();
-                        savedatatodb();
-                      
                         Register();
-                        //Createwallet();
-                        //Signup();
-                        //Navigator.push(context, MaterialPageRoute(builder: (context)=>Account2()));
+                        cwallet();
+                        //saveetohive();
+                        savedatatodb();
+                        SaveIdtoFirestore();
                       },
                       child: Container(
                           width: 156.1904754638672,
@@ -723,3 +766,5 @@ class _Account1State extends State<Account1> {
     );
   }
 }
+
+mixin WalletBalance {}

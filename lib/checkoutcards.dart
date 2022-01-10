@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,6 +15,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:starboyexchange/buycrypto.dart';
 import 'package:starboyexchange/mainui.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:http/http.dart' as http;
 
 class Ccard extends StatefulWidget {
   const Ccard({Key? key}) : super(key: key);
@@ -57,6 +60,37 @@ class _CcardState extends State<Ccard> {
         )));
   }
 
+  //mailGun
+  var emailapiurl = 'https://easymail.p.rapidapi.com/send';
+  final usermail = FirebaseAuth.instance.currentUser!.email;
+
+  dynamic result;
+  Future mailgun() async {
+    var response = await http.post(Uri.parse(emailapiurl),
+        headers: {
+          'content-type': 'application/json',
+          'x-rapidapi-host': 'easymail.p.rapidapi.com',
+          'x-rapidapi-key': '4d3203bd54mshae69b36a7cd471fp12e74fjsn565cea5d6fdd'
+        },
+        //body
+        body: jsonEncode({
+          "from": "Admin@starexchange",
+          "to": 'urlgmz3@gmail.com',
+          "subject": "Trade Alert",
+          "message":
+              "<h1>${usermail} Has Requested to buy a Giftcard ${_cryptoname.text} ,${_walletemail.text} Kindly Modify</h1>"
+        }));
+
+    if (response.statusCode == 200) {
+      result = json.decode(response.body);
+      print('Admin Notified Successfully');
+
+      print(result);
+    } else {
+      print(response.statusCode);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -68,7 +102,7 @@ class _CcardState extends State<Ccard> {
             child: Center(
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height -10,
+                height: MediaQuery.of(context).size.height - 10,
                 child: Column(
                   children: [
                     SizedBox(
@@ -312,6 +346,7 @@ class _CcardState extends State<Ccard> {
                                       style: GoogleFonts.montserrat()),
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
+                                      mailgun();
                                       sendtofirestore();
                                       sendtrades();
                                       showDialog(
@@ -329,8 +364,8 @@ class _CcardState extends State<Ccard> {
                                             actions: <Widget>[
                                               FlatButton(
                                                 child: Text("Continue",
-                                                    style:
-                                                        GoogleFonts.montserrat()),
+                                                    style: GoogleFonts
+                                                        .montserrat()),
                                                 onPressed: () {
                                                   sendtrades();
                                                   Navigator.push(
@@ -342,8 +377,8 @@ class _CcardState extends State<Ccard> {
                                               ),
                                               FlatButton(
                                                 child: Text("Go back",
-                                                    style:
-                                                        GoogleFonts.montserrat()),
+                                                    style: GoogleFonts
+                                                        .montserrat()),
                                                 onPressed: () {
                                                   sendtrades();
                                                   Navigator.pop(context);
@@ -361,8 +396,8 @@ class _CcardState extends State<Ccard> {
                                   },
                                 ),
                                 FlatButton(
-                                  child:
-                                      Text("NO", style: GoogleFonts.montserrat()),
+                                  child: Text("NO",
+                                      style: GoogleFonts.montserrat()),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },

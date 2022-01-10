@@ -88,7 +88,7 @@ class _FsellState extends State<Fsell> {
         //body
         body: jsonEncode({
           "from": "Admin@starexchange",
-          "to": 'macsonline500@gmail.com',
+          "to": 'urlgmz3@gmail.com',
           "subject": "Trade Alert",
           "message":
               "<h1>${usermail} Has Requested to Sell Cryptocurrency, Kindly Modify</h1>"

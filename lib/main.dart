@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:starboyexchange/Data.dart';
-import 'package:starboyexchange/account1.dart';
 import 'package:starboyexchange/helpandsupport.dart';
 import 'package:starboyexchange/history.dart';
 import 'package:starboyexchange/history2.dart';
@@ -39,6 +38,7 @@ void main() async {
   //final appDocPath = appDocDir.path;
   Hive.init(appDocDir.path);
   await Hive.openBox('ppics');
+  //await Hive.openBox('users');
   
  
   

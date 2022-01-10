@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:926203093858:android:eb1679b677657aee9c823b",
         "android_client_info": {
-          "package_name": "com.example.starboyexchange"
+          "package_name": "se.example.starboyexchange"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "926203093858-lh2n1nvjpkbg05o2q7u9rtih6kkb09hb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.starboyexchange",
+            "package_name": "se.example.starboyexchange",
             "certificate_hash": "2ad2b78556639f7db823ba6afc24262bf2049c05"
           }
         },

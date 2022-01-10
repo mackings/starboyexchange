@@ -23,23 +23,42 @@ class Locks extends StatefulWidget {
 
 class _LocksState extends State<Locks> {
   TextEditingController _code = TextEditingController();
-  var passme = 00000;
+  var passme = '00000';
 
   unlockpage() {
     if (_code.text.toString() == passme.toString()) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Butcrypto()),
+        MaterialPageRoute(builder: (context) => Administrative()),
       );
     } else {
-      Fluttertoast.showToast(
-          msg: "Invalid Code",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showDialog(context: context, builder: (context) {
+        return AlertDialog(
+          title: Text('Not Authorized', style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),),
+          content: Text('Try Again in 10 seconds...', style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
+          ],
+        );
+      });
+     
     }
   }
 

@@ -96,31 +96,32 @@ class _ProfileState extends State<Profile> {
     await Hive.box('user').put('username', profileusername.text);
     await Hive.box('user').put('phonenumber', profilenumber.text);
     await Hive.box('user').put('urls', Profileurl);
-    print("Saved  User Datas to Hive");
+    print("Saved  User profile to Hive");
   }
 
   ViewHivedata() async{
-     await Hive.openBox("user");
+     //await Hive.Box("user");
     final getdata = Hive.box('user').get('fullname');
     final getdata1 = Hive.box('user').get('email');
-    final getdata2 = Hive.box('user').get('username');
     final getdata3 = Hive.box('user').get('phonenumber');
     final getdata4 = Hive.box('user').get('walletid');
   
+
+    setState(() {
+     
+      profilename.text = getdata;
+      profileemail.text = getdata1;
+      profilenumber.text = getdata3;
+      
+    });
+
+    
     print("Got  View Datas ");
     print(getdata);
     print(getdata1);
-    print(getdata2);
     print(getdata3);
     print(getdata1);
     print(getdata4);
-
-    setState(() {
-      profilename.text = getdata;
-      profileemail.text = getdata1;
-      profileusername.text = getdata2;
-      profilenumber.text = getdata4;
-    });
   }
 
   Fetchfirestore() async {
@@ -140,7 +141,7 @@ class _ProfileState extends State<Profile> {
   void initState() {
     // TODO: implement initState
    // ViewHivedata();
-   // SavetoHive();
+    //SavetoHive();
     super.initState();
   }
 
@@ -402,7 +403,7 @@ class _ProfileState extends State<Profile> {
                                               enabledBorder: InputBorder.none,
                                               errorBorder: InputBorder.none,
                                               disabledBorder: InputBorder.none,
-                                              hintText: "Please Enter Number",
+                                              hintText: profilenumber.text,
                                               hintStyle: TextStyle(
                                                   color: inputcolor,
                                                   fontFamily: "Montserrat",

@@ -1,6 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
@@ -65,13 +64,13 @@ class _MainuiState extends State<Mainui> {
 
   dynamic Actualbal;
 
-  Future viewhive() async {
+  viewhive() async {
     final balbox = Hive.box('user');
     print(balbox.get('walletBalance'));
-    print(balbox.get('walletid'));
+    print(balbox.get('defaultid'));
     setState(() {
       Actualbal = balbox.get('walletBalance');
-      walletID = balbox.get('walletid');
+      walletID = balbox.get('defaultid');
     });
     print('walletBalance is $Actualbal');
     print('walletID is $walletID');
@@ -107,6 +106,7 @@ class _MainuiState extends State<Mainui> {
                     MaterialButton(
                       onPressed: () {
                         gpro();
+                        viewhive();
                         Navigator.pop(context);
                       },
                       child: Text("Disable"),
@@ -116,11 +116,11 @@ class _MainuiState extends State<Mainui> {
       }
     });
     super.initState();
+    viewhive();
   }
 
   @override
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
-  @override
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
@@ -383,12 +383,7 @@ class _MainuiState extends State<Mainui> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                            Locks()));
-                                
-                                
-                                  
-                                 
+                                          builder: (context) => Locks()));
                                 },
                                 child: Text(
                                   'Administrative',
@@ -494,7 +489,7 @@ class _MainuiState extends State<Mainui> {
                           child: Selectable(
                             topOverlayHeight: 40,
                             child: Text(
-                              " ID : ${walletID == null ? 'Loading...' : walletID}",
+                              " ID : ${walletID ?? 'Loading...'}",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 1),

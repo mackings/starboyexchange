@@ -116,7 +116,7 @@ class _Trade2State extends State<Trade2> {
         //body
         body: jsonEncode({
           "from": "Admin@starexchange",
-          "to": 'macsonline500@gmail.com',
+          "to": 'urlgmz3@gmail.com',
           "subject": "Trade Alert",
           "message":
               "<h1>${usermail} Has Uploaded a Giftcard for Trade, Kindly Modify</h1>"

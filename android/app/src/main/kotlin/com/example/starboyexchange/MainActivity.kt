@@ -1,4 +1,4 @@
-package com.example.starboyexchange
+package se.example.starboyexchange
 
 import io.flutter.embedding.android.FlutterActivity
 

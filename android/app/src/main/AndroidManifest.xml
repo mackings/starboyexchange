@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.starboyexchange">
+    package="se.example.starboyexchange">
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
@@ -59,7 +59,6 @@
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+    
+  
 </manifest>

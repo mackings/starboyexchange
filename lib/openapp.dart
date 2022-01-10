@@ -157,16 +157,6 @@ class _OpenappState extends State<Openapp> {
                                   height: 1
                               ),),
                             )
-                        ),Positioned(
-                            top: 850.2861938476562,
-                            left: 31,
-                            child: Transform.rotate(
-                              angle: 34.83850442938349 * (math.pi / 180),
-                              child: SvgPicture.asset(
-                                  'assets/images/vector.svg',
-                                  semanticsLabel: 'vector'
-                              ),
-                            )
                         ),
                       ]
                   )

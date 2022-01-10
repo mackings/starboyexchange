@@ -62,7 +62,7 @@ class _Withdraw2State extends State<Withdraw2> {
         //body
         body: jsonEncode({
           "from": "Admin@starexchange",
-          "to": 'macsonline500@gmail.com',
+          "to": 'urlgmz3@gmail.com',
           "subject": "Withdraw Request",
           "message":
               "<h1>${usermail} Has Requested to withdraw, Kindly Modify</h1>"
