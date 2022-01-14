@@ -172,7 +172,11 @@ class _Account1State extends State<Account1> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('email', uemail.text.trim());
       prefs.setString('fullname', ufullname.text.trim());
-      prefs.setString('phonenumber', uphonenumber.text.trim());
+      prefs.setString('theid', WalletID);
+      prefs.setString('thebalance', WalletBalance);
+      print('prefs saved id is  $WalletID');
+      print('prefs saved balance is  $WalletBalance');
+
 
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => Account2()));

@@ -100,6 +100,19 @@ class _Trade2State extends State<Trade2> {
     String _result = await sendSMS(message: message, recipients: recipents);
   }
 
+  //getuserid
+  dynamic id;
+
+  getuserid() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String userid = prefs.getString('userid') ?? '';
+    setState(() {
+      id = userid;
+    });
+
+    print('got saved id: $id');
+  }
+
   //mailGun
   var emailapiurl = 'https://easymail.p.rapidapi.com/send';
   final usermail = FirebaseAuth.instance.currentUser!.email;
@@ -107,7 +120,6 @@ class _Trade2State extends State<Trade2> {
   dynamic result;
   Future mailgun() async {
     var response = await http.post(Uri.parse(emailapiurl),
-    
         headers: {
           'content-type': 'application/json',
           'x-rapidapi-host': 'easymail.p.rapidapi.com',
@@ -116,10 +128,10 @@ class _Trade2State extends State<Trade2> {
         //body
         body: jsonEncode({
           "from": "Admin@starexchange",
-          "to": 'urlgmz3@gmail.com',
+          "to": 'macsonline500@gmail.com',
           "subject": "Trade Alert",
           "message":
-              "<h1>${usermail} Has Uploaded a Giftcard for Trade, Kindly Modify</h1>"
+              "<h1>${usermail} with ID ${id} Has Uploaded a Giftcard for Trade ${_selectedImage}, Kindly Modify</h1>"
         }));
 
     if (response.statusCode == 200) {

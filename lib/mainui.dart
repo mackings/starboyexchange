@@ -48,24 +48,35 @@ class _MainuiState extends State<Mainui> {
   //user data
   String? Myuserid = FirebaseAuth.instance.currentUser!.email;
   var walletID;
+  dynamic userid;
+  dynamic userwallet;
 
   late String link =
       "https://firebasestorage.googleapis.com/v0/b/starboyexchange-a9c9d.appspot.com/o/profile%2F";
 
   Future gpro() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
     final url = prefs.getString('url');
+    var userids = prefs.getString('theid');
+    var userwallets = prefs.getString('thebalance');
     print(url);
     print('i got it lol');
+
     setState(() {
       link = url!;
+      userid = userids;
+      userwallet = userwallets;
     });
+
+    print(userid);
+    print(userwallet);
   }
 
   dynamic Actualbal;
 
   viewhive() async {
-    final balbox = Hive.box('user');
+    final balbox = await Hive.box('user');
     print(balbox.get('walletBalance'));
     print(balbox.get('defaultid'));
     setState(() {
@@ -116,7 +127,7 @@ class _MainuiState extends State<Mainui> {
       }
     });
     super.initState();
-    viewhive();
+    //viewhive();
   }
 
   @override
@@ -489,7 +500,7 @@ class _MainuiState extends State<Mainui> {
                           child: Selectable(
                             topOverlayHeight: 40,
                             child: Text(
-                              " ID : ${walletID ?? 'Loading...'}",
+                              " ID : ${userid ?? 'Loading...'}",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 1),
