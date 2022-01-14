@@ -70,7 +70,8 @@ class _Account1State extends State<Account1> {
         defaultid = demwallet;
       });
 
-      saveetohive();
+      //saveetohive();
+      Savedatatopref();
       SaveIdtoFirestore();
       GetWalletidandbalance();
 
@@ -168,19 +169,23 @@ class _Account1State extends State<Account1> {
   Register() async {
     if (_myKey.currentState!.validate()) {
       _myKey.currentState!.save();
-      Signup().whenComplete(() => saveetohive());
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('email', uemail.text.trim());
-      prefs.setString('fullname', ufullname.text.trim());
-      prefs.setString('theid', WalletID);
-      prefs.setString('thebalance', WalletBalance);
-      print('prefs saved id is  $WalletID');
-      print('prefs saved balance is  $WalletBalance');
-
+      Signup().whenComplete(
+        () => Savedatatopref(), //savedatatoHive();
+      );
 
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => Account2()));
     }
+  }
+
+  Savedatatopref() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('email', uemail.text.trim());
+    prefs.setString('fullname', ufullname.text.trim());
+    prefs.setString('theid', demwallet);
+    prefs.setString('thebalance', dembalance);
+    print('prefs saved id is  $demwallet');
+    print('prefs saved balance is  $dembalance');
   }
 
   savedatatodb() {

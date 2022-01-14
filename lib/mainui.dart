@@ -2,6 +2,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:starboyexchange/Data.dart';
 import 'package:starboyexchange/Locks.dart';
@@ -50,6 +51,7 @@ class _MainuiState extends State<Mainui> {
   var walletID;
   dynamic userid;
   dynamic userwallet;
+  var uniqueid;
 
   late String link =
       "https://firebasestorage.googleapis.com/v0/b/starboyexchange-a9c9d.appspot.com/o/profile%2F";
@@ -58,19 +60,52 @@ class _MainuiState extends State<Mainui> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     final url = prefs.getString('url');
+
     var userids = prefs.getString('theid');
     var userwallets = prefs.getString('thebalance');
     print(url);
     print('i got it lol');
+    print(' Prefs got $userids');
+    print(' Prefs got $userwallets');
+    print('uniqueid is $uniqueid');
 
     setState(() {
       link = url!;
       userid = userids;
       userwallet = userwallets;
+      userids = uniqueid;
     });
 
     print(userid);
     print(userwallet);
+    print('uniqueid is $uniqueid');
+  }
+
+  iddialog() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    final theunique = sharedPrefs.getString('theid');
+    print('the unique is $theunique');
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Your Wallet ID',
+              style: GoogleFonts.montserrat(fontSize: 20)),
+          content: Selectable(
+              child: Text('$theunique',
+                  style: GoogleFonts.montserrat(fontSize: 20))),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   dynamic Actualbal;
@@ -128,6 +163,7 @@ class _MainuiState extends State<Mainui> {
     });
     super.initState();
     //viewhive();
+    gpro();
   }
 
   @override
@@ -496,20 +532,34 @@ class _MainuiState extends State<Mainui> {
                           )),
                       Positioned(
                           top: 220,
-                          left: 30.345726013183594,
+                          left: 50.345726013183594,
                           child: Selectable(
                             topOverlayHeight: 40,
-                            child: Text(
-                              " ID : ${userid ?? 'Loading...'}",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Color.fromRGBO(255, 255, 255, 1),
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 15,
-                                  letterSpacing:
-                                      0 /*percentages not used in flutter. defaulting to zero*/,
-                                  fontWeight: FontWeight.normal,
-                                  height: 1),
+                            child: Row(
+                              children: [
+                                Icon(Icons.visibility,
+                                    color: Colors.white, size: 30),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    iddialog();
+                                  },
+                                  child: Text(
+                                    " View ID",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 15,
+                                        letterSpacing:
+                                            0 /*percentages not used in flutter. defaulting to zero*/,
+                                        fontWeight: FontWeight.normal,
+                                        height: 1),
+                                  ),
+                                ),
+                              ],
                             ),
                           )),
                     ]))
@@ -600,6 +650,7 @@ class _MainuiState extends State<Mainui> {
                                 GestureDetector(
                                     onTap: () {
                                       gpro();
+                                      //iddialog();
 
                                       viewhive();
                                     },

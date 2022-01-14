@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _Trade2State extends State<Trade2> {
   File? _selectedImage;
   final picker = ImagePicker();
 
-  late String imageLink;
+  dynamic imageLink;
 
   get user => null;
 
@@ -56,16 +57,43 @@ class _Trade2State extends State<Trade2> {
     });
   }
 
+  dynamic defid1;
+
+  getprefid() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var defid = prefs.getString('theid');
+    setState(() {
+      defid1 = defid;
+    });
+
+    print(defid1);
+  }
+
   //Mailer
 
   Future SubmitTrade() async {
-    FirebaseStorage fs = FirebaseStorage.instance;
-    final reference = fs.ref();
-    final picturefolder = reference.child("Giftcards").child("Cards");
-    picturefolder.putFile(_selectedImage!).whenComplete(() => () async {
-          String imageLink = await picturefolder.getDownloadURL();
-          print(imageLink.toString());
-        });
+    final FirebaseStorage mystorage = FirebaseStorage.instance;
+    Reference reference =
+        mystorage.ref().child('Newcards/${_selectedImage?.path}');
+    UploadTask uploadTask = reference.putFile(_selectedImage!);
+    uploadTask.then((value) {
+      reference.getDownloadURL().then((value) {
+        imageLink = value.toString();
+        print(imageLink);
+        print('Image Uploaded');
+        Sendtradetodb();
+      });
+    });
+  }
+
+  final Useremail = FirebaseAuth.instance.currentUser!.email;
+
+  Sendtradetodb() async {
+    FirebaseFirestore.instance.collection('Star GC').doc(user).set({
+      'Trade': '$imageLink',
+      'walletID': '$defid1',
+      'email': '$Useremail',
+    }).whenComplete(() => print("Sent Trades to DB"));
   }
 
   Notifypersin() {}
@@ -128,10 +156,10 @@ class _Trade2State extends State<Trade2> {
         //body
         body: jsonEncode({
           "from": "Admin@starexchange",
-          "to": 'macsonline500@gmail.com',
+          "to": 'urlgmz3@gmail.com',
           "subject": "Trade Alert",
           "message":
-              "<h1>${usermail} with ID ${id} Has Uploaded a Giftcard for Trade ${_selectedImage}, Kindly Modify</h1>"
+              "<h1>${usermail}  Has Uploaded a Giftcard for Trade , Kindly Check your DB</h1>"
         }));
 
     if (response.statusCode == 200) {
@@ -406,6 +434,7 @@ class _Trade2State extends State<Trade2> {
                                                                         "Okay"),
                                                                 onPressed: () {
                                                                   SubmitTrade();
+                                                                  getprefid();
                                                                   mailgun();
                                                                   Notify();
                                                                   Navigator.push(
