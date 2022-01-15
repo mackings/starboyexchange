@@ -74,6 +74,7 @@ class _Account1State extends State<Account1> {
       Savedatatopref();
       SaveIdtoFirestore();
       GetWalletidandbalance();
+      saveetohive();
 
       print(demwallet);
       print('user balance is $dembalance');

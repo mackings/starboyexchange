@@ -446,7 +446,7 @@ class _AdministrativeState extends State<Administrative> {
                     }
                   },
                   child: Container(
-                    height: MediaQuery.of(context).size.height - 640,
+                    height: 60,
                     width: MediaQuery.of(context).size.width - 40,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -621,7 +621,7 @@ class _AdministrativeState extends State<Administrative> {
                     }
                   },
                   child: Container(
-                    height: MediaQuery.of(context).size.height - 640,
+                    height: 60,
                     width: MediaQuery.of(context).size.width - 40,
                     decoration: BoxDecoration(
                       color: Colors.red,
@@ -691,7 +691,7 @@ class _AdministrativeState extends State<Administrative> {
                     Fetchuserbalance();
                   },
                   child: Container(
-                    height: MediaQuery.of(context).size.height - 640,
+                    height: 60,
                     width: MediaQuery.of(context).size.width - 40,
                     decoration: BoxDecoration(
                       color: Colors.pink,

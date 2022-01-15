@@ -93,6 +93,7 @@ class _Trade2State extends State<Trade2> {
       'Trade': '$imageLink',
       'walletID': '$defid1',
       'email': '$Useremail',
+       'time': DateTime.now(),
     }).whenComplete(() => print("Sent Trades to DB"));
   }
 

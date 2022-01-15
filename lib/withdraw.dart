@@ -22,6 +22,7 @@ class Withdraw1 extends StatefulWidget {
 
 class _Withdraw1State extends State<Withdraw1> {
   dynamic withdrawbalance;
+  dynamic balanceamt;
 
   getwalletbal() async {
     final withdrawbox = Hive.box('user');
@@ -78,8 +79,8 @@ class _Withdraw1State extends State<Withdraw1> {
             child: Column(
               children: [
                 Container(
-                    width: 375,
-                    height: 800,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),

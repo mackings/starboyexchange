@@ -54,8 +54,9 @@ class _Rate1State extends State<Rate1> {
           child: Column(
             children: [
               Container(
-                  width: 375,
-                  height: 750,
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width ,
+                 
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
