@@ -17,6 +17,7 @@ import 'package:starboyexchange/news.dart';
 import 'package:starboyexchange/notifications.dart';
 import 'package:starboyexchange/profile.dart';
 import 'package:starboyexchange/rate1.dart';
+import 'package:starboyexchange/rates1.dart';
 
 import 'package:starboyexchange/settings.dart';
 import 'package:starboyexchange/testing.dart';
@@ -571,9 +572,11 @@ class _MainuiState extends State<Mainui> {
             child: Center(
               child: Column(
                 children: [
+
+                  //blackguy
                   Container(
                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height - 340,
+                      height: MediaQuery.of(context).size.height - 450,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),
@@ -592,7 +595,7 @@ class _MainuiState extends State<Mainui> {
                       child: Stack(children: <Widget>[
                         Positioned(
                           top: 65,
-                          left: 298,
+                          left: 310,
                           child: Container(
                             width: 40,
                             height: 40,
@@ -612,7 +615,7 @@ class _MainuiState extends State<Mainui> {
                         ),
                         Positioned(
                             top: 67,
-                            left: 90,
+                            left: 95,
                             child: Text(
                               "Hello Welcome Back",
                               textAlign: TextAlign.left,
@@ -663,14 +666,14 @@ class _MainuiState extends State<Mainui> {
                             )),
                         Positioned(
                             top: 120,
-                            left: 110,
+                            left: 100,
                             child: Text(
                               "  ${Myuserid.toString()}",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   fontFamily: 'Montserrat',
-                                  fontSize: 12,
+                                  fontSize: 18,
                                   letterSpacing:
                                       0 /*percentages not used in flutter. defaulting to zero*/,
                                   fontWeight: FontWeight.normal,
@@ -678,22 +681,24 @@ class _MainuiState extends State<Mainui> {
                             )),
                         Positioned(
                             top: 166,
-                            left: 129,
-                            child: Text(
-                              'Avaliable Balance',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Color.fromRGBO(255, 255, 255, 1),
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 10,
-                                  letterSpacing:
-                                      0 /*percentages not used in flutter. defaulting to zero*/,
-                                  fontWeight: FontWeight.normal,
-                                  height: 1),
+                            left: 119,
+                            child: Center(
+                              child: Text(
+                                'Avaliable Balance',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color.fromRGBO(255, 255, 255, 1),
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 15,
+                                    letterSpacing:
+                                        0 /*percentages not used in flutter. defaulting to zero*/,
+                                    fontWeight: FontWeight.normal,
+                                    height: 1),
+                              ),
                             )),
                         Positioned(
                             top: 262,
-                            left: 32,
+                            left: 47,
                             child: Container(
                                 width: 310,
                                 height: 40,
@@ -846,8 +851,12 @@ class _MainuiState extends State<Mainui> {
                                           ]))),
                                 ]))),
                       ])),
+
+                      SizedBox(
+                        height: 20,
+                      ),
                   Container(
-                      width: 316,
+                      width: 350,
                       height: 141,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
@@ -882,7 +891,7 @@ class _MainuiState extends State<Mainui> {
                             )),
                         Positioned(
                             top: 44,
-                            left: 22,
+                            left: 32,
                             child: Container(
                                 width: 63.999996185302734,
                                 height: 48,
@@ -893,7 +902,7 @@ class _MainuiState extends State<Mainui> {
                                 ))),
                         Positioned(
                             top: 44,
-                            left: 109,
+                            left: 140,
                             child: Container(
                                 width: 63.999996185302734,
                                 height: 48,
@@ -904,7 +913,7 @@ class _MainuiState extends State<Mainui> {
                                 ))),
                         Positioned(
                             top: 44,
-                            left: 196,
+                            left: 250,
                             child: Container(
                               width: 63.999996185302734,
                               height: 48,
@@ -951,7 +960,7 @@ class _MainuiState extends State<Mainui> {
                                 ]))),
                         Positioned(
                             top: 109,
-                            left: 117,
+                            left: 140,
                             child: Container(
                                 width: 49,
                                 height: 13,
@@ -974,7 +983,7 @@ class _MainuiState extends State<Mainui> {
                                 ]))),
                         Positioned(
                             top: 109,
-                            left: 203,
+                            left: 255,
                             child: Container(
                                 width: 49,
                                 height: 13,

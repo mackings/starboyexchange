@@ -332,7 +332,8 @@ class _AdministrativeState extends State<Administrative> {
 
                 Container(
                   margin: EdgeInsets.all(20),
-                  child: TextField(
+                  child: TextField( 
+                    keyboardType: TextInputType.number,
                     controller: creditnumcontroller,
                     decoration: InputDecoration(
                       hintText: 'Enter User Wallet ID',

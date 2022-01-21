@@ -31,6 +31,14 @@ class _LoginState extends State<Login> {
   TextEditingController passcon = TextEditingController();
   var _formKey = GlobalKey<FormState>();
 
+
+
+  
+
+
+
+
+
   Signinconfig() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
 

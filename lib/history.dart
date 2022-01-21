@@ -187,7 +187,7 @@ class _History1State extends State<History1> {
               height: 30,
             ),
             Container(
-              height: MediaQuery.of(context).size.height - 600,
+              height: 80,
               width: MediaQuery.of(context).size.width - 30,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -217,7 +217,7 @@ class _History1State extends State<History1> {
               height: 30,
             ),
             Container(
-              height: MediaQuery.of(context).size.height - 600,
+              height: 100,
               width: MediaQuery.of(context).size.width - 30,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -233,7 +233,7 @@ class _History1State extends State<History1> {
                    Center(
                      child: Container(
                       width: MediaQuery.of(context).size.width - 300,
-                      height: MediaQuery.of(context).size.height - 600,
+                      height: 100,
                       child: Center(
                         child: Text(
                           Histories== null ? '***' : '$noHistories',
@@ -276,7 +276,7 @@ class _History1State extends State<History1> {
             //yo
 
              Container(
-              height: MediaQuery.of(context).size.height - 600,
+              height: 100,
               width: MediaQuery.of(context).size.width - 30,
               decoration: BoxDecoration(
                 color: Colors.white,
